@@ -6,6 +6,7 @@ Release Engine
    :maxdepth: 2
 
    setup.rst
+   components.rst
    development.rst
 
 
