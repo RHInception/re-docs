@@ -1,6 +1,6 @@
 RE-REST
 -------
-Simple REST Api for the Release Engine.
+Simple REST Api for the Release Engine. By design RE-REST is the only way to interact with the Release Engine.
 
 
 Configuration
@@ -55,7 +55,8 @@ re-rest uses a decorator which keys off the AUTHORIZATION_CALLABLE configuration
 
 rerest.authroziation.no_authorization
 `````````````````````````````````````
-**This should not be used in a production environment**
+.. warning::
+   This should not be used in a production environment**
 
 To use this callable set AUTHORIZATION_CALLABLE to `rerest.authorization:no_authorization`.
 
@@ -92,10 +93,20 @@ Gunicorn
 ````````
 Gunicorn (http://gunicorn.org/) is a popular open source Python WSGI server. It's still recommend to use Apache (or another web server) to handle auth before gunicorn since gunicorn itself is not set up for it.
 
-::
+.. code-block:: bash
 
    $ gunicorn --user=YOUR_WORKER_USER --group=YOUR_WORKER_GROUP -D -b 127.0.0.1:5000 --access-logfile=/your/access.log --error-logfile=/your/error.log -e REREST_CONFIG=/full/path/to/settings.json rerest.app:app
 
+
+Running From Source
+~~~~~~~~~~~~~~~~~~~
+To run directly from source in order to test out the server run:
+
+.. code-block:: bash
+
+   $ python rundevserver.py
+
+The dev server will allow any HTTP Basic Auth user/password combination.
 
 
 URLs
@@ -106,7 +117,7 @@ URLs
 
 * PUT: Creates a new deployment.
  * **Response Type**: json
- * **Response Example**: ```{"status": "created", "id": 1}```
+ * **Response Example**: ``{"status": "created", "id": 1}``
  * **Input Format**: None
  * **Inputs**: optional json
 
@@ -114,7 +125,7 @@ URLs
 ``````````````````
 * GET: Gets a list of **all** playbooks.
  * **Response Type**: json
- * **Response Example**: ```{"status": "ok", "items": [...]}```
+ * **Response Example**: ``{"status": "ok", "items": [...]}``
  * **Input Format**: None
  * **Inputs**: None
 
@@ -123,12 +134,12 @@ URLs
 ````````````````````````````
 * GET: Gets a list of all playbooks for a project.
  * **Response Type**: json
- * **Response Example**: ```{"status": "ok", "items": [...]}```
+ * **Response Example**: ``{"status": "ok", "items": [...]}``
  * **Input Format**: None
  * **Inputs**: None
 * PUT: Creates a new playbook.
  * **Response Type**: json
- * **Response Example**: ```{"status": "created", "id": "53614ccf1370129d6f29c7dd"}```
+ * **Response Example**: ``{"status": "created", "id": "53614ccf1370129d6f29c7dd"}``
  * **Input Format**: json
  * **Inputs**: **TODO**
 
@@ -136,31 +147,19 @@ URLs
 ``````````````````````````````````
 * GET: Gets a playbooks for a project.
  * **Response Type**: json
- * **Response Example**: ```{"status": "ok", "item": ...}```
+ * **Response Example**: ``{"status": "ok", "item": ...}``
  * **Input Format**: None
  * **Inputs**: None
 * POST: Replace a playbook in a project.
  * **Response Type**: json
- * **Response Example**: ```{"status": "ok", "id": "53614ccf1370129d6f29c7dd"}```
+ * **Response Example**: ``{"status": "ok", "id": "53614ccf1370129d6f29c7dd"}``
  * **Input Format**: json
  * **Inputs**: **TODO**
 * DELETE: Delete a playbook in a project.
  * **Response Type**: json
- * **Response Example**: ```{"status": "gone"}```
+ * **Response Example**: ``{"status": "gone"}``
  * **Input Format**: None
  * **Inputs**: None
-
-
-Running From Source
--------------------
-To run directly from source in order to test out the server run:
-
-::
-
-   $ python rundevserver.py
-
-The dev server will allow any HTTP Basic Auth user/password combination.
-
 
 
 Platform Gotcha's
@@ -177,14 +176,14 @@ You may need to add the following to your PYTHONPATH to be able to use Jinja2:
 
 What's Happening
 ~~~~~~~~~~~~~~~~
-1. User requests a new job via the REST endpoint
-2. The REST server creates a temporary response queue and binds it to the exchange with the same name.
-3. The REST server creates a message with a reply_to of the temporary response queue's topic.
-4. The REST server sends the message to the bus on exchange *re* and topic *job.create*. Body Example: {"project": "nameofproject"}
-5. The REST server waits on the temporary response queue for a response.
-6. Once a response is returned the REST service loads the body into a json structure and pulls out the id parameter.
-7. The REST service then responds to the user with the job id.
-8. The temporary response queue then is automatically deleted by the bus.
+#. User requests a new job via the REST endpoint
+#. The REST server creates a temporary response queue and binds it to the exchange with the same name.
+#. The REST server creates a message with a reply_to of the temporary response queue's topic.
+#. The REST server sends the message to the bus on exchange *re* and topic *job.create*. Body Example: {"project": "nameofproject"}
+#. The REST server waits on the temporary response queue for a response.
+#. Once a response is returned the REST service loads the body into a json structure and pulls out the id parameter.
+#. The REST service then responds to the user with the job id.
+#. The temporary response queue then is automatically deleted by the bus.
 
 
 Usage Example
@@ -196,7 +195,7 @@ The authentication mechanism used in the front end webserver could be set up to 
 
 htaccess / HTTP Basic Auth
 ``````````````````````````
-::
+.. code-block:: bash
 
    $ curl -X PUT --user "USERNAME" https://rerest.example.com/api/v0/test/deployment/
    Password:
@@ -205,7 +204,7 @@ htaccess / HTTP Basic Auth
 
 kerberos
 ````````
-::
+.. code-block:: bash
 
    $ kinit -f USERNAME
    Password for USERNAME@DOMAIN:
@@ -218,8 +217,8 @@ Dynamic Variables
 `````````````````
 Passing dynamic variables requires two additions
 
-1. We must set the ``Content-Type`` header (``-H ...`` below) to ``application/json``
-2. We must pass **data** (``-d '{....}'`` below) for the ``PUT`` to send to the server
+#. We must set the ``Content-Type`` header (``-H ...`` below) to ``application/json``
+#. We must pass **data** (``-d '{....}'`` below) for the ``PUT`` to send to the server
 
 This example sets the ``Content-Type`` and passes two **dynamic
 variables**: ``cart`` which is the name of a
@@ -227,7 +226,7 @@ variables**: ``cart`` which is the name of a
 ``environment``, which is the environment to push the release cart
 contents to.
 
-::
+.. code-block:: bash
 
   $ curl -H "Content-Type: application/json" -d '{"cart": "bitmath", "environment": "re"}' -X PUT http://rerest.example.com/api/v0/test/deployment/
 
