@@ -5,6 +5,7 @@ Release Engine
 .. toctree::
    :maxdepth: 2
 
+   setup.rst
    development.rst
 
 
