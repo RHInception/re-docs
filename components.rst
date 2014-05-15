@@ -1,8 +1,15 @@
 Components
 ==========
-
 .. toctree::
    :maxdepth: 1
+   :glob:
 
-   rerest.rst
-   recore.rst
+   components/*
+
+Libraries/Helpers
+-----------------
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   libraries/*
