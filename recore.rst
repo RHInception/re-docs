@@ -45,4 +45,5 @@ For an example see `example-config.json <https://github.com/RHInception/re-core/
 
 RE-CORE Deployment
 ~~~~~~~~~~~~~~~~~~
-TODO
+.. todo::
+   How does one deploy this?

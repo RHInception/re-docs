@@ -30,10 +30,15 @@ The Bus
 * Create a user for RE-REST (the rest interface into Release Engine)
 * Create a user for RE-CORE (the state machine)
 * Create a queue for RE-CORE
-* Bind the RE-CORE queue to the re exchange with: TODO
+* Bind the RE-CORE queue to the re exchange with ??
 * Create a user for each component your instance will support
 * Create a queue for each component your instance will support
-* Bind the queue for each component to the re exchange with: TODO
+* Bind the queue for each component to the re exchange with ??
+
+.. todo::
+   List binding instructions for queues
+
+
 
 The Datastore
 ~~~~~~~~~~~~~
@@ -45,8 +50,10 @@ The Datastore
 * Create a database called "re"
 * Create a user for RE-CORE on database "re"
 * Create a user for RE-REST on database "re"
-* Import the initial data for the database via: TODO
+* Import the initial data for the database via something
 
+.. todo::
+   Provide a link to the initial database import
 
 Core Component Requirements
 ---------------------------

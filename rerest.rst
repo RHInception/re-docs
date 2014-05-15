@@ -147,7 +147,10 @@ URLs
  * **Response Type**: json
  * **Response Example**: ``{"status": "created", "id": "53614ccf1370129d6f29c7dd"}``
  * **Input Format**: json
- * **Inputs**: **TODO**
+ * **Inputs**: ??
+
+.. todo::
+   List PUT inputs
 
 /api/v0/*$PROJECT*/playbook/*$ID*/
 ``````````````````````````````````
@@ -160,12 +163,16 @@ URLs
  * **Response Type**: json
  * **Response Example**: ``{"status": "ok", "id": "53614ccf1370129d6f29c7dd"}``
  * **Input Format**: json
- * **Inputs**: **TODO**
+ * **Inputs**: ??
 * DELETE: Delete a playbook in a project.
  * **Response Type**: json
  * **Response Example**: ``{"status": "gone"}``
  * **Input Format**: None
  * **Inputs**: None
+
+.. todo::
+   List POST inputs
+
 
 
 Platform Gotcha's
