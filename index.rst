@@ -8,7 +8,7 @@ Release Engine
    Setting up <setup.rst>
    Components and Libraries <components.rst>
    development.rst
-
+   license.rst
 
 Indices and tables
 ==================
