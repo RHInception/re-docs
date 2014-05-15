@@ -11,16 +11,8 @@ tested AMQP service used with Release Engine is `RabbitMQ <http://www.rabbitmq.c
 
 Each compoenent on the bus should have it's own username and password combination. By enforcing component username/passwords access can be restricted to just what a component needs.This also allows quick deactivation of a component in the event something goes terribly wrong.
 
-The Datastore
-~~~~~~~~~~~~~
-Release engine utilizes `MongoDB <http://www.mongodb.org/>`_ for storing playbooks and other persistent data. Authentication must be turned on and it's highly recommended to create a username/password for every component that requires access to the data store.
-
-
-Infrastructure Cheat Sheet
---------------------------
-
-The Bus
-~~~~~~~
+Setup Steps
+~~~~~~~~~~~
 * Provision or choose a server to utilize for the bus
 * Install RabbitMQ on the server
 * Open ports 5672 (AMQP) and 15672 (management)
@@ -39,9 +31,19 @@ The Bus
    List binding instructions for queues
 
 
+Test Setup
+``````````
+.. todo::
+   How to verify it's ready.
+
 
 The Datastore
 ~~~~~~~~~~~~~
+Release engine utilizes `MongoDB <http://www.mongodb.org/>`_ for storing playbooks and other persistent data. Authentication must be turned on and it's highly recommended to create a username/password for every component that requires access to the data store.
+
+
+Setup Steps
+```````````
 * Provision or choose a server to utilize for the datastore
 * Install MongoDB on the server
 * Open port 27017
@@ -55,6 +57,11 @@ The Datastore
 .. todo::
    Provide a link to the initial database import
 
+Test Setup
+``````````
+.. todo::
+   How to verify it's ready.
+
 Core Component Requirements
 ---------------------------
 There are two components you must have no matter what workers you choose to support. These compoenents are: `RE-REST <https://github.com/RHInception/re-rest/>`_ and `RE-CORE <https://github.com/RHInception/re-core>`_.
@@ -63,27 +70,35 @@ RE-REST
 ~~~~~~~
 RE-REST is the REST endpoint for interacting with the Release Engine. This is the only interaction point by design. RE-REST is a `Flask <http://flask.pocoo.org/>`_ based application and requires a few libraries before it will work properly.
 
-RE-CORE
-~~~~~~~
-The core is essentially a finite state machine (FSM) hooked into a message bus and a database.
-
-The core oversees the execution of all release steps for any given project. The core is separate from the actual execution of each release step. Execution is delegated to the worker components.
-
-Core Component Cheat Sheet
---------------------------
-
-RE-REST
-~~~~~~~
+Setup Steps
+```````````
 * Provision or choose a server to utilize for RE-REST
 * Install Python v2
 * Install the python v2 libraries `listed here <https://github.com/RHInception/re-rest/blob/master/requirements.txt>`_.
 * Follow the RE-REST configuration instruction at :ref:`rerest-conf`.
 * Choose and implement a RE-REST deployment strategy via :ref:`rerest-deployment`.
 
+Test Setup
+``````````
+.. todo::
+   How to verify it's ready.
+
+
 RE-CORE
 ~~~~~~~
+The core is essentially a finite state machine (FSM) hooked into a message bus and a database.
+
+The core oversees the execution of all release steps for any given project. The core is separate from the actual execution of each release step. Execution is delegated to the worker components.
+
+Setup Steps
+```````````
 * Provision or choose a server to utilize for RE-CORE
 * Install Python v2
 * Install the python v2 libraries `listed here <https://github.com/RHInception/re-core/blob/master/requirements.txt>`_.
 * Follow the RE-CORE configuration instructions at :ref:`recore-conf`.
 * Choose and implement a RE-CORE deployment strategy via :ref:`recore-deployment`.
+
+Test Setup
+``````````
+.. todo::
+   How to verify it's ready.
