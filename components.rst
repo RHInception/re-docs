@@ -6,6 +6,14 @@ Components
 
    components/*
 
+Pre-Built Workers
+-----------------
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   workers/*
+
 Libraries/Helpers
 -----------------
 .. toctree::
