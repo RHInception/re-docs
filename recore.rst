@@ -14,8 +14,10 @@ Running From Source
    $ re-core -c ./examples/settings-example.json
 
 
-Configuration
-~~~~~~~~~~~~~
+.. _recore-conf:
+
+RE-CORE Configuration
+~~~~~~~~~~~~~~~~~~~~~
 Configuration of the server is done in JSON. You can find an example configuration file in the `examples/` directory.
 
 You can point to a specific configuration file using the `-c` command-line option.
@@ -39,6 +41,8 @@ PASSWORD   str    DB       Password to authenticate with
 For an example see `example-config.json <https://github.com/RHInception/re-core/blob/master/examples/settings-example.json>`_.
 
 
-Deployment
-~~~~~~~~~~
+.. _recore-deployment:
+
+RE-CORE Deployment
+~~~~~~~~~~~~~~~~~~
 TODO

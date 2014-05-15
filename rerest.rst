@@ -2,9 +2,12 @@ RE-REST
 -------
 Simple REST Api for the Release Engine. By design RE-REST is the only way to interact with the Release Engine.
 
+.. _rerest-conf:
 
-Configuration
-~~~~~~~~~~~~~
+RE-REST Configuration
+~~~~~~~~~~~~~~~~~~~~~~
+
+
 Configuration of the server is done in JSON and is by default kept in the current directories settings.json file.
 
 You can override the location by setting `REREST_CONFIG` environment variable.
@@ -79,8 +82,11 @@ LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of LDAP_FIELD_
 =================== ====== ====================== ================================================
 
 
-Deployment
-~~~~~~~~~~
+.. _rerest-deployment:
+
+RE-REST Deployment
+~~~~~~~~~~~~~~~~~~
+
 
 Apache with mod_wsgi
 ````````````````````

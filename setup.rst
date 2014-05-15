@@ -70,13 +70,13 @@ RE-REST
 * Provision or choose a server to utilize for RE-REST
 * Install Python v2
 * Install the python v2 libraries `listed here <https://github.com/RHInception/re-rest/blob/master/requirements.txt>`_.
-* Follow the RE-REST configuration instructions at the RE-REST doc location TODO (https://github.com/RHInception/re-rest/blob/master/README.md#configuration)
-* Choose and implement a RE-REST deployment strategy RE-REST doc location TODO (https://github.com/RHInception/re-rest/blob/master/README.md#deployment)
+* Follow the RE-REST configuration instruction at :ref:`rerest-conf`.
+* Choose and implement a RE-REST deployment strategy via :ref:`rerest-deployment`.
 
 RE-CORE
 ~~~~~~~
 * Provision or choose a server to utilize for RE-CORE
 * Install Python v2
 * Install the python v2 libraries `listed here <https://github.com/RHInception/re-core/blob/master/requirements.txt>`_.
-* Follow the RE-CORE configuration instructions at the RE-REST doc location TODO (https://github.com/RHInception/re-core/blob/master/README.md#configuration)
-* Choose and implement a RE-CORE deployment strategy RE-REST doc location TODO (??)
+* Follow the RE-CORE configuration instructions at :ref:`recore-conf`.
+* Choose and implement a RE-CORE deployment strategy via :ref:`recore-deployment`.
