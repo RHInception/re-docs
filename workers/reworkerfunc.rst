@@ -40,7 +40,6 @@ Engine Step Example
 
 .. code-block:: json
 
-   ...
    "steps": [
        {
            "name": "stop foo service",
@@ -53,7 +52,6 @@ Engine Step Example
            }
        }
    ]
-   ...
 
 
 Notes
