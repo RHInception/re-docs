@@ -13,7 +13,8 @@ For security best practices, each compoenent that transmits on the bus should ha
 Setup Steps
 ~~~~~~~~~~~
 
-** Provision or utilize an existing server to install RabbitMQ or similar service like Amazon SQS for the AMPQ service.  For the rest of this article we will assume that you are running the service on RabbitMQ **
+.. note::
+   Provision or utilize an existing server to install RabbitMQ or similar AMQP compliant service.  For the rest of this article we will assume that you are running the service on RabbitMQ.
 
 * Install RabbitMQ server
 * Open ports 5672 (AMQP) and 15672 (management)
@@ -26,7 +27,7 @@ Setup Steps
 * Bind the RE-CORE queue to the re exchange with job.create
 * Create a user for each component your instance will support
 * Create a queue for each component your instance will support
-* Bind the queue for each component to the re exchange with release.step
+* Bind the queue for each additional component (not including RE-REST and RE-CORE which are manditory and separate from any additional components) to the re exchange with connectors that describe the step or plugin that your instance will support.
 
 .. todo::
    List binding instructions for queues
@@ -46,7 +47,8 @@ Release engine utilizes `MongoDB <http://www.mongodb.org/>`_ for storing playboo
 Setup Steps
 ```````````
 
-** Provision or utilize an existing server to install MongoDB or similar service like Amazon DynamoDB for the NoSQL service.  For the rest of this article we will assume that you are running a local MongoDB service **
+.. note::
+   Provision or utilize an existing server to install MongoDB or similar service like Amazon DynamoDB for the NoSQL service.  For the rest of this article we will assume that you are running a local MongoDB service.
 
 * Provision or choose a server to utilize for the datastore
 * Install MongoDB on the server
