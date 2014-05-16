@@ -35,5 +35,27 @@ Unittests
 Run ``make tests`` from the main directory to execute unittests (including `pep8 <https://pypi.python.org/pypi/pep8>`_ and `pyflakes <https://pypi.python.org/pypi/pyflakes>`_)
 
 
-**Note:** See
-`Func - Module List <https://fedorahosted.org/func/wiki/ModulesList>`_ for more information.
+Engine Step Example
+~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: json
+
+   ...
+   "steps": [
+       {
+           "name": "stop foo service",
+           "plugin": "funcworker",
+           "parameters": {
+               "command": "service",
+               "subcommand": "stop",
+               "service": "megafrobber",
+               "hosts": ["127.0.0.1"]
+           }
+       }
+   ]
+   ...
+
+
+Notes
+~~~~~
+ See `Func - Module List <https://fedorahosted.org/func/wiki/ModulesList>`_ for more information.
