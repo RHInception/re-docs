@@ -6,15 +6,16 @@ Infrastructure Requirements
 
 The Bus
 ~~~~~~~
-Release Engine requires an AMQP service allowing messages to pass between components. The currently
-tested AMQP service used with Release Engine is `RabbitMQ <http://www.rabbitmq.com/>`_, an erlang based open source messaging service. For more information on setting up a RabbitMQ server please read the projects `server documentation <http://www.rabbitmq.com/admin-guide.html>`_.
+Release Engine requires an AMQP service allowing messages to pass between components. The current, verified to work, AMQP service used with Release Engine is `RabbitMQ <http://www.rabbitmq.com/>`_, an erlang based open source messaging service. For more information on setting up a RabbitMQ server please read the project's `server documentation <http://www.rabbitmq.com/admin-guide.html>`_.
 
-Each compoenent on the bus should have it's own username and password combination. By enforcing component username/passwords access can be restricted to just what a component needs.This also allows quick deactivation of a component in the event something goes terribly wrong.
+For security best practices, each compoenent that transmits on the bus should have it's own username and password combination. By enforcing component username/passwords access can be restricted to just what a component needs. This also allows quick deactivation of a component in the event something goes terribly wrong or a service is compromised.
 
 Setup Steps
 ~~~~~~~~~~~
-* Provision or choose a server to utilize for the bus
-* Install RabbitMQ on the server
+
+** Provision or utilize an existing server to install RabbitMQ or similar service like Amazon SQS for the AMPQ service.  For the rest of this article we will assume that you are running the service on RabbitMQ **
+
+* Install RabbitMQ server
 * Open ports 5672 (AMQP) and 15672 (management)
 * Enable RabbitMQ management via the `Management Plugin <http://www.rabbitmq.com/management.html>`_
 * Start RabbitMQ
@@ -22,10 +23,10 @@ Setup Steps
 * Create a user for RE-REST (the rest interface into Release Engine)
 * Create a user for RE-CORE (the state machine)
 * Create a queue for RE-CORE
-* Bind the RE-CORE queue to the re exchange with ??
+* Bind the RE-CORE queue to the re exchange with job.create
 * Create a user for each component your instance will support
 * Create a queue for each component your instance will support
-* Bind the queue for each component to the re exchange with ??
+* Bind the queue for each component to the re exchange with release.step
 
 .. todo::
    List binding instructions for queues
@@ -44,6 +45,9 @@ Release engine utilizes `MongoDB <http://www.mongodb.org/>`_ for storing playboo
 
 Setup Steps
 ```````````
+
+** Provision or utilize an existing server to install MongoDB or similar service like Amazon DynamoDB for the NoSQL service.  For the rest of this article we will assume that you are running a local MongoDB service **
+
 * Provision or choose a server to utilize for the datastore
 * Install MongoDB on the server
 * Open port 27017
@@ -52,7 +56,7 @@ Setup Steps
 * Create a database called "re"
 * Create a user for RE-CORE on database "re"
 * Create a user for RE-REST on database "re"
-* Import the initial data for the database via something
+* Import the initial data for the database via MongoDB Command Line Tools or one of the `many MongoDB UI Tools <http://mongodb-tools.com/>` 
 
 .. todo::
    Provide a link to the initial database import
