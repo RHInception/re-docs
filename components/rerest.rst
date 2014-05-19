@@ -152,32 +152,27 @@ URLs
 * PUT: Creates a new playbook.
  * **Response Type**: json
  * **Response Example**: ``{"status": "created", "id": "53614ccf1370129d6f29c7dd"}``
- * **Input Format**: json
- * **Inputs**: ??
+ * **Input Format**: json/yaml
+ * **Inputs**: Optional format parameter which controls submit type. Can be json or yaml. Default is json.
 
-.. todo::
-   List PUT inputs
 
 /api/v0/*$PROJECT*/playbook/*$ID*/
 ``````````````````````````````````
 * GET: Gets a playbooks for a project.
- * **Response Type**: json
+ * **Response Type**: json/yaml
  * **Response Example**: ``{"status": "ok", "item": ...}``
  * **Input Format**: None
- * **Inputs**: None
+ * **Inputs**: Optional format parameter which controls response type. Can be json or yaml. Default is json.
 * POST: Replace a playbook in a project.
  * **Response Type**: json
  * **Response Example**: ``{"status": "ok", "id": "53614ccf1370129d6f29c7dd"}``
- * **Input Format**: json
- * **Inputs**: ??
+ * **Input Format**: json/yaml
+ * **Inputs**: Optional format parameter which controls response type. Can be json or yaml. Default is json.
 * DELETE: Delete a playbook in a project.
  * **Response Type**: json
  * **Response Example**: ``{"status": "gone"}``
  * **Input Format**: None
  * **Inputs**: None
-
-.. todo::
-   List POST inputs
 
 
 
