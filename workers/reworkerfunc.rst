@@ -19,7 +19,7 @@ ships with:
 
 This plugin allows you to run any number of func worker
 instances. Each instance is configured to allow for calling specific
-func module commands through it. However, this requries configuration
+func module commands through it. However, this requires configuration
 before it can work.
 
 .. note::
@@ -93,7 +93,7 @@ We should see output similar to the following if everything well:
 
    [root@frober re-worker-func]# python ./replugin/funcworker/__init__.py
    2014-05-19 14:39:47,080 - FuncWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
-   2014-05-19 14:39:47,083 - FuncWorker - INFO - Attemtping connection with amqp://inceptadmin:***@mq01.inception.redhat.com:5672/
+   2014-05-19 14:39:47,083 - FuncWorker - INFO - Attempting connection with amqp://inceptadmin:***@mq01.inception.redhat.com:5672/
    2014-05-19 14:39:47,412 - FuncWorker - INFO - Connection and channel open.
    2014-05-19 14:39:47,413 - FuncWorker - INFO - Consuming on queue worker.funcworker
 

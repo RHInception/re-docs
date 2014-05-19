@@ -24,7 +24,7 @@ Name                      Type   Parent              Value
 ========================= ====== =================== ===========================================
 LOGFILE                   str    None                File name for the application level log
 LOGLEVEL                  str    None                DEBUG, INFO (default), WARN, FATAL
-MQ                        dict   None                Where all of the MQ connection settins are
+MQ                        dict   None                Where all of the MQ connection settings are
 SERVER                    str    MQ                  Hostname or IP of the server
 PORT                      int    MQ                  Port to connect on
 USER                      str    MQ                  Username to connect with
@@ -48,7 +48,7 @@ For an example see `example-settings.json <http://github.com/RHInception/re-rest
 
 Authentication
 ~~~~~~~~~~~~~~
-re-rest uses a simple decorater which enforces a REMOTE_USER be set.
+re-rest uses a simple decorator which enforces a REMOTE_USER be set.
 
 rerest.decorators:remote_user_required
 ``````````````````````````````````````
@@ -176,7 +176,7 @@ URLs
 
 
 
-Platform Gotcha's
+Platform Gotchas
 ~~~~~~~~~~~~~~~~~
 
 RHEL 6

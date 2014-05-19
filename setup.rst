@@ -10,7 +10,7 @@ Infrastructure Requirements
 
 The Bus
 ~~~~~~~
-Release Engine requires an AMQP service allowing messages to pass between components. The current, verified to work, AMQP service used with Release Engine is `RabbitMQ <http://www.rabbitmq.com/>`_, an erlang based open source messaging service. For more information on setting up a RabbitMQ server please read the project's `server documentation <http://www.rabbitmq.com/admin-guide.html>`_.
+Release Engine requires an AMQP service allowing messages to pass between components. The current, verified to work, AMQP service used with Release Engine is `RabbitMQ <http://www.rabbitmq.com/>`_, an Erlang based open source messaging service. For more information on setting up a RabbitMQ server please read the project's `server documentation <http://www.rabbitmq.com/admin-guide.html>`_.
 
 For security best practices, each component that transmits on the bus should have it's own username and password combination. By enforcing component username/passwords access can be restricted to just what a component needs. This also allows quick deactivation of a component in the event something goes terribly wrong or a service is compromised.
 
@@ -31,7 +31,7 @@ Setup Steps
 * Bind the RE-CORE queue to the re exchange with job.create
 * Create a user for each component your instance will support
 * Create a queue for each component your instance will support
-* Bind the queue for each additional component (not including RE-REST and RE-CORE which are manditory and separate from any additional components) to the re exchange with connectors that describe the step or plugin that your instance will support.
+* Bind the queue for each additional component (not including RE-REST and RE-CORE which are mandatory and separate from any additional components) to the re exchange with connectors that describe the step or plugin that your instance will support.
 
 .. todo::
    List binding instructions for queues

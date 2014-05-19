@@ -35,7 +35,7 @@ juicer configuration file.
 
 Dependencies
 ~~~~~~~~~~~~
-Use of the juicer worker requires a configuired and running `Pulp
+Use of the juicer worker requires a configured and running `Pulp
 Server <http://www.pulpproject.org/>`_ installation. Setup and
 maintenance of pulp servers is out of scope for this
 documentation. However, they provide `detailed setup instructions
