@@ -1,3 +1,5 @@
+.. _re_worker:
+
 RE-WORKER
 ---------
 This library provides a simple base for release engine workers to build from.

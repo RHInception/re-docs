@@ -1,8 +1,12 @@
+.. _setting_up:
+
 Setting Up
 ==========
 
 Infrastructure Requirements
 ----------------------------
+
+.. _setting_up_the_bus:
 
 The Bus
 ~~~~~~~
