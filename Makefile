@@ -48,6 +48,7 @@ help:
 
 clean:
 	rm -rf $(BUILDDIR)/*
+	find . -name '*.bak' -delete
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
