@@ -20,7 +20,13 @@ RE-CORE Configuration
 ~~~~~~~~~~~~~~~~~~~~~
 Configuration of the server is done in JSON. You can find an example configuration file in the `examples/ <https://github.com/RHInception/re-core/tree/master/examples>`_ directory.
 
-You can point to a specific configuration file using the ``-c`` command-line option.
+You must point to a specific configuration file using the ``-c`` command-line option to start the FSM:
+
+.. code-block:: bash
+
+   $ re-core -c settings.json
+
+Descriptions of all settings directives:
 
 ========== ====== ======== ===========================================
 Name       Type   Parent   Value
@@ -45,5 +51,32 @@ For an example see `example-config.json <https://github.com/RHInception/re-core/
 
 RE-CORE Deployment
 ~~~~~~~~~~~~~~~~~~
-.. todo::
-   How does one deploy this?
+
+.. note::
+
+   The release engine is only deployable via source code at this time.
+
+
+.. note::
+
+   Release engine components are no fully demonized at this
+   time. Therefore, deployment requires running each component in
+   something like **screen**.
+
+* Change into the directory you cloned **re-core** into
+* Run **screen**
+* Update your :ref:`re-core config file <recore-conf>` with appropriate values
+* Update your paths by running: ``. ./hacking/setup-env``
+* Run ``re-core -c path/to/settings.json``
+
+You should see output similar to the following:
+
+.. code-block:: bash
+
+   [~/release-engine/re-core] $ re-core -c ./real-settings.json
+   2014-05-19 13:56:00,179 - __init__:start_logging:43 - DEBUG - initialized stdout logger
+   2014-05-19 13:56:00,180 - __init__:parse_config:53 - DEBUG - Parsed configuration file
+
+Additional output will be directed to the log file you configured in
+the ``settings.json`` file. The default log file is called
+``recore.log`` and will be in your present working directory.
