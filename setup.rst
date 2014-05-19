@@ -58,7 +58,7 @@ Setup Steps
 * Create a database called "re"
 * Create a user for RE-CORE on database "re"
 * Create a user for RE-REST on database "re"
-* Import the initial data for the database via MongoDB Command Line Tools or one of the `many MongoDB UI Tools <http://mongodb-tools.com/>` 
+* Import the initial data for the database via MongoDB Command Line Tools or one of the `many MongoDB UI Tools <http://mongodb-tools.com/>`_.
 
 .. todo::
    Provide a link to the initial database import

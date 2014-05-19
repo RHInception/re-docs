@@ -38,21 +38,24 @@ Run ``make tests`` from the main directory to execute unittests (including `pep8
 Engine Step Example
 ~~~~~~~~~~~~~~~~~~~
 
+The following is just a *snippet* of a complete project.
+
 .. code-block:: json
 
-   "steps": [
-       {
-           "name": "stop foo service",
-           "plugin": "funcworker",
-           "parameters": {
-               "command": "service",
-               "subcommand": "stop",
-               "service": "megafrobber",
-               "hosts": ["127.0.0.1"]
-           }
-       }
-   ]
-
+   {
+      "steps": [
+          {
+              "name": "stop foo service",
+              "plugin": "funcworker",
+              "parameters": {
+                  "command": "service",
+                  "subcommand": "stop",
+                  "service": "megafrobber",
+                  "hosts": ["127.0.0.1"]
+              }
+          }
+      ]
+   }
 
 Notes
 ~~~~~

@@ -1,6 +1,9 @@
 RE-REST
 -------
-Simple REST Api for the Release Engine. By design RE-REST is the only way to interact with the Release Engine.
+Simple `REST Api
+<http://en.wikipedia.org/wiki/Representational_state_transfer>`_ for
+the Release Engine. By design RE-REST is the only way to interact with
+the Release Engine.
 
 .. _rerest-conf:
 
@@ -8,34 +11,37 @@ RE-REST Configuration
 ~~~~~~~~~~~~~~~~~~~~~~
 
 
-Configuration of the server is done in JSON and is by default kept in the current directories settings.json file.
+Configuration of the server is done in JSON and is by default kept in
+the current directories `settings.json
+<https://github.com/RHInception/re-rest/blob/master/example-settings.json>`_
+file.
 
-You can override the location by setting `REREST_CONFIG` environment variable.
+You can override the location by setting ``REREST_CONFIG`` environment variable.
 
 
 ========================= ====== =================== ===========================================
-Name                      Type   Parent              Value                                      
+Name                      Type   Parent              Value
 ========================= ====== =================== ===========================================
-LOGFILE                   str    None                File name for the application level log    
-LOGLEVEL                  str    None                DEBUG, INFO (default), WARN, FATAL         
-MQ                        dict   None                Where all of the MQ connection settins are 
-SERVER                    str    MQ                  Hostname or IP of the server               
-PORT                      int    MQ                  Port to connect on                         
-USER                      str    MQ                  Username to connect with                   
-PASSWORD                  str    MQ                  Password to authenticate with              
-VHOST                     str    MQ                  vhost on the server to utilize             
-MONGODB_SETTINGS          dict   None                Where all of the MongoDB settings live     
-DB                        str    MONGODB_Settings    Name of the database to use                
-USERNAME                  str    MONGODB_Settings    Username to auth with                      
-Password                  str    MONGODB_Settings    Password to auth with                      
-HOST                      str    MONGODB_Settings    Host to connect to                         
-PORT                      int    MONGODB_Settings    Port to connect to on the host             
+LOGFILE                   str    None                File name for the application level log
+LOGLEVEL                  str    None                DEBUG, INFO (default), WARN, FATAL
+MQ                        dict   None                Where all of the MQ connection settins are
+SERVER                    str    MQ                  Hostname or IP of the server
+PORT                      int    MQ                  Port to connect on
+USER                      str    MQ                  Username to connect with
+PASSWORD                  str    MQ                  Password to authenticate with
+VHOST                     str    MQ                  vhost on the server to utilize
+MONGODB_SETTINGS          dict   None                Where all of the MongoDB settings live
+DB                        str    MONGODB_Settings    Name of the database to use
+USERNAME                  str    MONGODB_Settings    Username to auth with
+Password                  str    MONGODB_Settings    Password to auth with
+HOST                      str    MONGODB_Settings    Host to connect to
+PORT                      int    MONGODB_Settings    Port to connect to on the host
 AUTHORIZATION_CALLABLE    str    None                module.location:callable. Eg: "rerest.authorization:no_authorization"
 AUTHORIZATION_CONFIG      dict   None                Authorization callable specific configuration items
 ========================= ====== =================== ===========================================
 
 
-Further configuration items can be found at http://flask.pocoo.org/docs/config/#builtin-configuration-values or look at specific AUTHORIZATION_CALLABLE documentation.
+Further configuration items can be found in the `Flask Documentation <http://flask.pocoo.org/docs/config/#builtin-configuration-values>`_ or look at specific AUTHORIZATION_CALLABLE documentation.
 
 For an example see `example-settings.json <http://github.com/RHInception/re-rest/blob/master/example-settings.json>`_
 
@@ -61,13 +67,13 @@ rerest.authroziation.no_authorization
 .. warning::
    This should not be used in a production environment**
 
-To use this callable set AUTHORIZATION_CALLABLE to `rerest.authorization:no_authorization`.
+To use this callable set AUTHORIZATION_CALLABLE to ``rerest.authorization:no_authorization``.
 
 
 rerest.authroziation.ldap_search
 ````````````````````````````````
 
-To use this callable set AUTHORIZATION_CALLABLE to `rerest.authorization:ldap_search` and set the following items
+To use this callable set AUTHORIZATION_CALLABLE to ``rerest.authorization:ldap_search`` and set the following items
 in your configuration file.
 
 =================== ====== ====================== ================================================
@@ -228,14 +234,16 @@ kerberos
 
 Dynamic Variables
 `````````````````
+.. _rerest_dynamic_variables:
+
 Passing dynamic variables requires two additions
 
 #. We must set the ``Content-Type`` header (``-H ...`` below) to ``application/json``
 #. We must pass **data** (``-d '{....}'`` below) for the ``PUT`` to send to the server
 
 This example sets the ``Content-Type`` and passes two **dynamic
-variables**: ``cart`` which is the name of a
-[Juicer](https://github.com/juicer/juicer) release cart, and
+variables**: ``cart`` which is the name of a `Juicer
+<https://github.com/juicer/juicer>`_ release cart, and
 ``environment``, which is the environment to push the release cart
 contents to.
 
@@ -244,3 +252,7 @@ contents to.
   $ curl -H "Content-Type: application/json" -d '{"cart": "bitmath", "environment": "re"}' -X PUT http://rerest.example.com/api/v0/test/deployment/
 
    ... # 201 and json data if exists, otherwise an error code
+
+.. seealso::
+
+   :ref:`RE-WORKER-JUICER <re_worker_juicer>`
