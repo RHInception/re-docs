@@ -12,7 +12,7 @@ The Bus
 ~~~~~~~
 Release Engine requires an AMQP service allowing messages to pass between components. The current, verified to work, AMQP service used with Release Engine is `RabbitMQ <http://www.rabbitmq.com/>`_, an erlang based open source messaging service. For more information on setting up a RabbitMQ server please read the project's `server documentation <http://www.rabbitmq.com/admin-guide.html>`_.
 
-For security best practices, each compoenent that transmits on the bus should have it's own username and password combination. By enforcing component username/passwords access can be restricted to just what a component needs. This also allows quick deactivation of a component in the event something goes terribly wrong or a service is compromised.
+For security best practices, each component that transmits on the bus should have it's own username and password combination. By enforcing component username/passwords access can be restricted to just what a component needs. This also allows quick deactivation of a component in the event something goes terribly wrong or a service is compromised.
 
 Setup Steps
 ~~~~~~~~~~~
@@ -74,7 +74,7 @@ Test Setup
 
 Core Component Requirements
 ---------------------------
-There are two components you must have no matter what workers you choose to support. These compoenents are: `RE-REST <https://github.com/RHInception/re-rest/>`_ and `RE-CORE <https://github.com/RHInception/re-core>`_.
+There are two components you must have no matter what workers you choose to support. These components are: `RE-REST <https://github.com/RHInception/re-rest/>`_ and `RE-CORE <https://github.com/RHInception/re-core>`_.
 
 RE-REST
 ~~~~~~~
