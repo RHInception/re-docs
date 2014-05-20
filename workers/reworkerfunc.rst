@@ -93,7 +93,7 @@ We should see output similar to the following if everything well:
 
    [root@frober re-worker-func]# python ./replugin/funcworker/__init__.py
    2014-05-19 14:39:47,080 - FuncWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
-   2014-05-19 14:39:47,083 - FuncWorker - INFO - Attempting connection with amqp://inceptadmin:***@mq01.inception.redhat.com:5672/
+   2014-05-19 14:39:47,083 - FuncWorker - INFO - Attempting connection with amqp://JoeUser:***@mq.example.com:5672/
    2014-05-19 14:39:47,412 - FuncWorker - INFO - Connection and channel open.
    2014-05-19 14:39:47,413 - FuncWorker - INFO - Consuming on queue worker.funcworker
 
