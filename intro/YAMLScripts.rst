@@ -5,7 +5,7 @@ YAML Scripts
 
 This page provides a basic overview of correct YAML
 syntax. Additionally it covers non-task specific modules that are
-valid in `Taboot` scripts.
+valid in `Release Engine` playbooks.
 
 .. seealso::
 
@@ -15,11 +15,11 @@ valid in `Taboot` scripts.
 YAML Basics
 -----------
 
-For `taboot`, every YAML script must be a list at it's root-most
-element. Each item in the list is a dictionary. These dictionaries
-represent all the options you can use to write a `taboot` script. In
+
+For the `Release Engine`, every YAML playbook must be a list at it's root-most element. Each item in the list is a dictionary. These dictionaries
+represent all the options you can use to write a `Release Engine` playbook. In
 addition, all YAML files (regardless of their association with
-`taboot` or not) should start with ``---``.
+`Release Engine` or not) all YAML documents should start with ``---``.
 
 In YAML a list can be represented in two ways. In one way all members
 of a list are lines beginning at the same indentation level starting
@@ -78,11 +78,11 @@ Finally, you can combine these data structures::
         - Mango
     languages:
         ruby: Elite
-	python: Elite
-	dotnet: Lame
+    python: Elite
+    dotnet: Lame
 
 That's all you really need to know about YAML to get started writing
-`Taboot` scripts.
+`Release Engine` playbooks.
 
 .. seealso::
 
@@ -90,12 +90,12 @@ That's all you really need to know about YAML to get started writing
        YAML Lint gets the lint out of your YAML
 
 
-.. _elements:
+.. _elements_yaml:
 
-Elements of a Taboot script
+elements of a Release Engine script
 ---------------------------
 
-A Taboot release script can specify the following keys:
+A Release Engine release script can specify the following keys:
 
 * ``hosts``
 * ``concurrency``
@@ -106,11 +106,11 @@ A Taboot release script can specify the following keys:
 Each of these keys and their respective arguments is described in the
 following sections.
 
-.. include:: elements/hosts.rst
-.. include:: elements/concurrency.rst
-.. include:: elements/output.rst
-.. include:: elements/preflight.rst
-.. include:: elements/tasks.rst
+.. include:: elements_yaml/hosts.rst
+.. include:: elements_yaml/concurrency.rst
+.. include:: elements_yaml/output.rst
+.. include:: elements_yaml/preflight.rst
+.. include:: elements_yaml/tasks.rst
 
 
 Putting it all together
@@ -123,19 +123,12 @@ now. That will include ``hosts``, ``concurrency``, ``output``,
     ---
     - hosts:
         - ruby*.web.qa.example.com
-	- www01.web.qa.example.com
-	- www02.web.qa.example.com
+        - www01.web.qa.example.com
+        - www02.web.qa.example.com
 
-      concurrency: 3
-      
-      output:
-        - CLIOutput
-	- LogOutput:
-	    logfile: web-restarts.log
-	- EmailOutput:
-	    to_addr: my_boss@example.com
-	    from_addr: my_email@example.com
-	    
+    - LogOutput:
+      logfile: web-restarts.log
+
       preflight:
         - puppet.Disable
 
@@ -143,7 +136,7 @@ now. That will include ``hosts``, ``concurrency``, ``output``,
         - service.Restart: {service: httpd}
 
 
-On three hosts at a time this `Taboot` script would restart the
+On three hosts at a time this `Release Engine` script would restart the
 `httpd` process, printing progress to the command line, logging it to
 'web-restarts.log', and finish by emailing the result of the whole
 task to my_boss@example.com.
