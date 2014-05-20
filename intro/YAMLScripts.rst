@@ -23,7 +23,9 @@ addition, all YAML files (regardless of their association with
 
 In YAML a list can be represented in two ways. In one way all members
 of a list are lines beginning at the same indentation level starting
-with a ``-`` character::
+with a ``-`` character
+
+.. code-block:: yaml
 
     ---
     # A list of tasty fruits
@@ -34,13 +36,17 @@ with a ``-`` character::
 
 In the second way a list is represented as comma separated elements
 surrounded by square brackets. Newlines are permitted between
-elements::
+elements
+
+.. code-block:: yaml
 
     ---
     # A list of tasty fruits
     [apple, orange, banana, mango]
 
-A dictionary is represented in a simple ``key:`` and ``value`` form::
+A dictionary is represented in a simple ``key:`` and ``value`` form
+
+.. code-block:: yaml
 
     ---
     # An employee record
@@ -48,7 +54,9 @@ A dictionary is represented in a simple ``key:`` and ``value`` form::
     job: Developer
     skill: Elite
 
-Like lists, dictionaries can be represented in an abbreviated form::
+Like lists, dictionaries can be represented in an abbreviated form
+
+.. code-block:: yaml
 
     ---
     # An employee record
@@ -56,14 +64,18 @@ Like lists, dictionaries can be represented in an abbreviated form::
 
 .. _truthiness:
 
-You can specify a boolean value (true/false) in several forms::
+You can specify a boolean value (true/false) in several forms
+
+.. code-block:: yaml
 
     ---
     knows_oop: True
     likes_emacs: TRUE
     uses_cvs: false
 
-Finally, you can combine these data structures::
+Finally, you can combine these data structures
+
+.. code-block:: yaml
 
     ---
     # An employee record
@@ -118,7 +130,9 @@ Putting it all together
 
 Before we finish, lets put together everything we've seen up to
 now. That will include ``hosts``, ``concurrency``, ``output``,
-``preflight``, and an example ``task``::
+``preflight``, and an example ``task``
+
+.. code-block:: yaml
 
     ---
     - hosts:
