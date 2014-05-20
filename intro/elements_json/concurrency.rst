@@ -8,6 +8,8 @@ Concurrency
 ``concurrency`` lets you specify the number of hosts this script can
 operate on at once. This is great if you need to perform rolling
 restarts or updates. In those cases you can omit this key, as the
-default value is 1::
+default value is 1
+
+.. code-block:: json
 
     concurrency: 5

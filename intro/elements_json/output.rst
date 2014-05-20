@@ -27,13 +27,17 @@ CLIOutput
 This is the default output method. If you only want command line
 printing then it can be omitted.
 
-Syntax::
+Syntax
+
+.. code-block:: json
 
   ---
     output:
        - CLIOutput
 
-Abbreviated form::
+Abbreviated form
+
+.. code-block:: json
 
   ---
     output: [CLIOutput]
@@ -51,14 +55,18 @@ requested. This has a default configured to log to a file called
 `taboot.log` which is configurable via the ``logfile`` keyword
 argument.
 
-Syntax::
+Syntax
+
+.. code-block:: json
 
   ---
     output:
       - LogOutput:
           logfile: taboot.log
 
-Abbreviated form::
+Abbreviated form
+
+.. code-block:: json
 
   ---
     output: [LogOutput: {logfile: taboot.log}]
@@ -110,14 +118,18 @@ defaults. Finally, if not set in the yaml file or the config file then
 the default is used (if available).
 
 
-Config File Syntax::
+Config File Syntax
+
+.. code-block:: ini
 
   [HTMLOutput]
   destdir=/var/www/html
   logfile=taboot.html
 
 
-Config File Using Date Substitution::
+Config File Using Date Substitution
+
+.. code-block:: ini
 
   [HTMLOutput]
   destdir=/var/www/html
@@ -125,14 +137,18 @@ Config File Using Date Substitution::
   logfile=hack-check-%s.html
 
 
-HTMLOutput Syntax::
+HTMLOutput Syntax
+
+.. code-block:: json
 
   ---
     output:
       - HTMLOutput:
           logfile: taboot.log
 
-Abbreviated form::
+Abbreviated form
+
+.. code-block:: json
 
   ---
     output: [HTMLOutput: {logfile: taboot.html, destdir: /var/www/html}]
@@ -149,7 +165,9 @@ EmailOutput
 * API: :class:`taboot.output.EmailOutput`
 
 Finally, `taboot` can go out of it's way and email you results when
-a script has finished running::
+a script has finished running
+
+.. code-block:: json
 
   ---
     output:
