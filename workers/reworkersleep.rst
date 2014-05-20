@@ -3,7 +3,7 @@ RE-WORKER-SLEEP
 Release Engine Worker Plugin that sleeps for a period of seconds.
 
 From a fresh checkout of the `re-worker-sleep repo
-<git@github.com:RHInception/re-worker-sleep.git>`_, we'll open
+<https://github.com/RHInception/re-worker-sleep.git>`_, we'll open
 ``replugin/sleepworker/__init__.py`` in our favorite editor and scroll
 to the bottom. We'll see something similar to this:
 

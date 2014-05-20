@@ -60,7 +60,7 @@ tell the worker that it must use that specific configuration file.
    accept it as what it is.
 
 From a fresh checkout of the `re-worker-func repo
-<git@github.com:RHInception/re-worker-func.git>`_, we'll open
+<https://github.com/RHInception/re-worker-sleep.git>`_, we'll open
 ``replugin/funcworker/__init__.py`` in our favorite editor and scroll
 to the bottom. We'll see something similar to this:
 
