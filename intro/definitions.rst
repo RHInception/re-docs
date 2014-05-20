@@ -91,3 +91,8 @@ Worker (Plugin)
 YAML
    YAML Ain't Markup Language. YAML is an alternative syntax which may
    be used to write Playbooks in. The normative syntax is JSON.
+
+.. seealso::
+
+    :ref:`YAML Basics<intro_yaml>`
+        Introduction to YAML formatting

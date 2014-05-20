@@ -12,3 +12,4 @@ the complete system.
 
 .. include:: intro/overview.rst
 .. include:: intro/definitions.rst
+.. include:: intro/YAMLScripts.rst
