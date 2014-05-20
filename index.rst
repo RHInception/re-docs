@@ -5,6 +5,7 @@ Release Engine
 .. toctree::
    :maxdepth: 3
 
+   intro.rst
    Setting up <setup.rst>
    Components and Libraries <components.rst>
    development.rst

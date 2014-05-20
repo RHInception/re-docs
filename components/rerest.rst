@@ -7,6 +7,9 @@ the Release Engine.
 
 .. _rerest-conf:
 
+.. contents:: Table of Contents
+   :depth: 3
+
 RE-REST Configuration
 ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -127,7 +130,8 @@ URLs
 /api/v0/*$PROJECT*/deployment/
 ``````````````````````````````
 
-* PUT: Creates a new deployment.
+* **PUT**: Creates a new deployment.
+
  * **Response Type**: json
  * **Response Example**: ``{"status": "created", "id": 1}``
  * **Input Format**: None
@@ -135,7 +139,8 @@ URLs
 
 /api/v0/playbooks/
 ``````````````````
-* GET: Gets a list of **all** playbooks.
+* **GET**: Gets a list of **all** playbooks.
+
  * **Response Type**: json
  * **Response Example**: ``{"status": "ok", "items": [...]}``
  * **Input Format**: None
@@ -144,12 +149,15 @@ URLs
 
 /api/v0/*$PROJECT*/playbook/
 ````````````````````````````
-* GET: Gets a list of all playbooks for a project.
+* **GET**: Gets a list of all playbooks for a project.
+
  * **Response Type**: json
  * **Response Example**: ``{"status": "ok", "items": [...]}``
  * **Input Format**: None
  * **Inputs**: None
-* PUT: Creates a new playbook.
+
+* **PUT**: Creates a new playbook.
+
  * **Response Type**: json
  * **Response Example**: ``{"status": "created", "id": "53614ccf1370129d6f29c7dd"}``
  * **Input Format**: json/yaml
@@ -158,17 +166,22 @@ URLs
 
 /api/v0/*$PROJECT*/playbook/*$ID*/
 ``````````````````````````````````
-* GET: Gets a playbooks for a project.
+* **GET**: Gets a playbooks for a project.
+
  * **Response Type**: json/yaml
  * **Response Example**: ``{"status": "ok", "item": ...}``
  * **Input Format**: None
  * **Inputs**: Optional format parameter which controls response type. Can be json or yaml. Default is json.
-* POST: Replace a playbook in a project.
+
+* **POST**: Replace a playbook in a project.
+
  * **Response Type**: json
  * **Response Example**: ``{"status": "ok", "id": "53614ccf1370129d6f29c7dd"}``
  * **Input Format**: json/yaml
  * **Inputs**: Optional format parameter which controls response type. Can be json or yaml. Default is json.
-* DELETE: Delete a playbook in a project.
+
+* **DELETE**: Delete a playbook in a project.
+
  * **Response Type**: json
  * **Response Example**: ``{"status": "gone"}``
  * **Input Format**: None
