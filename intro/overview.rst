@@ -3,6 +3,12 @@
 Overview
 ++++++++
 
-This section provides a very high-level overview of how the components
-of the Release Engine work together.
+This section is a narrative, or story, taking us through the
+components of the Release Engine. At the end of this narrative we'll
+have learned:
+
+* Overall workflow
+* About the key components
+* How components communicate
+* Basics of writing workers
 

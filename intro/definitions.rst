@@ -27,9 +27,10 @@ MongoDB
 
 Playbook
    A document describing a software release. This document is stored
-   in MongoDB. Playbooks consists of two main items: ownership
-   identification, and a list of steps (See also: **Playbook Step**)
-   required to finish so that the release can be considered completed.
+   in MongoDB. Playbooks consists of three main items: ownership
+   identification, target hosts, and a list of steps (See also:
+   **Playbook Step**) required to finish so that the release can be
+   considered completed.
 
 Playbook Step
    A playbook step represents a unit of work in your overall release
