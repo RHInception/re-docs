@@ -58,3 +58,12 @@ Worker for executing juicer (rpm promotion) calls
     :target: https://travis-ci.org/RHInception/re-worker-juicer/
 
 ----
+
+RE-WORKER-SLEEP
+~~~~~~~~~~~~~~~~
+Worker for executing sleeping.
+
+.. image:: https://api.travis-ci.org/RHInception/re-worker-sleep.png
+    :target: https://travis-ci.org/RHInception/re-worker-sleep/
+
+----
