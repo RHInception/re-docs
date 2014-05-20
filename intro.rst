@@ -14,7 +14,7 @@ AMQP
    See **Message Bus**.
 
 Finite State Machine (**FSM**)
-   See **CORE**
+   See **RE-CORE**
 
 JSON
    Javascript Object Notation. Data which can be turned into
@@ -39,7 +39,12 @@ Playbook
    required to finish so that the release can be considered completed.
 
 Playbook Step
-   Foo
+   A playbook step represents a unit of work in your overall release
+   process.
+
+   Defining a playbook step is like instantiating a **Worker
+   Plugin**. That is to say, using the api signature of a given Worker
+   Plugin, you fill in the missing parameters.
 
 Python
    The programming language the Release Engine is primarily written in.
@@ -74,7 +79,6 @@ REST
    records.
 
 Temporary Queue
-
    (See also: **Message Bus**) Temporary queues are created by various
    Release Engine components. These queues are ephemeral and usually
    automatically clean themselves up after all clients disconnect from
@@ -87,6 +91,9 @@ Worker (Plugin)
    several things: running puppet on a server; restarting a host;
    uploading RPMs into a YUM repository, scheduling downtime, the
    possibilities are virtually endless.
+
+   It might help to think of Worker Plugins as Class definitions. See
+   **Playbook Step** for the other half of that comparison.
 
 YAML
    YAML Ain't Markup Language. YAML is an alternative syntax which may
