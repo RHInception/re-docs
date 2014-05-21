@@ -8,7 +8,7 @@ Preflight
 * Default: None
 
 The ``preflight`` element defines the steps that will be performed on
-each host in :ref:`hosts <yaml_hosts>` before the :ref:`yaml_steps`
+each host in :ref:`hosts <json_hosts>` before the :ref:`json_steps`
 body executes. The syntax of each possible step varries. All of the
 steps are documented in the :ref:`Components → Pre-Built Workers
 <components_pre_built>` section.

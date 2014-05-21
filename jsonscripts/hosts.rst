@@ -1,4 +1,4 @@
-.. _yaml_hosts:
+.. _json_hosts:
 
 Hosts
 ^^^^^
@@ -10,17 +10,21 @@ Hosts
 The ``hosts`` element is used to describe the target hosts for the
 script to act on.
 
-.. code-block:: yaml
+.. code-block:: json
 
-   ---
-   - hosts:
-      - www01.web.ext.example.com
-      - www02.web.ext.example.com
-      - www03.web.ext.example.com
+    [
+     {
+      "hosts": [
+       "www01.web.ext.example.com", 
+       "www02.web.ext.example.com", 
+       "www03.web.ext.example.com"
+      ]
+     }
+    ]
 
-Or in YAML shorthand:
 
-.. code-block:: yaml
+Or in JSON shorthand:
 
-   ---
-   - hosts: [www01.web.ext.example.com, www02.web.ext.example.come, www03.web.ext.example.com]
+.. code-block:: json
+
+    [{"hosts": ["www01.web.ext.example.com", "www02.web.ext.example.com", "www03.web.ext.example.com"]}]
