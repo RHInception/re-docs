@@ -15,9 +15,7 @@ valid in `Release Engine` playbooks.
        For more information on the workers that ship with Release Engine
 
 For the `Release Engine`, every JSON playbook must be a list at it's root-most element. Each item in the list is a dictionary. These dictionaries
-represent all the options you can use to write a `Release Engine` playbook. In
-addition, all JSON files (regardless of their association with
-`Release Engine` or not) all JSON documents should start with ``---``.
+represent all the options you can use to write a `Release Engine` playbooks.
 
 In JSON a list can be represented in two ways. In one way all members
 of a list are lines beginning at the same indentation level starting
@@ -42,27 +40,25 @@ elements
 
 .. code-block:: json
 
-    ---
-    # A list of tasty fruits
-    [apple, orange, banana, mango]
+    ["apple", "orange", "strawberry", "mango"]
+ 
 
-A dictionary is represented in a simple ``key:`` and ``value`` form
+Aadictionary is represented in a simple ``key:`` and ``value`` form
 
 .. code-block:: json
 
-    ---
-    # An employee record
-    name: John Eckersberg
-    job: Developer
-    skill: Elite
+    {
+      "skill": "Elite", 
+      "job": "Developer", 
+      "name": "John Eckersberg"
+    }
 
 Like lists, dictionaries can be represented in an abbreviated form
 
 .. code-block:: json
 
-    ---
-    # An employee record
-    {name: John Eckersberg, job: Developer, skill: Elite}
+    {"skill": "Elite", "job": "Developer", "name": "John Eckersberg"}
+
 
 .. _truthiness:
 
@@ -70,30 +66,33 @@ You can specify a boolean value (true/false) in several forms
 
 .. code-block:: json
 
-    ---
-    knows_oop: True
-    likes_emacs: TRUE
-    uses_cvs: false
+    {
+      "knows_oop": true, 
+      "likes_emacs": true, 
+      "uses_cvs": false
+    }
 
 Finally, you can combine these data structures
 
 .. code-block:: json
 
-    ---
-    # An employee record
-    name: John Eckersberg
-    job: Developer
-    skill: Elite
-    employed: True
-    foods:
-        - Apple
-        - Orange
-        - Strawberry
-        - Mango
-    languages:
-        ruby: Elite
-    python: Elite
-    dotnet: Lame
+    {
+     "name": "John Eckersberg", 
+     "python": "Elite", 
+     "job": "Developer", 
+     "languages": {
+      "ruby": "Elite"
+     }, 
+     "foods": [
+      "Apple", 
+      "Orange", 
+      "Strawberry", 
+      "Mango"
+     ], 
+     "dotnet": "Lame", 
+     "employed": true, 
+     "skill": "Elite"
+    }
 
 That's all you really need to know about JSON to get started writing
 `Release Engine` playbooks.
