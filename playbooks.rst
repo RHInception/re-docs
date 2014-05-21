@@ -97,12 +97,9 @@ items for ``steps``.
 
     ---
     - hosts:
-        - ruby*.web.qa.example.com
+        - ruby01.web.qa.example.com
         - www01.web.qa.example.com
         - www02.web.qa.example.com
-
-    - LogOutput:
-      logfile: web-restarts.log
 
       preflight:
         - puppet.Disable
@@ -111,7 +108,9 @@ items for ``steps``.
         - service.Restart: {service: httpd}
 
 
-On three hosts at a time this `Release Engine` script would restart the
-`httpd` process, printing progress to the command line, logging it to
-'web-restarts.log', and finish by emailing the result of the whole
-task to my_boss@example.com.
+In this example: the ``preflight`` element tells us that all three
+hosts will stop the ``puppet`` agent at the same time
+(concurrently). Afterwards the playbook will restart the ``httpd``
+service on each host in an iterative manner. I.e., one server at a
+time, beginning with ``ruby01.web.qa...`` and finishing with
+``www02.web.qa...``.
