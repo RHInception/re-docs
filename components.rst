@@ -6,6 +6,8 @@ Components
 
    components/*
 
+.. _components_pre_built:
+
 Pre-Built Workers
 -----------------
 .. important::

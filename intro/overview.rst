@@ -16,8 +16,24 @@ end of this narrative we'll have learned:
 Scenario
 ~~~~~~~~
 
-We work in an software shop and we have been told to increase our rate
-of delivery. We took some measurements and realized that even with
-**Jenkins** automating things, we're still spending 35%+ of our sprint
-time just deploying to test environments. It is clear that we need to
-reduce this number.
+We work in a software shop and we have been told to decreate our time
+to delivery. We took some measurements and realized that even with
+`Jenkins <http://jenkins-ci.org/>`_ and some home-brewed systems for
+deployment, we're still spending ≥ **20%** of our sprint time on *just
+deploying to test environments*. Lets focus on getting back that 20%.
+
+How do we approach this? What functionality must be present in any
+kind of system which can automate deployments? Also consider that
+we're just one stop in a much larger shop. Given that constraint, it
+follows that whatever we build should be accessible to outsiders,
+extensible so other teams can build on it to fit their requirements,
+as well as have a clear language for describing steps in a release.
+
+* Authentication and authorization
+* Storage for deployment playbooks
+* Loosey coupled components, so individual installations can scale to
+  meet their owners requirements
+* Something to do manage all of the actual steps happening
+* And, some sort of configurable notification system, so we can get
+  updates in real time.
+

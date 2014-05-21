@@ -12,8 +12,8 @@ Setup Steps
 .. note::
    Provision or utilize an existing server to install RabbitMQ or similar AMQP compliant service.  For the rest of this article we will assume that you are running the service on RabbitMQ.
 
-* Install RabbitMQ server
-* Open ports 5672 (AMQP) and 15672 (management)
+* Install `RabbitMQ Server <http://www.rabbitmq.com/install-rpm.html>`_
+* Open ports **5672** (*AMQP*) and **15672** (*management*)
 * Enable RabbitMQ management via the `Management Plugin <http://www.rabbitmq.com/management.html>`_
 * Start RabbitMQ
 * Create an exchange called "re" using topics

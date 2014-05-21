@@ -84,7 +84,9 @@ to the bottom. We'll see something similar to this:
   :ref:`Setting Up The Bus<setting_up_the_bus>`)
 * Next, we change the ``config_file`` line to point at our selected
   configuration file. For example:
+
  * ``config_file='conf/nagios.json',``
+
 * Run the worker: ``python ./replugin/funcworker/__init__.py``
 
 We should see output similar to the following if everything well:

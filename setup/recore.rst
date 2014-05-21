@@ -8,7 +8,7 @@ Setup Steps
 ```````````
 * Provision or choose a server to utilize for RE-CORE
 * Install Python v2
-* Install the python v2 libraries `listed here <https://github.com/RHInception/re-core/blob/master/requirements.txt>`_.
+* Install the python v2 libraries listed on `the re-core GitHub page <https://github.com/RHInception/re-core/blob/master/requirements.txt>`_.
 * Follow the RE-CORE configuration instructions at :ref:`recore-conf`.
 * Choose and implement a RE-CORE deployment strategy via :ref:`recore-deployment`.
 

@@ -5,13 +5,13 @@ Simple `REST Api
 the Release Engine. By design RE-REST is the only way to interact with
 the Release Engine.
 
-.. _rerest-conf:
-
 .. contents:: Table of Contents
    :depth: 3
 
+.. _rerest_conf:
+
 RE-REST Configuration
-~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 
 Configuration of the server is done in JSON and is by default kept in
@@ -91,7 +91,7 @@ LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of LDAP_FIELD_
 =================== ====== ====================== ================================================
 
 
-.. _rerest-deployment:
+.. _rerest_deployment:
 
 RE-REST Deployment
 ~~~~~~~~~~~~~~~~~~

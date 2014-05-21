@@ -1,7 +1,9 @@
 .. _intro_yaml:
 
+
+
 YAML Scripts
-============
+************
 
 This page provides a basic overview of correct YAML
 syntax. Additionally it covers non-task specific modules that are
@@ -9,12 +11,8 @@ valid in `Release Engine` playbooks.
 
 .. seealso::
 
-   :ref:`tasks`
-       The complete documentation of all included task modules
-
-YAML Basics
------------
-
+   :ref:`Components → Pre-Built Workers <components_pre_built>`
+       For more information on the workers that ship with Release Engine
 
 For the `Release Engine`, every YAML playbook must be a list at it's root-most element. Each item in the list is a dictionary. These dictionaries
 represent all the options you can use to write a `Release Engine` playbook. In
@@ -101,56 +99,8 @@ That's all you really need to know about YAML to get started writing
    `YAMLLint <http://yamllint.com/>`_
        YAML Lint gets the lint out of your YAML
 
+.. seealso:: Get Deeper into Playbooks
 
-.. _elements_yaml:
-
-elements of a Release Engine script
----------------------------
-
-A Release Engine release script can specify the following keys:
-
-* ``hosts``
-* ``concurrency``
-* ``output``
-* ``preflight``
-* ``tasks``
-
-Each of these keys and their respective arguments is described in the
-following sections.
-
-.. include:: elements_yaml/hosts.rst
-.. include:: elements_yaml/concurrency.rst
-.. include:: elements_yaml/output.rst
-.. include:: elements_yaml/preflight.rst
-.. include:: elements_yaml/tasks.rst
-
-
-Putting it all together
------------------------
-
-Before we finish, lets put together everything we've seen up to
-now. That will include ``hosts``, ``concurrency``, ``output``,
-``preflight``, and an example ``task``
-
-.. code-block:: yaml
-
-    ---
-    - hosts:
-        - ruby*.web.qa.example.com
-        - www01.web.qa.example.com
-        - www02.web.qa.example.com
-
-    - LogOutput:
-      logfile: web-restarts.log
-
-      preflight:
-        - puppet.Disable
-
-      tasks:
-        - service.Restart: {service: httpd}
-
-
-On three hosts at a time this `Release Engine` script would restart the
-`httpd` process, printing progress to the command line, logging it to
-'web-restarts.log', and finish by emailing the result of the whole
-task to my_boss@example.com.
+   Now that we're comfortable with YAML, lets' continue on and read
+   the :ref:`Playbooks <playbooks>` section for an in-depth guide of
+   playbooks.

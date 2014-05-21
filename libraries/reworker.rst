@@ -32,20 +32,24 @@ Worker.send
 Sends a message.
 
 * **Inputs**:
+
  * topic: the routing key
  * corr_id: the correlation id
  * message_struct: the dict or list to send as the body
  * exchange: set to **''** to reply back to the FSM
+
 * **Returns**: None
 
 Worker.notify
 `````````````
 * **Inputs**:
+
  * slug: the short text to use in the notification
  * message: a string which will be used in the notification
  * phase: the phase to identify with in the notification
  * corr_id: the correlation id. Default: None
  * exchange: the exchange to publish on. Default: re
+
 * **Returns**: None
 
 Worker.ack
@@ -53,7 +57,9 @@ Worker.ack
 Acks a message.
 
 * **Inputs**:
+
  * basic_deliver: pika.Spec.Basic.Deliver instance
+
 * **Returns**: None
 
 Worker.run_forever
@@ -69,11 +75,13 @@ What a worker should do when a message is received. All output
 should be written to the output logger.
 
 * **Inputs**:
+
  * channel: pika.channel.Channel instance
  * basic_deliver: pika.Spec.Basic.Deliver instance
  * properties: pika.Spec.BasicProperties instance (ex: headers)
  * body: dict or list that was json loaded off the message
  * output: logger instance to send output
+
 * **Returns**: None
 
 
@@ -82,6 +90,7 @@ Running
 To run an instance you will need to make an instance of your worker by passing in a few items.
 
 * **Inputs**:
+
   * mq_config: should house: user, password, server, port and vhost.
   * config_file: is an optional full path to a json config file
   * output_dir: is the directory for process logs to be written to
