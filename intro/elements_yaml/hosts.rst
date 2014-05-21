@@ -8,7 +8,7 @@ Hosts
 * Default: None
 
 The ``hosts`` key is used to describe the target hosts for the script to
-act on. The ``hosts`` key takes a list of hosts as input. Optionally you
+act on. The ``hosts`` key takes a list of hosts as input. 
 can specify hosts as shell-like globs
 
 .. code-block:: yaml
@@ -17,19 +17,3 @@ can specify hosts as shell-like globs
       - www01.web.ext.example.com
       - www02.web.ext.example.com
       - www03.web.ext.example.com
-
-To operate on all the www* named hosts in the web subdomain you could
-simplify the above list into this single shell-like glob
-
-
-.. code-block:: yaml
-
-    hosts:
-      - www*.web.ext.example.com
-
-Or even shorter
-
-.. code-block:: yaml
-
-    hosts: [www*.web.ext.example.com]
-
