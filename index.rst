@@ -11,6 +11,7 @@ Release Engine
    Components and Libraries <components.rst>
    development.rst
    YAMLScripts.rst
+   JSONScripts.rst
    playbooks.rst
    license.rst
 
