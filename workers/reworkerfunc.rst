@@ -146,6 +146,7 @@ The following is just a *snippet* of a complete playbook.
                   "command": "yumcmd",
                   "subcommand": "install",
                   "package": "megafrobber",
+                  "hosts": ["127.0.0.1"]
               }
           }
       ]
@@ -167,6 +168,7 @@ The following is just a *snippet* of a complete playbook.
                   "command": "service",
                   "subcommand": "stop",
                   "service": "megafrobber",
+                  "hosts": ["127.0.0.1"]
               }
           }
       ]
