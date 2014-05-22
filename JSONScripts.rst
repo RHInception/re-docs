@@ -21,12 +21,11 @@ represent all the options you can use to write a `Release Engine` playbooks.
 
 .. tip::
 
-    In JSON, all types (arrays, booleans, integers, numbers, nulls, objects, and strings)
-    of a list or dictionary are not required to be surrounded by double quotes ``"Foo"``
-    with the exception of **strings**, although there is no restriction on surrounding
-    any type with double qoutes so best practices would dictate that all types be double quoted.
-    Also, all lines must end in a comma ``,``  **except** the final member in the
-    list or dictionary, which must explicitly **not** end with a comma.
+    With the exception of **strings** all types (arrays, booleans, integers, numbers,
+    nulls and objects) in a JSON list or dictionary are not required to be surrounded
+    by double quotes (``"Foo"``). If added, these types become **strings**. Also, all
+    lines in a list or dictionary must end in a comma ``,`` **except** the final member
+    in the list or dictionary, which must explicitly **not** end with a comma.
 
 In JSON a list can be represented in two ways. In one way all members
 of a list are lines beginning at the same indentation level surrounded by
