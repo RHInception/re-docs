@@ -127,8 +127,8 @@ The dev server will allow any HTTP Basic Auth user/password combination.
 URLs
 ~~~~
 
-/api/v0/*$PROJECT*/deployment/
-``````````````````````````````
+/api/v0/*$PROJECT*/playbook/*$PLAYBOOKID*/deployment/
+`````````````````````````````````````````````````````
 
 * **PUT**: Creates a new deployment.
 
@@ -224,7 +224,7 @@ htaccess / HTTP Basic Auth
 ``````````````````````````
 .. code-block:: bash
 
-   $ curl -X PUT --user "USERNAME" -H "Content-Type: application/json" --data @file.json https://rerest.example.com/api/v0/test/deployment/
+   $ curl -X PUT --user "USERNAME" -H "Content-Type: application/json" --data @file.json https://rerest.example.com/api/v0/test/playbook/
    Password:
 
    ... # 201 and json data if exists, otherwise an error code
@@ -236,7 +236,7 @@ kerberos
 
    $ kinit -f USERNAME
    Password for USERNAME@DOMAIN:
-   $ curl --negotiate -u 'a:a' -H "Content-Type: application/json" --data @file.json -X PUT https://rerest.example.com/api/v0/test/deployment/
+   $ curl --negotiate -u 'a:a' -H "Content-Type: application/json" --data @file.json -X PUT https://rerest.example.com/api/v0/test/playbook/
 
    ... # 201 and json data if exists, otherwise an error code
 
@@ -258,7 +258,7 @@ contents to.
 
 .. code-block:: bash
 
-  $ curl -u "user:passwd" -H "Content-Type: application/json" -d '{"cart": "bitmath", "environment": "re"}' -X PUT http://rerest.example.com/api/v0/test/deployment/
+  $ curl -u "user:passwd" -H "Content-Type: application/json" -d '{"cart": "bitmath", "environment": "re"}' -X PUT http://rerest.example.com/api/v0/test/playbook/12345/deployment/
 
    ... # 201 and json data if exists, otherwise an error code
 
