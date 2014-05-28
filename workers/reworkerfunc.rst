@@ -47,15 +47,24 @@ to run.
 The configuration file uses the following **pattern** in JSON format:
 
 .. code-block:: json
+   :linenos:
 
    {
+       "queue": "QUEUE_NAME",
        "FUNC_MODULE": {
            "METHOD_1": ["REQUIRED", "PARAMETERS"],
            "METHOD_2": ["ONE_ITEM"],
            "METHOD_N": []
    }
 
-.. todo:: Document the optional "queue" parameter
+
+In this example on line 2 we see a parameter ``queue``. This is how we
+set a specific name for the queue to bind to on the message bus. This
+parameter is **required** if you are running more than one func worker
+concurrently. Using a name like **funcFOO** is recommended. For
+example, if you're using the Nagios plugin, you would create and bind
+to a queue such as ``funcnagios`` (which is expanded to
+``worker.funcnagios`` internally).
 
 
 Once we've prepared a configuration file for our worker, we need to
@@ -108,7 +117,7 @@ We should see output similar to the following if everything well:
    2014-05-19 14:39:47,080 - FuncWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
    2014-05-19 14:39:47,083 - FuncWorker - INFO - Attempting connection with amqp://JoeUser:***@mq.example.com:5672/
    2014-05-19 14:39:47,412 - FuncWorker - INFO - Connection and channel open.
-   2014-05-19 14:39:47,413 - FuncWorker - INFO - Consuming on queue worker.funcworker
+   2014-05-19 14:39:47,413 - FuncWorker - INFO - Consuming on queue worker.funcnagios
 
 
 Example Configuration
