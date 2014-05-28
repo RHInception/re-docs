@@ -7,6 +7,8 @@ Setting Up
    :depth: 3
 
 
+.. _setup_infra_req:
+
 Infrastructure Requirements
 ---------------------------
 
