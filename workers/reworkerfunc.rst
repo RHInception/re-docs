@@ -216,6 +216,16 @@ service. This happens in lines **9** → **11**:
               subcommand: restart
               service: megafrobber
 
+
+More Modules
+~~~~~~~~~~~~
+
+The func worker ships with support for several other func modules
+out-of-the-box. To see them all, check out `GitHub:
+re-worker-func/conf/
+<https://github.com/RHInception/re-worker-func/tree/master/conf>`_
+
+
 ----
 
  See `Func - Module List <https://fedorahosted.org/func/wiki/ModulesList>`_ for more information.
