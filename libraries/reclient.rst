@@ -1,3 +1,5 @@
+.. _reclient:
+
 RE-CLIENT
 ---------
 Release Engine - Client Tool
@@ -36,7 +38,8 @@ At this point you would enter the hostname of your
    3) Update a playbook
    4) Delete a playbook
    5) Create a new playbook
-   6) Quit
+   6) Start a deployment (without any dynamic keys)
+   7) Quit
    command>>
 
 Release Engine Client Tools are now setup and ready to use.

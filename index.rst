@@ -15,12 +15,3 @@ automated software releases.
    playbooks.rst
    appendices.rst
    license.rst
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
