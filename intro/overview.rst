@@ -1,7 +1,7 @@
 .. _intro_overview:
 
 Overview
-++++++++
+********
 
 This section is a narrative, or story, introducing us to the
 individiual roles each component plays in the Release Engine. At the
@@ -13,7 +13,7 @@ end of this narrative we'll have learned:
 
 
 Scenario
-~~~~~~~~
+========
 
 We work in a software shop and we have been told to decreate our time
 to delivery. We took some measurements and realized that even with

@@ -1,7 +1,7 @@
 .. _components:
 
 Components
-++++++++++
+**********
 
 The Release Engine has three required components:
 
@@ -21,7 +21,7 @@ The Release Engine has three required components:
   * There are several pre-built workers, you can view them `on github <https://github.com/RHInception?query=re-worker->`_
 
 
-In addition to the two required components:
+In addition to the required components:
 
 * :ref:`RE-CLIENT <reclient>`
 
