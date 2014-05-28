@@ -79,12 +79,15 @@ release = '0.0.1'
 # directories to ignore when looking for source files.
 exclude_patterns = [
     '_build',
+    'buildstatus.rst',
     # 'components/*.rst',
-    # 'intro/*.rst',
+    'intro/definitions.rst',
+    'intro/overview.rst',
     # 'libraries/*.rst',
-    # 'setup/*.rst',
+    'setup/*.rst',
+    'jsonscripts/*.rst',
     # 'workers/*.rst',
-    # 'yamlscripts/*.rst'
+    'yamlscripts/*.rst'
 ]
 
 # The reST default role (used for this markup: `text`) to use for all

@@ -3,9 +3,9 @@
 Hosts
 ^^^^^
 
-* Required: Yes
-* Argument type: List
-* Default: None
+* **Required**: Yes
+* **Argument** type: ``list``
+* **Default**: None
 
 The ``hosts`` element is used to describe the target hosts for the
 script to act on.

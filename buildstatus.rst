@@ -68,9 +68,9 @@ Worker for executing sleeping.
 
 ----
 
-.. note:: **More Inception Projects**
-
-   You can find the rest of the `Red Hat Inception Team
-   <http://developerblog.redhat.com/tag/inception/>`_ projects on
-   github: `GitHub: Red Hat Inception
-   <https://github.com/RHInception/>`_.
+.. note::
+   **More Inception Projects**
+      You can find the rest of the `Red Hat Inception Team
+      <http://developerblog.redhat.com/tag/inception/>`_ projects on
+      github: `GitHub: Red Hat Inception
+      <https://github.com/RHInception/>`_.

@@ -1,14 +1,10 @@
 .. _playbooks:
 
-.. caution:: **This section is a work in progress**
+Playbooks
+#########
 
-   **Everything you see here is subject to change without notice.**
-
-Playbooks (Incomplete)
-######################
-
-.. contents:: Playbook Elements
-   :depth: 2
+.. contents::
+   :depth: 4
    :local:
 
 Playbooks are documents which describe the exact set of steps required
@@ -20,97 +16,188 @@ A playbook might be ran automatically each time a code builder
 finishes so that it may deploy the latest snapshots. Alternatively, if
 more control is desired over the release process, playbooks may be ran
 by hand. Playbooks may be written in YAML syntax, or optionally in
-JSON syntax.
+`JSON Syntax <intro_json>`_.
 
 **In this section we'll learn:**
 
 * what a playbook looks like (by reviewing a simple example)
-* the three major elements of playbooks
-* the basics of how to describe steps in your playbooks, including:
+* the major items of playbooks
+* the basics of how to describe ``execution`` steps in your playbooks, including:
 
- * describing a step (``name``)
- * identifying which worker to use (``plugin``)
- * passing data to the worker (``parameters``)
-
-* advanced step description, including:
-
- * use of the ``dynamic`` attributes
- * use of the ``notify`` attributes
-
-.. note:: **JSON Syntax**
-
-   Documentation for working with JSON documents is not available yet
-   at this time.
+ * describing a release step
+ * identifying which worker to use
+ * passing data to the worker
 
 Example Playbook
 *****************
 
+Here is an example of what a **super simple** playbook looks like. The
+playbook is `owned` by the group called **inception**.
+
+When ran, all this would do is restart the ``httpd`` service on
+``foo.bar.example.com``
+
+.. _simple_playbook:
+
 .. code-block:: yaml
+   :linenos:
 
    ---
-   - hosts:
-       - foo.dev.example.com
-       - bar.ops.example.com
-
-     preflight:
-       - misc.Noop
-
-     steps:
-       - bigip.OutOfRotation
-       - misc.Echo:
-           input: "This is a test message"
-
+   group: inception
+   name: Simple playbook
+   execution:
+     - description: restart httpd
+       hosts:
+         - foo.bar.example.com
+       steps:
+         - service.Restart: {service: httpd}
 
 .. _elements_yaml:
 
-Playbook Elements
-*****************
+Playbook Components
+*******************
 
-A Release Engine playbook can specify the following elements:
+A Release Engine playbook is made up of the following **required**
+items:
 
-* ``hosts``
-* ``preflight``
-* ``steps``
+group
+    A short string (acronyms are best) defining the ownership of this
+    playbook. Think of it like the unix group a team might all be
+    members of.
 
-Of those elements, only ``hosts`` and ``steps`` are required. That is
-to say, only the ``preflight`` element is optional.
+    The ``group`` in our example is **inception**
 
-Each of those elements and their respective usage is described in the
-following sections.
+execution
+    A list of playbook `execution sequences`. These execution
+    sequences are composed of release steps and are accompanied by
+    supporting meta-data. These sequences are explained fully in
+    :ref:`Execution Sequences <playbooks_exec_seq>`.
+
+    In our example, we have one execution sequence with one release
+    step (``service.Restart``).
+
+Additionally, a playbook may define the optional item:
+
+name
+    A short description of what this playbook accomplishes overall.
+
+    In our example the name is **Simple playbook**.
+
+
+
+.. _playbooks_exec_seq:
+
+Execution Sequences
+*******************
+
+Recall that ``execution`` items hold a ``list`` type. Each item in the
+list is an `execution sequence`. This section describes exactly what
+execution sequences do, and how to write our own.
+
+In our example, :ref:`simple playbook <simple_playbook>`, the
+execution sequence is defined in lines **5 → 9**. Let's review those
+lines again:
+
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 5,6,7,8,9
+
+   ---
+   group: inception
+   name: Simple playbook
+   execution:
+     - description: restart httpd
+       hosts:
+         - foo.bar.example.com
+       steps:
+         - service.Restart: {service: httpd}
+
+Like playbooks themselves, each execution sequence is comprised of
+several required and optional elements. In `Sample playbook` we can
+see several items are already being used: ``description``, ``hosts``,
+and ``steps``. The following sections will describe these, and all
+other items which are allowed in execution steps.
+
+Required Items
+++++++++++++++
+
+This section describes the **required** items in execution sequences.
 
 .. include:: yamlscripts/hosts.rst
 .. include:: yamlscripts/tasks.rst
-.. include:: yamlscripts/preflight.rst
 
-.. include:: playbook_steps.rst
+Optional Items
+++++++++++++++
+
+This section describes the **optional** items which are allowed in
+execution sequences.
+
+.. include:: yamlscripts/description.rst
+.. include:: yamlscripts/preflight.rst
 
 
 
 Putting it all together
 ***********************
 
-Before we finish, lets put together everything we've seen up to
-now. That will include ``hosts``, ``preflight``, and some example
-items for ``steps``.
+To finish up, let's put together everything we've seen up to now. That
+will include ``hosts``, ``preflight``, and some example items for
+``steps``.
 
 .. code-block:: yaml
+   :linenos:
 
     ---
-    - hosts:
-        - ruby01.web.qa.example.com
-        - www01.web.qa.example.com
-        - www02.web.qa.example.com
+    # Playbook owned by group inception
+    group: inception
 
-      preflight:
-        - puppet.Disable
+    # This playbook is clearly awesome:
+    name: Simple playbook
 
-      tasks:
-        - service.Restart: {service: httpd}
+    # This playbook executes **two** sequences of steps for this
+    # release:
+    execution:
 
+      ################################################################
+      # Sequence 1
+      ################################################################
+      # Including a description is optional. This must be a string.
+      - description: frobnicate these lil guys
+        hosts:
+          - foo.dev.example.com
+          - bar.ops.example.com
 
-In this example: the ``preflight`` element tells us that all three
-hosts will stop the ``puppet`` agent at the same time
-(concurrently). Afterwards the playbook will restart the ``httpd``
-service on each host in an iterative manner. I.e., one server at a
-time, beginning with ``ruby01.web.qa...`` and finishing with
-``www02.web.qa...``.
+        # Install megafrobber on all our hosts ahead of time
+        preflight:
+          - funcworker.yumcmd:
+              subcommand: install
+              package: "megafrobber"
+
+        steps:
+          # Some steps don't require parameters:
+          - bigip.OutOfRotation
+
+          # Whereas, some require parameters:
+          - misc.Echo:
+              input: "This is a test message"
+
+      ################################################################
+      # Sequence 2
+      ################################################################
+      - description: then frobnicate the other half
+        hosts:
+          - dev.foo.example.com
+          - ops.bar.example.com
+
+        steps:
+          - bigip.OutOfRotation
+
+          # Some may even accept lists as the value of their parameters
+          - misc.ListFrob:
+              frob_list:
+                - item1
+                - item2
+                - item3
+
+.. todo:: Describe interesting parts of the previous example

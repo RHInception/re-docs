@@ -135,6 +135,8 @@ Example: Installing a package
 
 The following is just a *snippet* of a complete playbook.
 
+.. todo:: CONVERT THIS TO YAML
+
 .. code-block:: json
 
    {
@@ -146,7 +148,6 @@ The following is just a *snippet* of a complete playbook.
                   "command": "yumcmd",
                   "subcommand": "install",
                   "package": "megafrobber",
-                  "hosts": ["127.0.0.1"]
               }
           }
       ]
@@ -156,6 +157,8 @@ The following is just a *snippet* of a complete playbook.
 Example: Stopping a Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The following is just a *snippet* of a complete playbook.
+
+.. todo:: CONVERT THIS TO YAML
 
 .. code-block:: json
 
