@@ -51,7 +51,7 @@ The ``re-client`` command accepts two optional parameters:
 
 Usage Example
 `````````````
-Lets work with **example project** for the duration of this session:
+Let's work with **example project** for the duration of this session:
 
 .. code-block:: bash
 

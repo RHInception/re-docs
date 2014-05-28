@@ -20,7 +20,7 @@ We work in a software shop and we have been told to decreate our time
 to delivery. We took some measurements and realized that even with
 `Jenkins <http://jenkins-ci.org/>`_ and some home-brewed systems for
 deployment, we're still spending ≥ **20%** of our sprint time on *just
-deploying to test environments*. Lets focus on getting back that 20%.
+deploying to test environments*. Let's focus on getting back that 20%.
 
 How do we approach this? What functionality must be present in any
 kind of system which can automate deployments? Also consider that
@@ -36,4 +36,3 @@ as well as have a clear language for describing steps in a release.
 * Something to do manage all of the actual steps happening
 * And, some sort of configurable notification system, so we can get
   updates in real time.
-

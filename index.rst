@@ -1,7 +1,8 @@
 Release Engine
 ==============
 
-Release Engine is a collection of tools which
+Release Engine is a collection of open-source tools for managing
+automated software releases.
 
 .. toctree::
    :maxdepth: 2

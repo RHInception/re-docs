@@ -32,7 +32,7 @@ including the full-stop (".") character refers to the worker or
 module. The string after the full-stop character refers to the
 specific sub-command to run.
 
-OK. Enough of the boring stuff. Lets see some examples.
+OK. Enough of the boring stuff. Let's see some examples.
 
 **Assume** there is a module called ``logrotate``, this module provides
 one sub-command:

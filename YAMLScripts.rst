@@ -101,6 +101,6 @@ That's all you really need to know about YAML to get started writing
 
 .. seealso:: Get Deeper into Playbooks
 
-   Now that we're comfortable with YAML, lets' continue on and read
+   Now that we're comfortable with YAML, let's continue on and read
    the :ref:`Playbooks <playbooks>` section for an in-depth guide of
    playbooks.

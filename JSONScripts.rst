@@ -84,20 +84,20 @@ Finally, you can combine these data structures:
 .. code-block:: json
 
     {
-     "name": "John Eckersberg", 
-     "python": "Elite", 
-     "job": "Developer", 
+     "name": "John Eckersberg",
+     "python": "Elite",
+     "job": "Developer",
      "languages": {
        "ruby": "Elite"
-     }, 
+     },
      "foods": [
-      "Apple", 
-      "Orange", 
-      "Strawberry", 
+      "Apple",
+      "Orange",
+      "Strawberry",
       "Mango"
-     ], 
-     "dotnet": "Lame", 
-     "employed": true, 
+     ],
+     "dotnet": "Lame",
+     "employed": true,
      "skill": "Elite"
     }
 
@@ -111,6 +111,6 @@ That's all you really need to know about JSON to get started writing
 
 .. seealso:: Get Deeper into Playbooks
 
-   Now that we're comfortable with JSON, lets' continue on and read
+   Now that we're comfortable with JSON, let's continue on and read
    the :ref:`Playbooks <playbooks>` section for an in-depth guide of
    playbooks.
