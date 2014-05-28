@@ -3,7 +3,7 @@
 
 
 JSON Scripts
-************
+++++++++++++
 
 This page provides a basic overview of correct JSON
 syntax. Additionally it covers non-task specific modules that are

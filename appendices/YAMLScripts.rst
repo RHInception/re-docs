@@ -3,7 +3,7 @@
 
 
 YAML Scripts
-************
+++++++++++++
 
 This page provides a basic overview of correct YAML
 syntax. Additionally it covers non-task specific modules that are

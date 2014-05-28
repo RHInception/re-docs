@@ -16,7 +16,7 @@ A playbook might be ran automatically each time a code builder
 finishes so that it may deploy the latest snapshots. Alternatively, if
 more control is desired over the release process, playbooks may be ran
 by hand. Playbooks may be written in YAML syntax, or optionally in
-`JSON Syntax <intro_json>`_.
+:ref:`JSON Syntax <intro_json>`.
 
 **In this section we'll learn:**
 

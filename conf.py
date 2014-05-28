@@ -80,6 +80,7 @@ release = '0.0.1'
 exclude_patterns = [
     '_build',
     'buildstatus.rst',
+    'intro/components.rst',
     # 'components/*.rst',
     'intro/definitions.rst',
     'intro/overview.rst',

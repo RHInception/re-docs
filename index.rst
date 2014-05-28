@@ -12,8 +12,6 @@ automated software releases.
    Setting up <setup.rst>
    Components and Libraries <components.rst>
    development.rst
-   YAMLScripts.rst
-   JSONScripts.rst
    playbooks.rst
    appendices.rst
    license.rst
