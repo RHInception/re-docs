@@ -127,7 +127,7 @@ The dev server will allow any HTTP Basic Auth user/password combination.
 URLs
 ~~~~
 
-/api/v0/*$PROJECT*/playbook/*$PLAYBOOKID*/deployment/
+/api/v0/*$GROUP*/playbook/*$PLAYBOOKID*/deployment/
 `````````````````````````````````````````````````````
 
 * **PUT**: Creates a new deployment.
@@ -147,9 +147,9 @@ URLs
  * **Inputs**: None
 
 
-/api/v0/*$PROJECT*/playbook/
+/api/v0/*$GROUP*/playbook/
 ````````````````````````````
-* **GET**: Gets a list of all playbooks for a project.
+* **GET**: Gets a list of all playbooks for a group.
 
  * **Response Type**: json
  * **Response Example**: ``{"status": "ok", "items": [...]}``
@@ -164,23 +164,23 @@ URLs
  * **Inputs**: Optional format parameter which controls submit type. Can be json or yaml. Default is json.
 
 
-/api/v0/*$PROJECT*/playbook/*$ID*/
+/api/v0/*$GROUP*/playbook/*$ID*/
 ``````````````````````````````````
-* **GET**: Gets a playbooks for a project.
+* **GET**: Gets a playbooks for a group.
 
  * **Response Type**: json/yaml
  * **Response Example**: ``{"status": "ok", "item": ...}``
  * **Input Format**: None
  * **Inputs**: Optional format parameter which controls response type. Can be json or yaml. Default is json.
 
-* **POST**: Replace a playbook in a project.
+* **POST**: Replace a playbook in a group.
 
  * **Response Type**: json
  * **Response Example**: ``{"status": "ok", "id": "53614ccf1370129d6f29c7dd"}``
  * **Input Format**: json/yaml
  * **Inputs**: Optional format parameter which controls response type. Can be json or yaml. Default is json.
 
-* **DELETE**: Delete a playbook in a project.
+* **DELETE**: Delete a playbook in a group.
 
  * **Response Type**: json
  * **Response Example**: ``{"status": "gone"}``
@@ -206,7 +206,7 @@ What's Happening
 #. User requests a new job via the REST endpoint
 #. The REST server creates a temporary response queue and binds it to the exchange with the same name.
 #. The REST server creates a message with a reply_to of the temporary response queue's topic.
-#. The REST server sends the message to the bus on exchange *re* and topic *job.create*. Body Example: {"project": "nameofproject"}
+#. The REST server sends the message to the bus on exchange *re* and topic *job.create*. Body Example: {"group": "nameofgroup"}
 #. The REST server waits on the temporary response queue for a response.
 #. Once a response is returned the REST service loads the body into a json structure and pulls out the id parameter.
 #. The REST service then responds to the user with the job id.
