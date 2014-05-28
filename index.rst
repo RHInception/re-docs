@@ -15,6 +15,7 @@ automated software releases.
    YAMLScripts.rst
    JSONScripts.rst
    playbooks.rst
+   appendices.rst
    license.rst
 
 

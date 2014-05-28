@@ -1,3 +1,5 @@
+.. _re_core:
+
 RE-CORE
 -------
 The core is essentially a finite state machine (**FSM**) hooked into a message bus and a database.

@@ -29,7 +29,7 @@ by hand. Playbooks may be written in YAML syntax, or optionally in
  * passing data to the worker
 
 Example Playbook
-*****************
+****************
 
 Here is an example of what a **super simple** playbook looks like. The
 playbook is `owned` by the group called **inception**.

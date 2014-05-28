@@ -1,3 +1,5 @@
+.. _re_rest:
+
 RE-REST
 -------
 Simple `REST Api

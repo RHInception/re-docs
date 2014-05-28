@@ -10,7 +10,6 @@ end of this narrative we'll have learned:
 * Overall workflow
 * About the key components
 * How components communicate
-* Basics of writing workers
 
 
 Scenario
@@ -36,3 +35,5 @@ as well as have a clear language for describing steps in a release.
 * Something to do manage all of the actual steps happening
 * And, some sort of configurable notification system, so we can get
   updates in real time.
+
+When used together, the Release Engine provides all these things.

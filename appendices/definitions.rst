@@ -97,3 +97,8 @@ YAML
 
     :ref:`YAML Basics<intro_yaml>`
         Introduction to YAML formatting
+
+.. seealso::
+
+   :ref:`Playbooks <playbooks>`
+       Everything you need to know to begin writing playbooks
