@@ -2,6 +2,11 @@ RE-WORKER-FUNC
 --------------
 Release Engine Worker Plugin to run commands over `FUNC <https://fedorahosted.org/func/>`_.
 
+.. contents::
+   :depth: 1
+   :local:
+
+
 .. admonition:: What's FUNC?
 
    Func stands for *Fedora Unified Network Controller*. Func allows
@@ -30,6 +35,7 @@ before it can work.
    <https://fedorahosted.org/func/wiki/InstallAndSetupGuide>`_ for
    additional information.
 
+.. _worker_func_configuration:
 
 Configuration
 ~~~~~~~~~~~~~
@@ -48,6 +54,9 @@ The configuration file uses the following **pattern** in JSON format:
            "METHOD_2": ["ONE_ITEM"],
            "METHOD_N": []
    }
+
+.. todo:: Document the optional "queue" parameter
+
 
 Once we've prepared a configuration file for our worker, we need to
 tell the worker that it must use that specific configuration file.
@@ -80,6 +89,8 @@ to the bottom. We'll see something similar to this:
            output_dir='/tmp/logs/')
        worker.run_forever()
 
+.. todo:: Update the previous example with configuration file information once available
+
 * Set the ``mq_conf`` parameters to sane values (see also:
   :ref:`Setting Up The Bus<setting_up_the_bus>`)
 * Next, we change the ``config_file`` line to point at our selected
@@ -100,8 +111,8 @@ We should see output similar to the following if everything well:
    2014-05-19 14:39:47,413 - FuncWorker - INFO - Consuming on queue worker.funcworker
 
 
-Example
-```````
+Example Configuration
+`````````````````````
 
 Here is a real-life example of a func worker which may be used to run
 the ``yumcmd`` modules ``install``, ``remove``, and ``update``
@@ -133,65 +144,78 @@ step.
 Example: Installing a package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following is just a *snippet* of a complete playbook.
+The following is an example of a :ref:`playbook <playbooks>` which
+installs a single package:
 
-.. todo:: CONVERT THIS TO YAML
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 9,10,11
 
-.. code-block:: json
+   ---
+   group: inception
+   name: Setup megafrobber
+   execution:
+     - description: install the megafrobber package
+       hosts:
+         - foo.bar.example.com
+       steps:
+          - funcworker.yumcmd:
+              subcommand: install
+              package: megafrobber
 
-   {
-      "steps": [
-          {
-              "name": "install the megafrobber command",
-              "plugin": "funcworker",
-              "parameters": {
-                  "command": "yumcmd",
-                  "subcommand": "install",
-                  "package": "megafrobber",
-              }
-          }
-      ]
-   }
+Here we can see in lines **9** → **11** how to call the ``install``
+sub-command for the **funcworker**.
 
 
 Example: Stopping a Service
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-The following is just a *snippet* of a complete playbook.
 
-.. todo:: CONVERT THIS TO YAML
+In this example :ref:`playbook <playbooks>` we will use the
+**service** sub-command to restart the **megafrobber** system
+service. For reference, first we'll look at the **funcworker**
+configuration for the **service** module:
 
 .. code-block:: json
+   :linenos:
 
    {
-      "steps": [
-          {
-              "name": "stop foo service",
-              "plugin": "funcworker",
-              "parameters": {
-                  "command": "service",
-                  "subcommand": "stop",
-                  "service": "megafrobber",
-                  "hosts": ["127.0.0.1"]
-              }
-          }
-      ]
+       "service": {
+           "stop": ["service"],
+           "start": ["service"],
+           "restart": ["service"],
+           "reload": ["service"],
+           "status": ["service"]
+       }
    }
 
-We'll work backwards now and describe the func worker configuration
-file which would define this release step:
+Recall from what we learned in the :ref:`configuration
+<worker_func_configuration>` section that this defines one module,
+``service``.
 
-All the important parts we're concerned with are in the ``parameters``
-object: ``command``, ``subcommand``, and ``service``.
+As we can see above, the ``service`` module has 5 sub-commands, each
+requires one parameter, ``service``, which is the name of the service
+to control.
 
-* ``command`` - The name of the func module to use
-* ``subcommand`` - The name of the method to call in the selected func module
-* ``service`` - This the name of the service to run ``subcommand`` on.
+The following example shows how to use the
+``funcworker.service.restart`` method to restart the ``megafrobber``
+service. This happens in lines **9** → **11**:
 
-In this case we would be calling ``service.stop`` with the argument
-``megafrobber``, indicating we wish to stop the ``megafrobber``
-service on the remote host.
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 9,10,11
 
+   ---
+   group: inception
+   name: Setup megafrobber
+   execution:
+     - description: restart the megafrobber service
+       hosts:
+         - foo.bar.example.com
+       steps:
+          - funcworker.service:
+              subcommand: restart
+              service: megafrobber
 
-Notes
-~~~~~
+----
+
  See `Func - Module List <https://fedorahosted.org/func/wiki/ModulesList>`_ for more information.
