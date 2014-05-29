@@ -145,59 +145,9 @@ To finish up, let's put together everything we've seen up to now. That
 will include ``hosts``, ``preflight``, and some example items for
 ``steps``.
 
-.. code-block:: yaml
+.. literalinclude:: reference_playbook.yaml
+   :language: yaml
    :linenos:
 
-    ---
-    # Playbook owned by group inception
-    group: inception
-
-    # This playbook is clearly awesome:
-    name: Simple playbook
-
-    # This playbook executes **two** sequences of steps for this
-    # release:
-    execution:
-
-      ################################################################
-      # Sequence 1
-      ################################################################
-      # Including a description is optional. This must be a string.
-      - description: frobnicate these lil guys
-        hosts:
-          - foo.dev.example.com
-          - bar.ops.example.com
-
-        # Install megafrobber on all our hosts ahead of time
-        preflight:
-          - funcworker.yumcmd:
-              subcommand: install
-              package: "megafrobber"
-
-        steps:
-          # Some steps don't require parameters:
-          - bigip.OutOfRotation
-
-          # Whereas, some require parameters:
-          - misc.Echo:
-              input: "This is a test message"
-
-      ################################################################
-      # Sequence 2
-      ################################################################
-      - description: then frobnicate the other half
-        hosts:
-          - dev.foo.example.com
-          - ops.bar.example.com
-
-        steps:
-          - bigip.OutOfRotation
-
-          # Some may even accept lists as the value of their parameters
-          - misc.ListFrob:
-              frob_list:
-                - item1
-                - item2
-                - item3
 
 .. todo:: Describe interesting parts of the previous example

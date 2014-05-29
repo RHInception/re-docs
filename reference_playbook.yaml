@@ -1,0 +1,50 @@
+---
+# Playbook owned by group inception
+group: inception
+
+# This playbook is clearly awesome:
+name: Simple playbook
+
+# This playbook executes **two** sequences of steps for this
+# release:
+execution:
+
+  ################################################################
+  # Sequence 1
+  ################################################################
+  # Including a description is optional. This must be a string.
+  - description: frobnicate these lil guys
+    hosts:
+      - foo.dev.example.com
+      - bar.ops.example.com
+
+    # Install megafrobber on all our hosts ahead of time
+    preflight:
+      - yum:Install:
+          package: "megafrobber"
+
+    steps:
+      # Some steps don't require parameters:
+      - bigip:OutOfRotation
+
+      # Whereas, some require parameters:
+      - misc:Echo:
+          input: "This is a test message"
+
+  ################################################################
+  # Sequence 2
+  ################################################################
+  - description: then frobnicate the other half
+    hosts:
+      - dev.foo.example.com
+      - ops.bar.example.com
+
+    steps:
+      - bigip:OutOfRotation
+
+      # Some may even accept lists as the value of their parameters
+      - misc:ListFrob:
+          frob_list:
+            - item1
+            - item2
+            - item3
