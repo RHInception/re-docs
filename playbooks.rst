@@ -50,7 +50,7 @@ When ran, all this would do is restart the ``httpd`` service on
        hosts:
          - foo.bar.example.com
        steps:
-         - service.Restart: {service: httpd}
+         - service:Restart: {service: httpd}
 
 .. _elements_yaml:
 
@@ -74,7 +74,7 @@ execution
     :ref:`Execution Sequences <playbooks_exec_seq>`.
 
     In our example, we have one execution sequence with one release
-    step (``service.Restart``).
+    step (``service:Restart``).
 
 Additionally, a playbook may define the optional item:
 
@@ -111,7 +111,7 @@ lines again:
        hosts:
          - foo.bar.example.com
        steps:
-         - service.Restart: {service: httpd}
+         - service:Restart: {service: httpd}
 
 Like playbooks themselves, each execution sequence is comprised of
 several required and optional elements. In `Sample playbook` we can

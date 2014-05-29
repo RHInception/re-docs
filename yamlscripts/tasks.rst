@@ -27,24 +27,22 @@ An execution step may be a simple string. To us, this means that this
 given step requires no additional information. The actual `workers`
 implementing each step may include possible several
 sub-commands. Because of this it is common to see step names given in
-a `dotted.notation`. In this form the string leading up to but not
-including the full-stop (".") character refers to the worker or
-module. The string after the full-stop character refers to the
+colon delimited notation. In this form the string leading up to but
+not including the colon (":") character refers to the worker or
+module. The string after the colon character refers to the
 specific sub-command to run.
 
 OK. Enough of the boring stuff. Let's see some examples.
 
 **Assume** there is a module called ``logrotate``, this module provides
-one sub-command:
-
-* ``rotate``
+one sub-command: ``Rotate``.
 
 The documentation for the ``logrotate`` module tell us that the
-``rotate`` sub-command requires no keyword parameters. That is to say,
+``Rotate`` sub-command requires no keyword parameters. That is to say,
 we can define it in our execution steps as a simple string. Recall
 that steps are denoted using dotted notation where the module name
 comes first, followed by the sub-command. In this case our module is
-``service`` and our sub-command is ``rotate``. We can see this on line
+``service`` and our sub-command is ``Rotate``. We can see this on line
 **9** in the following example:
 
 
@@ -60,15 +58,15 @@ comes first, followed by the sub-command. In this case our module is
        hosts:
          - foo.bar.example.com
        steps:
-         - logrotate.rotate
+         - logrotate:Rotate
 
 But what is happening exactly in this example? On line **9** we see
-the entry: ``- logrotate.rotate``. Recall that each step is given as
+the entry: ``- logrotate:Rotate``. Recall that each step is given as
 an item to the ``steps`` list. This is why line **9** in the previous
 code example begins with a hyphen character. In YAML this indicates a
 list item.
 
-**Note** closely exactly how we gave ``logrotate.rotate``, because in
+**Note** closely exactly how we gave ``logrotate:Rotate``, because in
 the next example this will change very slightly.
 
 Steps - Keyword Arguments
@@ -76,8 +74,8 @@ Steps - Keyword Arguments
 
 Now let us assume there is a module called ``service`` which can
 control system services. The documentation for this module tells us
-that there are three sub-commands provided: ``start``, ``stop``, and
-``restart``. Additionally, the documentation tells us that each
+that there are three sub-commands provided: ``Start``, ``Stop``, and
+``Restart``. Additionally, the documentation tells us that each
 sub-command requires one keyword parameter: ``service``. On lines
 **9** and **10** in the following example, we see how to provide
 keyword arguments to steps:
@@ -95,7 +93,7 @@ keyword arguments to steps:
        hosts:
          - foo.bar.example.com
        steps:
-         - service.restart:
+         - service:Restart:
              service: megafrobber
 
 Or in YAML shorthand (only focusing on the step definition)
@@ -106,7 +104,7 @@ Or in YAML shorthand (only focusing on the step definition)
 
    ---
    # ...
-         - service.restart: {service: megafrobber}
+         - service:Restart: {service: megafrobber}
 
 
 Let's look closer at this and see exactly what is happening.
@@ -115,7 +113,7 @@ Let's look closer at this and see exactly what is happening.
 defined ways to describe different datastructures. Review the
 `dictionary` section in :ref:`intro_yaml` if you need a refresher.
 
-The ``service.restart`` sub-command requires one parameter,
+The ``service:Restart`` sub-command requires one parameter,
 ``service``. You describe parameters in execution steps by using a
 hash, or dictionary. For our example, a dictionary describing a
 keyword ``service`` with value ``megafrobber`` would look like the
@@ -130,24 +128,26 @@ following example in YAML:
 
 Additionally, recall that you can nest datastructure in YAML. If we
 wanted to represent a list of dictionaries, we could do that in the
-following way:
+following way. Here's an example of a list of nested dictionaries:
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 2,3,4,5
+
+   ---
+   - thingies:
+       service: megafrobber
+   - stuffs:
+       penguins: cute
+
+Or in alternative representation:
 
 .. code-block:: yaml
    :linenos:
    :emphasize-lines: 2
 
    ---
-   - thingies:
-       service: megafrobber
-
-Or in alternative representation:
-
-.. code-block:: json
-   :linenos:
-   :emphasize-lines: 2
-
-   ---
-   [{thingies: {service: megafrobber}}]
+   [{thingies: {service: megafrobber}}, {stuffs: {penguins: cute}}]
 
 
 Now that we know all of this, to give the required parameters to our
@@ -166,13 +166,13 @@ nested-dictionary describing our parameters. This is shown on lines
        hosts:
          - foo.bar.example.com
        steps:
-         - service.restart:
+         - service:Restart:
              service: megafrobber
 
 .. important::
    Note the syntax change
       In the previous example we only gave the string:
-      ``logrotate.rotate``. Now, instead of a string we're describing a
+      ``logrotate:Rotate``. Now, instead of a string we're describing a
       **dictionary key**.
 
 Therefore, the text for this step begins with a hyphen character (to
@@ -191,11 +191,7 @@ example:
 
    ---
    # ...
-         - service.restart:
+         - service:Restart:
              service: megafrobber
              foo: bar
              noop: true
-
-
-
-.. All of the tasks are documented in the :ref:`steps` section.
