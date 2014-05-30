@@ -41,7 +41,7 @@ The documentation for the ``logrotate`` module tell us that the
 we can define it in our execution steps as a simple string. Recall
 that steps are denoted using dotted notation where the module name
 comes first, followed by the sub-command. In this case our module is
-``service`` and our sub-command is ``Rotate``. We can see this on line
+``logrotate`` and our sub-command is ``Rotate``. We can see this on line
 **9** in the following example:
 
 
