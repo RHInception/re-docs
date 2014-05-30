@@ -5,6 +5,8 @@ RE-WORKER
 This library provides a simple base for release engine workers to build from.
 
 
+.. _re_worker_implementation:
+
 Implementing a Worker
 ~~~~~~~~~~~~~~~~~~~~~
 To implement a worker subclass off of **reworker.worker.Worker** and override the **process** method.

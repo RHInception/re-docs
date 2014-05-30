@@ -266,4 +266,6 @@ contents to.
 
 .. seealso::
 
-   :ref:`RE-WORKER-JUICER <re_worker_juicer>`
+      * :ref:`RE-WORKER-JUICER <re_worker_juicer>`
+
+      * :ref:`Playbooks → Dynamic Variables <playbooks_steps_dynamic>`
