@@ -135,7 +135,7 @@ execution sequences.
 
 .. include:: yamlscripts/description.rst
 .. include:: yamlscripts/preflight.rst
-
+.. include:: yamlscripts/notify.rst
 
 
 Putting it all together
