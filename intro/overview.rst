@@ -32,7 +32,7 @@ as well as have a clear language for describing steps in a release.
 * Storage for deployment playbooks
 * Loosey coupled components, so individual installations can scale to
   meet their owners requirements
-* Something to do manage all of the actual steps happening
+* Something to manage all of the actual steps happening
 * And, some sort of configurable notification system, so we can get
   updates in real time.
 
