@@ -31,6 +31,13 @@ execution:
       - misc:Echo:
           input: "This is a test message"
 
+      # And some times you just want to tell the world what you're doing
+      - frob.Nicate:
+          things: "all the things"
+          notify:
+              started:
+                  irc: [ "PHB", "#myteam" ]
+
   ################################################################
   # Sequence 2
   ################################################################
