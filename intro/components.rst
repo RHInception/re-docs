@@ -37,7 +37,7 @@ In addition to the required components:
 Component Diagram
 =================
 
-.. image:: images/release-engine_smaller.png
+.. image:: images/ComponentDiagram.png
 
 
 Interactions & Workflow
