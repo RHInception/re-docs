@@ -20,3 +20,4 @@ $ sudo pip install sphinx_rtd_theme
 $ make html
 $ xdg-open _build/html/index.html
 ```
+RC entry
