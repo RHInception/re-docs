@@ -73,7 +73,8 @@ message which it would emit to the bus.
            "subcommand": "OutOfRotation"
        },
        "group": "test",
-       "dynamic": {}
+       "dynamic": {},
+       "notify": {}
    }
 
 This is the simplest message format used by **re-core** when
@@ -107,6 +108,8 @@ On line **10** in the following playbook we can see there is only one
 step to execute, ``service:Restart``. From how the step is written, as
 a dictionary, we know that this step requires one argument,
 ``service`` which is defined as ``megafrobber`` (line **11**).
+
+.. _recorereworkers_playbook:
 
 .. code-block:: json
    :linenos:
@@ -147,7 +150,8 @@ message which it would emit to the bus.
            "command": "service"
        },
        "group": "test",
-       "dynamic": {}
+       "dynamic": {},
+       "notify": {}
    }
 
 
@@ -222,7 +226,8 @@ The following example shows the format of the message which
        "dynamic": {
            "cart": "bitmath",
            "environment": "re"
-       }
+       },
+       "notify": {}
    }
 
 Here we see a familiar key appearing in the ``parameters`` item,
@@ -242,6 +247,72 @@ key-values (lines **14** → **16**).
    A dictionary with the required dynamic variables for a worker to
    run. The type of each argument is dictated by the respective
    worker.
+
+
+
+
+
+Per-Step Notifications
+``````````````````````
+
+Auxiliary to the formats we've just discussed, are per-step
+:ref:`notifications <notify>`. `Per-step notifications` are an
+**optional** item which may be added to any given step (`simple`,
+`argument`, and `dynamic`). Using the :ref:`previous example playbook
+<recorereworkers_playbook>` for reference, we would see notifications
+defined as in lines **6** → **8**, below:
+
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 6,7,8
+
+   {
+       "steps": [
+           {
+               "service:Restart": {
+                   "service": "megafrobber",
+                   "notify": {
+                       "started": {
+                           "irc": [ "PHB", "#teamchannel" ]
+                       }
+                   }
+               }
+           }
+       ]
+   }
+
+The corresponding message sent to workers, with the additional
+``notify`` item would look like lines **12** → **14** in the following
+example.
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 12,13,14
+
+   {
+       "parameters": {
+           "service": "megafrobber",
+           "hosts": [
+               "host01.example.com"
+           ],
+           "subcommand": "Restart",
+           "command": "service"
+       },
+       "group": "test",
+       "dynamic": {},
+       "notify": {
+           "started": {
+               "irc": [ "PHB", "#teamchannel" ]
+           }
+       }
+   }
+
+.. seealso::
+
+   :ref:`Playbooks - Notify <notify>`
+      The documentation for `notify` elements in playbooks. That
+      section defines the allowed syntax for the `notify` item.
 
 
 Response Message Formats
