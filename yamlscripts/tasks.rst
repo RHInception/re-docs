@@ -19,6 +19,8 @@ brief, these forms are described below:
   their :ref:`dynamic <playbooks_steps_dynamic>` parameters
 
 
+.. _playbooks_steps_strings:
+
 Steps - Strings
 """""""""""""""
 
@@ -67,6 +69,8 @@ list item.
 
 **Note** closely exactly how we gave ``logrotate:Rotate``, because in
 the next example this will change very slightly.
+
+.. _playbooks_steps_arguments:
 
 Steps - Keyword Arguments
 """""""""""""""""""""""""
@@ -180,7 +184,7 @@ indicate a list item) and ends with a colon character.
 Finally, on line **4** you see the provided parameters.
 
 If there were a module which required more than one parameter, the
-syntax is very similar. Lines 4 → 6 show this in the following
+syntax is very similar. Lines **4** → **6** show this in the following
 example:
 
 

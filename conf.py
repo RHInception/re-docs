@@ -84,6 +84,7 @@ exclude_patterns = [
     # 'components/*.rst',
     'intro/definitions.rst',
     'intro/overview.rst',
+    'messageformats/*.rst',
     # 'libraries/*.rst',
     'setup/*.rst',
     'jsonscripts/*.rst',
