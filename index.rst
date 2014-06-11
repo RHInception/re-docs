@@ -18,6 +18,7 @@ Developer Blog <http://developerblog.redhat.com/>`_ under the tag
    Setting up <setup.rst>
    Components and Libraries <components.rst>
    development.rst
+   messageformats.rst
    playbooks.rst
    appendices.rst
    license.rst
