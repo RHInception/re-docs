@@ -122,7 +122,7 @@ a dictionary, we know that this step requires one argument,
                "steps": [
                    {
                        "service:Restart": {
-                           "service": "crond"
+                           "service": "megafrobber"
                        }
                    }
                ]
