@@ -27,9 +27,8 @@ which make the respective format unique from the others.
 Deployment Message Formats
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This section describes the two message formats emitted by
-**re-core**.
-
+This section describes the message formats emitted by **re-core** to
+workers.
 
 
 .. _messageformats_recore_simple:
