@@ -226,6 +226,36 @@ service. This happens in lines **9** → **11**:
               service: megafrobber
 
 
+We can also add optional parameters ``tries`` and ``check_scripts``. ``check_scripts``
+is an array of scripts that will be run after the command. If they all return success
+(a zero return value) the whole command is considered successful. However if any
+return a non zero value the step is considered failed. The ``tries`` parameter tells
+the worker to try the step X number of times before giving up.
+
+The following example will attempt the restart ``megafrobber`` and run the check_script
+``/usr/bin/diditwork``. If the either the restart or the check script return a failure
+it will try again until it's limit of 5 tries has been hit (at which point it returns
+failure back to the bus).
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 12,13
+
+   ---
+   group: inception
+   name: Setup megafrobber
+   execution:
+     - description: restart the megafrobber service
+       hosts:
+         - foo.bar.example.com
+       steps:
+          - funcworker.service:
+              subcommand: restart
+              service: megafrobber
+              tries: 5
+              check_scripts: ["/usr/bin/diditwork"]
+
+
 More Modules
 ~~~~~~~~~~~~
 
