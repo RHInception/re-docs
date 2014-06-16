@@ -82,7 +82,7 @@ should be written to the output logger.
  * basic_deliver: pika.Spec.Basic.Deliver instance
  * properties: pika.Spec.BasicProperties instance (ex: headers)
  * body: dict or list that was json loaded off the message
- * output: logger instance to send output
+ * output: logger like instance to send output
 
 * **Returns**: None
 
@@ -95,7 +95,6 @@ To run an instance you will need to make an instance of your worker by passing i
 
   * mq_config: should house: user, password, server, port and vhost.
   * config_file: is an optional full path to a json config file
-  * output_dir: is the directory for process logs to be written to
   * logger: is an optional logger. Defaults to a logger to stderr
 
 
@@ -122,8 +121,30 @@ Example
         'password': 'guest',
    }
 
-   worker = IPrintStuff(mq_conf, output_dir='/tmp/logs/')
+   worker = IPrintStuff(mq_conf)
    worker.run_forever()
 
+
+To Turn this into a runnable script you'll rant to use ``reworker.worker.runner`` like so:
+
+
+Example
+~~~~~~~
+
+.. code-block:: python
+
+  from reworker.worker import Worker
+
+  class IPrintStuff(Worker):
+      ...
+
+
+  def main():
+      from reworker.worker import runner
+      runner(IPrintStuff)
+
+
+  if __name__ == '__main__':
+      main()
 
 For a more in-depth example see the `examples/ <https://github.com/RHInception/re-worker/tree/master/examples>`_ folder.
