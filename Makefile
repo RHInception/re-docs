@@ -49,6 +49,7 @@ help:
 clean:
 	rm -rf $(BUILDDIR)/*
 	find . -name '*.bak' -delete
+	@find . -type f \( -name "*~" -or -name "#*" \) -delete
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html 2>&1 | grep -v 'nonlocal image URI found:'

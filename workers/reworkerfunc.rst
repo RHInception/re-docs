@@ -1,3 +1,5 @@
+.. _re_worker_func:
+
 RE-WORKER-FUNC
 --------------
 Release Engine Worker Plugin to run commands over `FUNC <https://fedorahosted.org/func/>`_.

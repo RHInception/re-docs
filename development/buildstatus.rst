@@ -1,8 +1,8 @@
 Build States
-------------
+************
 
 RE-CORE
-~~~~~~~
++++++++
 
 Status for the core finite state machine component
 
@@ -12,7 +12,7 @@ Status for the core finite state machine component
 ----
 
 RE-REST
-~~~~~~~
++++++++
 
 Status for the REST endpoint component
 
@@ -22,7 +22,7 @@ Status for the REST endpoint component
 ----
 
 RE-WORKER
-~~~~~~~~~
++++++++++
 
 Status for the worker  component
 
@@ -32,7 +32,7 @@ Status for the worker  component
 ----
 
 RE-CLIENT
-~~~~~~~~~
++++++++++
 
 Status for the client utility component
 
@@ -42,7 +42,7 @@ Status for the client utility component
 ----
 
 RE-WORKER-FUNC
-~~~~~~~~~~~~~~
+++++++++++++++
 Worker for executing func calls
 
 .. image:: https://api.travis-ci.org/RHInception/re-worker-func.png
@@ -51,7 +51,7 @@ Worker for executing func calls
 ----
 
 RE-WORKER-JUICER
-~~~~~~~~~~~~~~~~
+++++++++++++++++
 Worker for executing juicer (rpm promotion) calls
 
 .. image:: https://api.travis-ci.org/RHInception/re-worker-juicer.png
@@ -60,7 +60,7 @@ Worker for executing juicer (rpm promotion) calls
 ----
 
 RE-WORKER-SLEEP
-~~~~~~~~~~~~~~~~
+++++++++++++++++
 Worker for executing sleeping.
 
 .. image:: https://api.travis-ci.org/RHInception/re-worker-sleep.png

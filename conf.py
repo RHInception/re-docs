@@ -79,7 +79,7 @@ release = '0.0.1'
 # directories to ignore when looking for source files.
 exclude_patterns = [
     '_build',
-    'buildstatus.rst',
+    'development/*.rst',
     'intro/components.rst',
     # 'components/*.rst',
     'intro/definitions.rst',
