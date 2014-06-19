@@ -24,6 +24,32 @@ is started. See :ref:`Dynamic Variables <rerest_dynamic_variables>`
 for more information on this topic.
 
 
+To run the worker the normal MQ configuration must be defined and used.
+
+.. code-block:: json
+
+  {
+    "server": "127.0.0.1",
+    "port": 5672,
+    "vhost": "/",
+    "user": "guest",
+    "password": "guest"
+  }
+
+* Set the ``MQ config file`` parameters to sane values (see also:
+  :ref:`Setting Up The Bus<setting_up_the_bus>`)
+* Run the worker: ``python ./replugin/juicerworker/__init__.py` $YOUR_MQ_CONF.json``
+
+We should see output similar to the following if everything well:
+
+.. code-block:: bash
+
+   [user@frober re-worker-juicerworker]$ python ./replugin/juicerworker/__init__.py mq.json
+   2014-05-19 14:39:47,080 - JuicerWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
+   2014-05-19 14:39:47,083 - JuicerWorker - INFO - Attempting connection with amqp://inceptadmin:***@messagebus.example.com:5672/
+   2014-05-19 14:39:47,412 - JuicerWorker - INFO - Connection and channel open.
+   2014-05-19 14:39:47,413 - JuicerWorker - INFO - Consuming on queue worker.juicer
+
 
 Juicer Client Configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

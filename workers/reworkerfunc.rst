@@ -42,9 +42,9 @@ before it can work.
 Configuration
 ~~~~~~~~~~~~~
 
-Each running func worker requires a configuration file. This file
-defines exactly which func modules and methods the worker is allowed
-to run.
+Each running func worker requires a worker and an MQ configuration file.
+The worker configuration file defines exactly which func modules and methods
+the worker is allowed to run.
 
 The configuration file uses the following **pattern** in JSON format:
 
@@ -63,53 +63,28 @@ The configuration file uses the following **pattern** in JSON format:
 In this example on line 2 we see a parameter ``queue``. This is how we
 set a specific name for the queue to bind to on the message bus. This
 parameter is **required** if you are running more than one func worker
-concurrently. Using a name like **funcFOO** is recommended. For
+concurrently. Using a name that defines what the workers does. For
 example, if you're using the Nagios plugin, you would create and bind
-to a queue such as ``funcnagios`` (which is expanded to
-``worker.funcnagios`` internally).
+to a queue such as ``nagios`` (which is expanded to ``worker.nagios``
+internally).
 
 
-Once we've prepared a configuration file for our worker, we need to
-tell the worker that it must use that specific configuration file.
+The second configuration file is the normal MQ configuration used for
+connecting to the bus:
 
-.. note::
+.. code-block:: json
 
-   Configuration is kind of hacky right now. In the future we may have
-   demonized services which provide a more intelligent method of
-   configuration. Until that time comes however, you'll just have to
-   accept it as what it is.
+  {
+    "server": "127.0.0.1",
+    "port": 5672,
+    "vhost": "/",
+    "user": "guest",
+    "password": "guest"
+  }
 
-From a fresh checkout of the `re-worker-func repo
-<https://github.com/RHInception/re-worker-sleep.git>`_, we'll open
-``replugin/funcworker/__init__.py`` in our favorite editor and scroll
-to the bottom. We'll see something similar to this:
-
-.. code-block:: python
-
-   if __name__ == '__main__':
-       mq_conf = {
-           'server': '127.0.0.1',
-           'port': 5672,
-           'vhost': '/',
-           'user': 'guest',
-           'password': 'guest',
-       }
-       worker = FuncWorker(
-           mq_conf,
-           config_file='conf/example.json',
-           output_dir='/tmp/logs/')
-       worker.run_forever()
-
-.. todo:: Update the previous example with configuration file information once available
-
-* Set the ``mq_conf`` parameters to sane values (see also:
+* Set the ``MQ config file`` parameters to sane values (see also:
   :ref:`Setting Up The Bus<setting_up_the_bus>`)
-* Next, we change the ``config_file`` line to point at our selected
-  configuration file. For example:
-
- * ``config_file='conf/nagios.json',``
-
-* Run the worker: ``python ./replugin/funcworker/__init__.py``
+* Run the worker: ``python ./replugin/funcworker/__init__.py` -w $YOUR_CONFIG_FILE.json $YOUR_MQ_CONF.json``
 
 We should see output similar to the following if everything well:
 
@@ -119,7 +94,7 @@ We should see output similar to the following if everything well:
    2014-05-19 14:39:47,080 - FuncWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
    2014-05-19 14:39:47,083 - FuncWorker - INFO - Attempting connection with amqp://JoeUser:***@mq.example.com:5672/
    2014-05-19 14:39:47,412 - FuncWorker - INFO - Connection and channel open.
-   2014-05-19 14:39:47,413 - FuncWorker - INFO - Consuming on queue worker.funcnagios
+   2014-05-19 14:39:47,413 - FuncWorker - INFO - Consuming on queue worker.nagios
 
 
 Example Configuration

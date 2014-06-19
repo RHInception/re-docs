@@ -42,4 +42,4 @@ We should see output similar to the following if everything well:
    2014-05-19 14:39:47,080 - IRCNotifyWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
    2014-05-19 14:39:47,083 - IRCNotifyWorker - INFO - Attempting connection with amqp://inceptadmin:***@messagebus.example.com:5672/
    2014-05-19 14:39:47,412 - IRCNotifyWorker - INFO - Connection and channel open.
-   2014-05-19 14:39:47,413 - IRCNotifyWorker - INFO - Consuming on queue worker.outputworker
+   2014-05-19 14:39:47,413 - IRCNotifyWorker - INFO - Consuming on queue worker.output
