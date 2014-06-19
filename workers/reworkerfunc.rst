@@ -160,7 +160,7 @@ installs a single package:
 
 .. code-block:: yaml
    :linenos:
-   :emphasize-lines: 9,10,11
+   :emphasize-lines: 9,10
 
    ---
    group: inception
@@ -170,11 +170,10 @@ installs a single package:
        hosts:
          - foo.bar.example.com
        steps:
-          - funcworker.yumcmd:
-              subcommand: install
+          - yumcmd:install:
               package: megafrobber
 
-Here we can see in lines **9** → **11** how to call the ``install``
+Here we can see in lines **9** → **10** how to call the ``install``
 sub-command for the **funcworker**.
 
 
@@ -209,11 +208,11 @@ to control.
 
 The following example shows how to use the
 ``funcworker.service.restart`` method to restart the ``megafrobber``
-service. This happens in lines **9** → **11**:
+service. This happens in lines **9** → **10**:
 
 .. code-block:: yaml
    :linenos:
-   :emphasize-lines: 9,10,11
+   :emphasize-lines: 9,10
 
    ---
    group: inception
@@ -223,16 +222,14 @@ service. This happens in lines **9** → **11**:
        hosts:
          - foo.bar.example.com
        steps:
-          - funcworker.service:
-              subcommand: restart
+          - service:restart:
               service: megafrobber
-
 
 We can also add optional parameters ``tries`` and ``check_scripts``. ``check_scripts``
 is an array of scripts that will be run after the command. If they all return success
 (a zero return value) the whole command is considered successful. However if any
 return a non zero value the step is considered failed. The ``tries`` parameter tells
-the worker to try the step X number of times before giving up.
+the worker to try the step `X` number of times before giving up.
 
 The following example will attempt the restart ``megafrobber`` and run the check_script
 ``/usr/bin/diditwork``. If the either the restart or the check script return a failure
