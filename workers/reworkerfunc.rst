@@ -238,7 +238,7 @@ failure back to the bus).
 
 .. code-block:: yaml
    :linenos:
-   :emphasize-lines: 12,13
+   :emphasize-lines: 11,12
 
    ---
    group: inception
@@ -248,8 +248,7 @@ failure back to the bus).
        hosts:
          - foo.bar.example.com
        steps:
-          - funcworker.service:
-              subcommand: restart
+          - service:restart:
               service: megafrobber
               tries: 5
               check_scripts: ["/usr/bin/diditwork"]
