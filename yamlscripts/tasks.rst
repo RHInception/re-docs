@@ -265,9 +265,9 @@ This is an excellent opportunity to use dynamic variables.
 The following examples will be using a fictional worker called
 *change*. This worker has one usable function: ``Update``. The
 **change** worker documentation provides the following API signature
-for the ``change.Update`` function:
+for the ``change:Update`` function:
 
-* **Function:** ``change.Update``
+* **Function:** ``change:Update``
 
    * **Arguments:**
 
