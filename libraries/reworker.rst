@@ -21,7 +21,9 @@ If there are any inputs that need to be passed in the class level variable **dyn
 
        ...
 
-If a **config_file** is passed in on Worker creation it will be loaded as JSON and available as self._config. Otherwise self._config will be an empty dictionary.
+If a **config_file** is passed in on Worker creation it will be loaded
+as JSON and available as ``self._config``. Otherwise ``self._config``
+will be an empty dictionary.
 
 
 Worker also provides a few convenience methods to simplify use:
