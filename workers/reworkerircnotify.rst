@@ -14,7 +14,7 @@ This worker takes two configuration files. The first is the IRCNOTIFY configurat
     "server": "127.0.0.1",
     "port": 6697,
     "ssl": true,
-    "channels": ["#releaseengine"],
+    "channels": ["#release-engine"],
     "nick": "renotify"
   }
 
