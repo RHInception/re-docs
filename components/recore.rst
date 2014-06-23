@@ -87,3 +87,37 @@ You should see output similar to the following:
 Additional output will be directed to the log file you configured in
 the ``settings.json`` file. The default log file is called
 ``recore.log`` and will be in your present working directory.
+
+
+Per-release Logging
+~~~~~~~~~~~~~~~~~~~
+
+By default, the FSM will log to the console and a single logfile
+(``LOGFILE``).
+
+Optionally, one may log the FSM activity for **each release** to a
+separate file. This is done by configuring the re-core
+``RELEASE_LOG_DIR`` setting with the path to the log-holding
+directory.
+
+If per-release logging is enabled, the log files will be created as:
+``RELEASE_LOG_DIR/FSM-STATE_ID.log``
+
+.. warning::
+
+   Be sure the FSM has permission to write the specified
+   directory. You won't find out it can't until the first release is
+   attempted.
+
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 3
+
+   {
+       "LOGFILE": "recore.log",
+       "RELEASE_LOG_DIR": "/var/log/recore",
+       "MQ": {
+           "SERVER": "amqp.example.com"
+      }
+   }
