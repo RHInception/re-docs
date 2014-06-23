@@ -200,6 +200,9 @@ service. This happens in lines **9** → **10**:
           - service:restart:
               service: megafrobber
 
+Example: Trying/Checking
+~~~~~~~~~~~~~~~~~~~~~~~~
+
 We can also add optional parameters ``tries`` and ``check_scripts``. ``check_scripts``
 is an array of scripts that will be run after the command. If they all return success
 (a zero return value) the whole command is considered successful. However if any
