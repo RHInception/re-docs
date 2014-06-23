@@ -34,6 +34,7 @@ Descriptions of all settings directives:
 Name               Type   Parent             Value
 ================== ====== ================== ===========================================
 LOGFILE            str    None               File name for the application level log
+RELEASE_LOG_DIR    str    None               Directory for per-release logging (default: ``None``)
 MQ                 dict   None               Where all of the MQ connection settings are
 SERVER             str    MQ                 Hostname or IP of the server
 NAME               str    MQ                 Username to connect with
@@ -45,9 +46,9 @@ DATABASE           str    DB                 Name of the MongoDB database
 NAME               str    DB                 Username to connect with
 PASSWORD           str    DB                 Password to authenticate with
 PHASE_NOTIFICATION dict   None               Notifications that will always happen in a phase
-TABOOT_URL         str    PHASE_NOTIFICATION URL with %s to taboot tailer EX: http://example.com/taboot/%s/
-TOPIC              str    PHASE_NOTIFICATION The topic (routing key) to send notification on. EX: notify.irc.
-TARGET             list   PHASE_NOTIFICATION The targets to send the notification to. EX: ["#mychannel", "auser"]
+TABOOT_URL         str    PHASE_NOTIFICATION URL with ``%s`` to taboot tailer EX: http://example.com/taboot/%s/
+TOPIC              str    PHASE_NOTIFICATION The topic (`routing key`) to send notification on. EX: ``notify.irc``.
+TARGET             list   PHASE_NOTIFICATION The targets to send the notification to. EX: ``["#mychannel", "auser"]``
 ================== ====== ================== ===========================================
 
 For an example see `example-config.json <https://github.com/RHInception/re-core/blob/master/examples/settings-example.json>`_.
