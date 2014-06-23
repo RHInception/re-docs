@@ -39,6 +39,11 @@ items:
 * `pyflakes <https://pypi.python.org/pypi/pyflakes>`_ - A simple
   program which checks Python source files for errors.
 
+* `virtualenv <https://virtualenv.pypa.io/en/latest/>`_ - A tool to
+  create isolated Python environments. Allows us to install additonal
+  package dependencies without requiring access to the system
+  site-packages directory.
+
 * `Makefiles <http://www.gnu.org/software/make/>`_ - Utility scripts
   used for project building and testing. How Release Engine uses
   **Makefiles** is described later in this section.
