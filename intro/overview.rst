@@ -15,7 +15,7 @@ end of this narrative we'll have learned:
 Scenario
 ========
 
-We work in a software shop and we have been told to decreate our time
+We work in a software shop and we have been told to decrease our time
 to delivery. We took some measurements and realized that even with
 `Jenkins <http://jenkins-ci.org/>`_ and some home-brewed systems for
 deployment, we're still spending ≥ **20%** of our sprint time on *just
