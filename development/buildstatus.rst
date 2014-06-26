@@ -19,6 +19,8 @@ Build States
    * - `re-worker <https://github.com/RHInception/re-worker>`_
      - .. image:: https://api.travis-ci.org/RHInception/re-worker.png
           :target: https://travis-ci.org/RHInception/re-worker/
+   * - `re-worker-bigip <https://github.com/RHInception/re-worker-bigip>`_
+     - n/a
    * - `re-worker-emailnotify <https://github.com/RHInception/re-worker-emailnotify>`_
      - .. image:: https://api.travis-ci.org/RHInception/re-worker-emailnotify.png
           :target: https://travis-ci.org/RHInception/re-worker-emailnotify/

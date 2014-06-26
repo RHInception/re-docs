@@ -10,16 +10,39 @@ Components
 
 .. _components_pre_built:
 
-Pre-Built Workers
------------------
 .. important::
    Release Engine workers require the :ref:`RE-WORKER <re_worker>` module
 
+
+Playbook Workers
+----------------
+
+These workers are usable in :ref:`playbooks <playbooks>`.
+
 .. toctree::
    :maxdepth: 1
-   :glob:
 
-   workers/*
+   workers/reworkerbigip.rst
+   workers/reworkerfunc.rst
+   workers/reworkerjuicer.rst
+   workers/reworkersleep.rst
+
+
+Auxiliary Workers
+-----------------
+
+These workers are support workers and handle various other tasks. They
+are **not** usable in playbooks.
+
+.. toctree::
+   :maxdepth: 1
+
+   workers/reworkeremailnotify.rst
+   workers/reworkerircnotify.rst
+   workers/reworkeroutput.rst
+
+
+
 
 Libraries/Helpers
 -----------------
