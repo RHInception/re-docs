@@ -3,6 +3,11 @@
 RE-WORKER-JUICER
 ----------------
 
+.. contents::
+   :depth: 2
+   :local:
+
+
 Release Engine Worker Plugin to run Juicer commands
 
 .. admonition:: What's Juicer?
@@ -14,7 +19,7 @@ Release Engine Worker Plugin to run Juicer commands
    <https://github.com/juicer/juicer/wiki/cart-json-specification>`_.
 
 
-About & Usage
+About & Setup
 ~~~~~~~~~~~~~
 
 A **juicer** worker allows you to upload/promote RPMs as just another
@@ -38,13 +43,17 @@ To run the worker the normal MQ configuration must be defined and used.
 
 * Set the ``MQ config file`` parameters to sane values (see also:
   :ref:`Setting Up The Bus<setting_up_the_bus>`)
-* Run the worker: ``python ./replugin/juicerworker/__init__.py` $YOUR_MQ_CONF.json``
+* Run the worker
+
+  * **From source:** ``python ./replugin/juicerworker/__init__.py $YOUR_MQ_CONF.json``
+  * **From install:** ``re-worker-juicer $YOUR_MQ_CONF.json``
+
 
 We should see output similar to the following if everything well:
 
 .. code-block:: bash
 
-   [user@frober re-worker-juicerworker]$ python ./replugin/juicerworker/__init__.py mq.json
+   [user@frober re-worker-juicerworker]$ re-worker-juicer mq_conf.json
    2014-05-19 14:39:47,080 - JuicerWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
    2014-05-19 14:39:47,083 - JuicerWorker - INFO - Attempting connection with amqp://inceptadmin:***@messagebus.example.com:5672/
    2014-05-19 14:39:47,412 - JuicerWorker - INFO - Connection and channel open.
@@ -52,7 +61,7 @@ We should see output similar to the following if everything well:
 
 
 Juicer Client Configuration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```````````````````````````
 See the upstream `juicer configuration
 <https://github.com/juicer/juicer/blob/master/docs/markdown/config.md>`_
 documentation for instructions on how to setup a system accounts
@@ -60,10 +69,55 @@ juicer configuration file.
 
 
 Dependencies
-~~~~~~~~~~~~
+````````````
 Use of the juicer worker requires a configured and running `Pulp
 Server <http://www.pulpproject.org/>`_ installation. Setup and
 maintenance of pulp servers is out of scope for this
 documentation. However, they provide `detailed setup instructions
 <https://pulp-user-guide.readthedocs.org/en/pulp-2.3/installation.html>`_
 to help get you started.
+
+
+Commands
+~~~~~~~~
+
+The Juicer worker has the following commands available.
+
+
+Promote
+```````
+
+Promote a release cart to a specified environment. It is recommended
+that this command is used in an execution sequence only a single dummy
+host listed in the ``hosts`` array. This will prevent the step from
+being ran multiple times.
+
+
+**Parameters**
+
+* ``dynamic`` (type: list)
+
+  * **Required:** True
+
+  * **Items:** The strings ``environment`` and ``cart``
+
+
+**Example**
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 3-6
+
+   hosts: ['localhost']
+   steps:
+       - juicer:promote:
+           dynamic:
+               - environment
+               - cart
+
+
+.. note::
+
+   Recall that playbooks which have steps including :ref:`dynamic
+   parameters <playbooks_steps_dynamic>` require the values for those
+   parameters to be passed when starting the deployment.
