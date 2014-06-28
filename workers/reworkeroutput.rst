@@ -1,3 +1,5 @@
+.. _re_worker_output:
+
 RE-WORKER-OUTPUT
 ----------------
 Release Engine Worker Plugin consumes output from other works on the bus and writes it to files.

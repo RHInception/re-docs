@@ -9,9 +9,11 @@ This library provides a simple base for release engine workers to build from.
 
 Implementing a Worker
 ~~~~~~~~~~~~~~~~~~~~~
-To implement a worker subclass off of **reworker.worker.Worker** and override the **process** method.
+To implement a worker, subclass off of ``reworker.worker.Worker`` and
+override the ``process`` method.
 
-If there are any inputs that need to be passed in the class level variable **dynamic** should be populated.
+If there are any inputs that need to be passed in, the class level
+variable ``dynamic`` should be populated.
 
 .. code-block:: python
 
@@ -21,12 +23,54 @@ If there are any inputs that need to be passed in the class level variable **dyn
 
        ...
 
-If a **config_file** is passed in on Worker creation it will be loaded
+If a ``config_file`` is passed in on Worker creation it will be loaded
 as JSON and available as ``self._config``. Otherwise ``self._config``
 will be an empty dictionary.
 
 
-Worker also provides a few convenience methods to simplify use:
+.. _re_worker_logging:
+
+Logging
+```````
+When implementing your own worker, the ``re-worker`` base-class
+provides two mechanisms for logging and reporting worker progress.
+
+**Application-level**
+   Recording the kind of information system administrators need to see
+   for debugging is facilitated by the ``self.app_logger`` instance
+   variable. This information is logged to ``stdout``.
+
+.. code-block:: python
+   :linenos:
+
+   def process(self, channel, basic_deliver, properties, body, output):
+
+       # ...
+
+       self.app_logger.debug("Going to frob the widget.")
+
+**User-level**
+   Reporting progress is facilitated by the ``output`` parameter which
+   is passed to the ``Worker.process`` method. This information is
+   send back to the message bus where it is then collected and saved
+   by the :ref:`output worker <re_worker_output>`.
+
+.. code-block:: python
+   :linenos:
+
+   def process(self, channel, basic_deliver, properties, body, output):
+       self.output = output
+
+       # ...
+
+       self.output.info("Release step successful with result: %s" % (
+           str(result)))
+
+
+Convenience Methods
+~~~~~~~~~~~~~~~~~~~
+
+**Worker** also provides a few convenience methods to simplify use:
 
 .. todo::
    Change to using actual sphinx API documentation.
@@ -37,10 +81,10 @@ Sends a message.
 
 * **Inputs**:
 
- * topic: the routing key
- * corr_id: the correlation id
- * message_struct: the dict or list to send as the body
- * exchange: set to **''** to reply back to the FSM
+ * ``topic``: the routing key
+ * ``corr_id``: the correlation id
+ * ``message_struct``: the dict or list to send as the body
+ * ``exchange``: set to **''** to reply back to the FSM
 
 * **Returns**: None
 
@@ -48,11 +92,11 @@ Worker.notify
 `````````````
 * **Inputs**:
 
- * slug: the short text to use in the notification
- * message: a string which will be used in the notification
- * phase: the phase to identify with in the notification
- * corr_id: the correlation id. Default: None
- * exchange: the exchange to publish on. Default: re
+ * ``slug``: the short text to use in the notification
+ * ``message``: a string which will be used in the notification
+ * ``phase``: the phase to identify with in the notification
+ * ``corr_id``: the correlation id. Default: **None**
+ * ``exchange``: the exchange to publish on. Default: **re**
 
 * **Returns**: None
 
@@ -62,7 +106,9 @@ Acks a message.
 
 * **Inputs**:
 
- * basic_deliver: pika.Spec.Basic.Deliver instance
+ * ``basic_deliver``: `pika.Spec.Basic.Deliver
+   <http://pika.readthedocs.org/en/latest/modules/spec.html#pika.spec.Basic.Deliver>`_
+   instance
 
 * **Returns**: None
 
@@ -76,77 +122,35 @@ Starts the main loop.
 Worker.process
 ``````````````
 What a worker should do when a message is received. All output
-should be written to the output logger.
+should be written to the :ref:`output logger <re_worker_logging>`.
 
 * **Inputs**:
 
- * channel: pika.channel.Channel instance
- * basic_deliver: pika.Spec.Basic.Deliver instance
- * properties: pika.Spec.BasicProperties instance (ex: headers)
- * body: dict or list that was json loaded off the message
- * output: logger like instance to send output
+ * ``channel``: `pika.channel.Channel
+   <http://pika.readthedocs.org/en/latest/modules/channel.html#pika.channel.Channel>`_
+   instance
+ * ``basic_deliver``: `pika.Spec.Basic.Deliver
+   <http://pika.readthedocs.org/en/latest/modules/spec.html#pika.spec.Basic.Deliver>`_
+   instance
+ * ``properties``: `pika.Spec.BasicProperties
+   <http://pika.readthedocs.org/en/latest/modules/spec.html#pika.spec.BasicProperties>`_
+   instance (ex: headers)
+ * ``body``: dict or list that was json loaded off the message
+ * ``output``: logger like instance to send output
 
 * **Returns**: None
 
 
 Running
 ~~~~~~~
-To run an instance you will need to make an instance of your worker by passing in a few items.
+.. todo::
+   Update this with how to run a custom **non-packaged** worker from source.
+
+To run an instance you will need to make an instance of your worker by
+passing in a few items.
 
 * **Inputs**:
 
   * mq_config: should house: user, password, server, port and vhost.
   * config_file: is an optional full path to a json config file
   * logger: is an optional logger. Defaults to a logger to stderr
-
-
-Example
-~~~~~~~
-
-.. code-block:: python
-
-   from reworker.worker import Worker
-
-   class IPrintStuff(Worker):
-
-       def process(self, channel, basic_deliver, properties, body, output):
-           print body  # This is a loaded json structure
-           output.info(str(body))  # output is the logger for process output
-           self.ack(basic_deliver) # ack at the end
-
-
-   mq_conf = {
-       'server': '127.0.0.1',
-        'port': 5672,
-        'vhost': '/',
-        'user': 'guest',
-        'password': 'guest',
-   }
-
-   worker = IPrintStuff(mq_conf)
-   worker.run_forever()
-
-
-To Turn this into a runnable script you'll rant to use ``reworker.worker.runner`` like so:
-
-
-Example
-~~~~~~~
-
-.. code-block:: python
-
-  from reworker.worker import Worker
-
-  class IPrintStuff(Worker):
-      ...
-
-
-  def main():
-      from reworker.worker import runner
-      runner(IPrintStuff)
-
-
-  if __name__ == '__main__':
-      main()
-
-For a more in-depth example see the `examples/ <https://github.com/RHInception/re-worker/tree/master/examples>`_ folder.
