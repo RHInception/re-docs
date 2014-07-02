@@ -6,5 +6,13 @@ of the workers included with the Release Engine. What follows includes
 formal `signatures` of each step, as well as examples of each step in
 playbooks.
 
-.. todo:: Move the existing examples from their dedicated sections into here.
 
+.. contents::
+   :depth: 3
+   :local:
+
+
+.. include:: worker-steps/juicer.rst
+.. include:: worker-steps/bigip.rst
+.. include:: worker-steps/func.rst
+.. include:: worker-steps/sleep.rst

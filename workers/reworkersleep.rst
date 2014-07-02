@@ -16,7 +16,7 @@ This worker takes the normal MQ configuration as it's only configuration file:
 
 * Set the ``MQ config file`` parameters to sane values (see also:
   :ref:`Setting Up The Bus<setting_up_the_bus>`)
-* Run the worker: ``python ./replugin/emailworker/__init__.py` $YOUR_MQ_CONF.json``
+* Run the worker: ``python ./replugin/emailworker/__init__.py $YOUR_MQ_CONF.json``
 
 We should see output similar to the following if everything well:
 
@@ -27,3 +27,8 @@ We should see output similar to the following if everything well:
    2014-05-19 14:39:47,083 - SleepWorker - INFO - Attempting connection with amqp://inceptadmin:***@messagebus.example.com:5672/
    2014-05-19 14:39:47,412 - SleepWorker - INFO - Connection and channel open.
    2014-05-19 14:39:47,413 - SleepWorker - INFO - Consuming on queue worker.sleep
+
+Commands
+^^^^^^^^
+
+.. todo:: Link to the worker steps docs
