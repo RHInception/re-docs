@@ -33,5 +33,6 @@ Developer Blog <http://developerblog.redhat.com/>`_ under the tag
    development.rst
    messageformats.rst
    playbooks.rst
+   worker-steps.rst
    appendices.rst
    license.rst
