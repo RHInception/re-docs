@@ -31,4 +31,4 @@ We should see output similar to the following if everything well:
 Commands
 ^^^^^^^^
 
-.. todo:: Link to the worker steps docs
+The Sleep Worker steps are documented in :ref:`Worker Steps: Sleep <steps_sleep>`.

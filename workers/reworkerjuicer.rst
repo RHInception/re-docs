@@ -81,4 +81,4 @@ to help get you started.
 Commands
 ~~~~~~~~
 
-.. todo:: Link to the worker-steps page
+The Juicer Worker steps are documented in :ref:`Worker Steps: Juicer <steps_juicer>`.

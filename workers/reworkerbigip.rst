@@ -36,7 +36,4 @@ We should see output similar to the following if everything well:
 Commands
 ````````
 
-The BigIP worker has the following commands available.
-
-.. todo:: Link to the worker steps docs
-
+The BigIP Worker steps are documented in :ref:`Worker Steps: BigIP <steps_bigip>`

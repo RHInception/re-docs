@@ -127,6 +127,12 @@ update all packages on the target system.
 The following is an example using the ``yumcmd`` module in a playbook
 step.
 
+Commands
+~~~~~~~~
+
+The FUNC Worker steps are documented in :ref:`Worker Steps: FUNC <steps_func>`.
+
+
 Example: Installing a package
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
