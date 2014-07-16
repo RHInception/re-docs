@@ -1,3 +1,5 @@
+.. _steps_juicer:
+
 Juicer
 ******
 
