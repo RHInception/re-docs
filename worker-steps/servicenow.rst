@@ -8,7 +8,7 @@ servicenow:DoesChangeRecordExist
 
 Checks to see if a change record exists. Resulting data will have an exists key with a bool.
 
-**Parameters**
+**Dynamic Arguments**
 
 * ``change_record`` (type ``str``)
 
@@ -17,7 +17,7 @@ Checks to see if a change record exists. Resulting data will have an exists key 
 
 **Example**
 
-To check if a change record CHG00000 exists:
+To check if a change record exists:
 
 .. code-block:: yaml
    :linenos:
@@ -26,6 +26,7 @@ To check if a change record CHG00000 exists:
    hosts: ['localhost']
    steps:
        - servicenow:DoesChangeRecordExist:
-           change_record: CHG000000
+           dynamic:
+               - change_record
 
 .. note:: If more than one host is given in ``hosts``, the playbook will check again for each host given.
