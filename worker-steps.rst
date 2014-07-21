@@ -16,3 +16,4 @@ playbooks.
 .. include:: worker-steps/bigip.rst
 .. include:: worker-steps/func.rst
 .. include:: worker-steps/sleep.rst
+.. include:: worker-steps/servicenow.rst
