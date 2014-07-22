@@ -49,6 +49,7 @@ PHASE_NOTIFICATION dict   None               Notifications that will always happ
 TABOOT_URL         str    PHASE_NOTIFICATION URL with ``%s`` to taboot tailer EX: http://example.com/taboot/%s/
 TOPIC              str    PHASE_NOTIFICATION The topic (`routing key`) to send notification on. EX: ``notify.irc``.
 TARGET             list   PHASE_NOTIFICATION The targets to send the notification to. EX: ``["#mychannel", "auser"]``
+PRE_DEPLOY_CHECK   list   None               The yes/no checks to make prior to deployment (see below for more information)
 ================== ====== ================== ===========================================
 
 For an example see `example-config.json <https://github.com/RHInception/re-core/blob/master/examples/settings-example.json>`_.
@@ -121,3 +122,78 @@ If per-release logging is enabled, the log files will be created as:
            "SERVER": "amqp.example.com"
       }
    }
+
+
+Pre-Deployment Checks
+~~~~~~~~~~~~~~~~~~~~~
+
+An re-core instance may be configured to run one or more scripts prior
+to the deployment of any playbook. Each pre-deployment check defines
+the command to run and the expected result from the command. If
+expected equals observed, then the check is considered to have
+passed. If expected is not equal to observed, then the check has
+failed and the entire deployment is marked as failed.
+
+.. important:: These checks apply to *all* deployments
+
+Configuration of pre-deployment checks takes place in the re-core
+``setting.json`` file.
+
+Example settings
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 6-16
+
+   {
+       "LOGFILE": "recore.log",
+       "RELEASE_LOG_DIR": null,
+
+       "PRE_DEPLOY_CHECK": [{
+           "Require Change Record": {
+               "COMMAND": "servicenow",
+               "SUBCOMMAND": "getchangerecord",
+               "PARAMETERS": {},
+               "EXPECTATION": {
+                   "status": "completed",
+                   "data": {
+                       "exists": true
+                   }
+               }
+           }
+       }]
+   }
+
+
+Here we see a new directive, ``PRE_DEPLOY_CHECK`` (line **5**), this
+key holds a list whose members are nested dictionaries (lines **6** →
+**16**). This example has one nested-dictionary. It has one key, that
+is the name of the check, **Require Change Record**. You can give any
+name you want to keys as long as it is JSON parsable.
+
+Now let's look at this nested-dictionary closer:
+
+.. code-block:: python
+
+   {
+       "COMMAND": "servicenow",
+       "SUBCOMMAND": "getchangerecord",
+       "PARAMETERS": {},
+       "EXPECTATION": {
+           "status": "completed",
+           "data": {
+               "exists": true
+           }
+       }
+   }
+
+
+* ``COMMAND`` - Name of the worker to run the check with
+* ``SUBCOMMAND`` - The specific sub-command to run on that worker
+* ``PARAMETERS`` - Dictionary with variable keys depending on what your worker requires
+* ``EXPECTATION`` - The result we expected to get back from the check.
+
+**Pass or fail** is determined by comparing the *actual* response
+against ``EXPECTATION``. If they are the same then the check
+passes. If they differ then the check fails and the deployment is
+marked as *failed* and aborted.
