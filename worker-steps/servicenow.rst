@@ -29,4 +29,6 @@ To check if a change record exists:
            dynamic:
                - change_record
 
+.. note:: This check is ran for each host in ``hosts``
+
 .. note:: This step has no direct side-effects. It is more useful as a :ref:`Pre-Deployment Step <components_recore_predeployment_checks>`
