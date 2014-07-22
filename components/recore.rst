@@ -124,6 +124,8 @@ If per-release logging is enabled, the log files will be created as:
    }
 
 
+.. _components_recore_predeployment_checks:
+
 Pre-Deployment Checks
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -188,7 +190,8 @@ Now let's look at this nested-dictionary closer:
    }
 
 
-* ``COMMAND`` - Name of the worker to run the check with
+* ``COMMAND`` - Name of the worker to run the check with,
+  :ref:`re-worker-servicenow <steps_servicenow>` in this example
 * ``SUBCOMMAND`` - The specific sub-command to run on that worker
 * ``PARAMETERS`` - Dictionary with variable keys depending on what your worker requires
 * ``EXPECTATION`` - The result we expected to get back from the check.

@@ -29,4 +29,4 @@ To check if a change record exists:
            dynamic:
                - change_record
 
-.. note:: If more than one host is given in ``hosts``, the playbook will check again for each host given.
+.. note:: This step has no direct side-effects. It is more useful as a :ref:`Pre-Deployment Step <components_recore_predeployment_checks>`

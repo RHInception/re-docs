@@ -1,9 +1,12 @@
+.. _workers_servicenow:
+
 RE-WORKER-SERVICENOW
 --------------------
-Release Engine Worker Plugin that does basic interaction with Service Now.
+Release Engine Worker Plugin that does basic interaction with `Service
+Now <http://www.servicenow.com/>`_.
 
-
-This worker takes two configuration files. The first is the SERVICE NOW configuration file. It should look like this:
+This worker takes two configuration files. The first is the SERVICE
+NOW configuration file. It should look like this:
 
 .. code-block:: json
 
