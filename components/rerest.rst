@@ -88,8 +88,9 @@ LDAP_URI            str    AUTHORIZATION_CONFIG   A full ldap URI such as ldaps:
 LDAP_USER           str    AUTHORIZATION_CONFIG   User to bind with
 LDAP_PASSWORD       str    AUTHORIZATION_CONFIG   Password to bind with
 LDAP_SEARCH_BASE    str    AUTHORIZATION_CONFIG   Search base for all queries. Ex: dc=example,dc=com
+LDAP_MEMBER_ID      str    AUTHORIZATION_CONFIG   The name of the field that houses the username
 LDAP_FIELD_MATCH    str    AUTHORIZATION_CONFIG   What field to use against the lookup table
-LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of LDAP_FIELD_MATCH items to allowed groups
+LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of LDAP_FIELD_MATCH items to allowed groups. A '*' means all groups.
 =================== ====== ====================== ================================================
 
 
