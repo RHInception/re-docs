@@ -30,6 +30,7 @@ Developer Blog <http://developerblog.redhat.com/>`_ under the tag
    intro.rst
    Setting up <setup.rst>
    Components and Libraries <components.rst>
+   Tutorial: Writing Workers <writing_workers.rst>
    development.rst
    messageformats.rst
    playbooks.rst
