@@ -1,0 +1,57 @@
+digraph workerflow {
+    // Global Defaults
+    // compount allows linking between subgraphs
+    compound = true;
+    node [fontname="Courier"];
+
+    node [shape=diamond];
+    "parameters\nparsed OK?";
+    "needful\nsuccessful?";
+
+    node [shape=component];
+    "send 'started' message to FSM";
+    "send 'failed' message to FSM";
+    "send 'completed' message to FSM";
+    "send 'failed' message to FSM";
+    "JSON formatted\njob parameters";
+
+    node [shape=Msquare];
+    "do the\nneedful";
+
+    node [shape=oval];
+    "initialize worker";
+    "return True";
+    "return False";
+
+    //////////////////////////////////////////////////////////////////
+    subgraph cluster_reworker {
+        node [shape=rect];
+        "initialize worker" ->
+        "listen to channel\nfor new job parameters" ->
+        "receive parameters";
+	"receive parameters" -> "ACK parameters";
+        "ACK parameters" -> "parameters\nparsed OK?" [label="Parse parameters"];
+        "JSON formatted\njob parameters" -> "receive parameters" [style="dotted", label="via message bus"];
+
+	//////////////////////////////////////////////////////////////
+	// First the OK
+        "parameters\nparsed OK?" -> "send 'started' message to FSM" [label="OK"];
+	"send 'started' message to FSM" -> "do the\nneedful" -> "needful\nsuccessful?";
+
+	// Then the not OK
+        "parameters\nparsed OK?" -> "send 'failed' message to FSM" [label="NOT OK"];
+	"send 'failed' message to FSM" -> "return False";
+
+        //////////////////////////////////////////////////////////////////
+        "needful\nsuccessful?" -> "send 'completed' message to FSM" [label="YES"];
+	"send 'completed' message to FSM" -> "return True";
+
+        ////////////////
+        "needful\nsuccessful?" -> "send 'failed' message to FSM" [label="NO"];
+        //////////////////////////////////////////////////////////////////
+
+	fontsize = 20;
+	label = "re-worker";
+    }
+
+}
