@@ -157,4 +157,4 @@ Hard stuff.
 Other languages
 ===============
 
-what about erlang?
+what about erlang, go, hack, or node.js?
