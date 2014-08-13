@@ -147,6 +147,23 @@ Now, let's translate what this is saying into human readable words:
    and continue its loop to begin the process all over again.
 
 
+Message Queue Bindings
+**********************
+
+This section will describe how to configure your message queue
+bindings so that messages are delivered to the right workers.
+
+..
+   * a binding from worker.juicer must exist, routing to whatever queue the worker is listening on (presumably, worker.juicer)
+   * running worker instances can pick whatever queue they want to listen on. this has important implications:
+   * You could have two juicer workers running. One listening on worker.juicer, one on worker.secretjuice
+   * If you did this, you could have two different step definitions in your playbook:
+     * juicer:promote
+     * secretjuice:promote
+   * Each would route to a different juicer worker, respectively.
+
+
+
 
 Advanced Topics
 ***************
