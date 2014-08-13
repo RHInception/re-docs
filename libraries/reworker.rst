@@ -75,6 +75,9 @@ Convenience Methods
 .. todo::
    Change to using actual sphinx API documentation.
 
+
+.. _reworker_send:
+
 Worker.send
 ```````````
 Sends a message.

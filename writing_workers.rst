@@ -22,6 +22,10 @@ Typical Worker Flow
 
 .. graphviz:: asset_sources/worker_flow/worker_flow.dot
 
+.. note:: Not included in the chart are some of the various
+          logging/notification steps which take place in a release.
+
+
 Now, let's translate what this is saying into human readable words:
 
 **initialize worker**
@@ -58,6 +62,10 @@ Now, let's translate what this is saying into human readable words:
    communication with the FSM on. Messages sent to *any other*
    destination will be lost in the message exchange.
 
+   Additionally, this first message will contain a **correlation
+   ID**. This information should be recorded by our worker because it
+   is used for logging and communicating back to the FSM.
+
 **ACK parameters**
    Now that our worker has received its job parameters, the next step
    is to **acknowledge** receiving the parameters. Our worker does
@@ -78,7 +86,40 @@ Now, let's translate what this is saying into human readable words:
    to provide to subcommands, and :ref:`dynamic values
    <messageformats_recore_dynamic>` passed in at deployment-time.
 
+**parameters verified**
+   If the parameters are parsed and it is verified that all the
+   required information is present, then our worker will *reply* back
+   to the FSM indicating that it is going to start running the step
+   now.
 
+   The body of the message send back to the FSM is a JSON
+   **serialized** datastructure. See the :ref:`Response Message Format
+   <recore_reworker_response_format>` documentation in the re-core ↔
+   re-worker docs for more information.
+
+   Workers using the :ref:`re-worker <re_worker>` library typically
+   respond by calling the :ref:`worker.send() <reworker_send>`
+   method. When responding they should provide the ``reply_to``
+   variable as the ``topic`` parameter and leave the ``exchange``
+   parameter as an empty string.
+
+**parameters invalid**
+   Our worker must notify the FSM in the unfortunate event that the
+   parameters provided were invalid. Similar to the previous step
+   (valid parameters) our worker will use its ``send()`` method to
+   send a :ref:`job failed <recore_reworkers_job_failed>` message.
+
+   Once the message has been sent our worker will abort all further
+   execution. If the worker is designed such that it runs in a some
+   kind of io-loop (such as in the *re-worker* library), this is as
+   simple as returning ``False`` while still in the ``process()``
+   method.
+
+**do the needful**
+
+   At this point our worker has been initialized, received operating
+   parameters from the FSM, and communicated back that it is going to
+   proceed with the release.
 
 
 Advanced Topics

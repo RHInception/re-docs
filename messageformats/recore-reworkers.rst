@@ -317,6 +317,8 @@ example.
       section defines the allowed syntax for the `notify` item.
 
 
+.. _recore_reworker_response_format:
+
 Response Message Formats
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -408,6 +410,8 @@ miliseconds) it took to `frob` each item.
     workers should use the :ref:`notification system
     <notification_message_format>` for communicating such information.
 
+
+.. _recore_reworkers_job_failed:
 
 Job Failed
 ``````````
