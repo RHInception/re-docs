@@ -116,10 +116,36 @@ Now, let's translate what this is saying into human readable words:
    method.
 
 **do the needful**
-
    At this point our worker has been initialized, received operating
    parameters from the FSM, and communicated back that it is going to
-   proceed with the release.
+   proceed with the release. The next step is for the worker to begin
+   doing what it was instructed to do.
+
+   The specifics of what happens in this step are different from
+   worker to worker. The :ref:`BigIP <steps_bigip>` worker, for
+   example, will run one of three sub-commands at this point. The
+   exact sub-command is dictated by the value of the ``subcommand``
+   parameter.
+
+**step complete**
+   If *the needful* was a success, then our worker will reply back to
+   the FSM one last time (again, using its ``send()`` method) with a
+   JSON serialized datastructure. The message will include a
+   ``status`` key set to ``completed``.
+
+   After the message has been sent the worker will return ``True`` and
+   continue its loop to begin the process all over again.
+
+**step failed**
+   If *the needful* was **not** a success, then our worker will reply
+   back to the FSM one last time (again, using its ``send()`` method)
+   with a JSON serialized datastructure. The message will include a
+   ``status`` key set to ``failed`` and possibly another key, ``data``
+   with various information about the exact nature of the failure.
+
+   After the message has been sent the worker will return ``False``
+   and continue its loop to begin the process all over again.
+
 
 
 Advanced Topics
