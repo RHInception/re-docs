@@ -1,3 +1,5 @@
+.. _recore_reworkers:
+
 re-core ↔ re-workers
 ----------------------
 
