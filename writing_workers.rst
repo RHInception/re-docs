@@ -147,8 +147,15 @@ Now, let's translate what this is saying into human readable words:
    and continue its loop to begin the process all over again.
 
 
+
+Advanced Topics
+***************
+
+Hard stuff.
+
+
 Message Queue Bindings
-**********************
+======================
 
 This section will describe how to configure your message queue
 bindings so that messages are delivered to the right workers.
@@ -162,13 +169,6 @@ bindings so that messages are delivered to the right workers.
      * secretjuice:promote
    * Each would route to a different juicer worker, respectively.
 
-
-
-
-Advanced Topics
-***************
-
-Hard stuff.
 
 
 Other languages
