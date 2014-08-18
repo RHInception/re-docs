@@ -227,8 +227,77 @@ application behavior.
 Scaffolding: Class Definition
 -----------------------------
 
-Following our imports comes the class definition.
+Following our imports comes the class definition. As we noted
+previously, this example worker will use the **re-worker**
+library. The **re-worker** library includes one class,
+``reworker.worker.Worker``.
 
+As per the :ref:`re-worker <re_worker>` documentation, to *use* this
+class, our worker must:
+
+* Subclass ``reworker.worker.Worker`` (line **1**)
+* Define a ``process`` method (line **6**)
+
+.. code-block:: python
+   :linenos:
+
+   class MegafrobberWorker(reworker.worker.Worker):
+       """
+       Plugin to frob the heck out of something
+       """
+
+       def process(self, channel, basic_deliver, properties, body, output):
+
+The parameters that we see defined on line **6** are required. This is
+because of how the **re-worker** message bus integration code is
+written.
+
+1. **re-worker** connects to the bus automatically upon startup
+2. **re-worker** begins consuming from the workers dedicated queue
+3. Upon receiving a message a `callback
+   <http://en.wikipedia.org/wiki/Callback_(computer_programming)#Python>`_
+   is ran by the AMQP library (we use Pika for this). That callback
+   flows into our ``process`` method
+4. Once in the ``process`` method, the actual worker **work** happens
+   (that's where we are now)
+
+.. seealso::
+
+   `The Pika Documentation <http://pika.readthedocs.org/en/latest/>`_
+      You can read more about callbacks and their usage on the Pika
+      website.
+
+
+Scaffolding: Record Job Properties
+----------------------------------
+
+Our ``process`` method has a lot of arguments, this can appear
+overwhelming. Which do we need to care about?
+
+Here are some common setup actions we might do with these properties.
+
+.. code-block:: python
+   :linenos:
+
+   def process(self, channel, basic_deliver, properties, body, output):
+      # Output is a logger from the python logger library. This is
+      # what we report progress through
+      self.output = output
+
+      # This is the ID given to the currently happening deployment. It
+      # is a unique ID used to connect all passed messages together and
+      # record the deployment state in the database.
+      #
+      # We use it when responding to the FSM.
+      self.corr_id = str(properties.correlation_id)
+
+      # If the FSM passed us any dynamic variables, they will be in
+      # the 'dynamic' key of the body if they were provided.
+      dynamic = body.get('dynamic', {})
+
+      # reply_to is the temporary message bus queue we respond to the
+      # FSM through
+      self.reply_to = properties.reply_to
 
 
 
