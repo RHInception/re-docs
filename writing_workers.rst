@@ -92,7 +92,7 @@ Now, let's translate what this is saying into human readable words:
    to the FSM indicating that it is going to start running the step
    now.
 
-   The body of the message send back to the FSM is a JSON
+   The body of the message sent back to the FSM is a JSON
    **serialized** datastructure. See the :ref:`Response Message Format
    <recore_reworker_response_format>` documentation in the re-core ↔
    re-worker docs for more information.
