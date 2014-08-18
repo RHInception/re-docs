@@ -193,7 +193,41 @@ following commands:
    ./re-worker-megafrobber/replugin/megafrobberworker/__init__.py
 
 
+Scaffolding: Shebang and Imports
+--------------------------------
 
+.. note:: The remainder of this tutorial assumes the present working
+          directory is ``re-worker-megafrobber``, the top-level
+          directory
+
+With our directory now created, we can begin filling in some
+scaffolding for our new worker. All of the following code snippets go
+into ``replugin/megafrobberworker/__init__.py``.
+
+The first things we'll add are the Python `shebang
+<http://www.catb.org/jargon/html/S/shebang.html>`_ and some standard
+imports:
+
+.. code-block:: python
+   :linenos:
+
+   #!/usr/bin/env python
+   import reworker.worker
+   import logging
+
+The shebang (line **1**) is just there so that this script can be
+executed from the command line. It tells our shell (ex: BASH) what
+program to run the rest of the script in.
+
+The import on line **2** will provide the standard **re-worker**
+library for us. Finally, line **3** will allow us to properly output
+application behavior.
+
+
+Scaffolding: Class Definition
+-----------------------------
+
+Following our imports comes the class definition.
 
 
 
