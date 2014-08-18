@@ -238,6 +238,8 @@ class, our worker must:
 * Subclass ``reworker.worker.Worker`` (line **1**)
 * Define a ``process`` method (line **6**)
 
+As we can see on line **1**, we call our class ``MegafrobberWorker``.
+
 .. code-block:: python
    :linenos:
 
@@ -274,7 +276,8 @@ Scaffolding: Record Job Properties
 Our ``process`` method has a lot of arguments, this can appear
 overwhelming. Which do we need to care about?
 
-Here are some common setup actions we might do with these properties.
+To get us started, here are some common setup actions we might take
+with these properties.
 
 .. code-block:: python
    :linenos:
@@ -292,12 +295,38 @@ Here are some common setup actions we might do with these properties.
       self.corr_id = str(properties.correlation_id)
 
       # If the FSM passed us any dynamic variables, they will be in
-      # the 'dynamic' key of the body if they were provided.
+      # the 'dynamic' key of the body parameter
       dynamic = body.get('dynamic', {})
 
       # reply_to is the temporary message bus queue we respond to the
       # FSM through
       self.reply_to = properties.reply_to
+
+
+Scaffolding: Make It Runnable
+-----------------------------
+
+There are only two more things we need to add to make our worker
+runnable from the command line. The first is a ``main`` function, the
+second is the code to call that function when requested. These should
+go at the **end** of the file.
+
+
+.. code-block:: python
+   :linenos:
+
+   def main():  # pragma: no cover
+       from reworker.worker import runner
+       runner(MegafrobberWorker)
+
+
+   if __name__ == '__main__':  # pragma: no cover
+       main()
+
+
+Note on line **3** that we pass the name of our class to the
+``runner`` function.
+
 
 
 
