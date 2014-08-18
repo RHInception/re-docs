@@ -146,6 +146,56 @@ Now, let's translate what this is saying into human readable words:
    After the message has been sent the worker will return ``False``
    and continue its loop to begin the process all over again.
 
+Exercise: Write a Worker from Scratch
+=====================================
+
+In this section we will build a worker from scratch. The worker will
+be written in `Python <https://www.python.org/>`_. Additionally, the
+worker will utilize the :ref:`re-worker <re_worker>` library.
+
+To keep things simple, our new worker will pretend to `frob
+<http://www.catb.org/jargon/html/F/frobnicate.html>`_ ("manipulate or
+adjust, to tweak") an arbitrary *thing* and then report the
+results. This worker will be called the **megafrobber** worker.
+
+This section is separated into several sub-sections. Each sub-section
+will incrementally build upon the work of the preceeding sections. At
+the end, we'll have a deployable worker.
+
+Directory Structure
+-------------------
+
+Workers adhere to the following directory structure::
+
+   re-worker-megafrobber/     - Top level
+   └── replugin/              - Python package directory
+       ├── megafrobberworker/ - Worker code directory
+       │   └── __init__.py    - Worker code
+       └── __init__.py        - Empty file, Python module requirement
+
+
+In a command-line shell, you could create this structure using the
+following commands:
+
+.. code-block:: console
+   :linenos:
+
+   $ WORKER=megafrobber
+   $ mkdir -p re-worker-${WORKER}/replugin/${WORKER}worker
+   $ touch re-worker-${WORKER}/replugin/__init__.py
+   $ touch re-worker-${WORKER}/replugin/${WORKER}worker/__init__.py
+   $ find .
+   .
+   ./re-worker-megafrobber
+   ./re-worker-megafrobber/replugin
+   ./re-worker-megafrobber/replugin/__init__.py
+   ./re-worker-megafrobber/replugin/megafrobberworker
+   ./re-worker-megafrobber/replugin/megafrobberworker/__init__.py
+
+
+
+
+
 
 
 Advanced Topics
