@@ -1,8 +1,8 @@
 Release Engine
 ==============
+Release Engine is a collection of open-source tools that provides the functionality necessary to continuously deploy packaged code from a development team’s continuous integration server of choice to all environments and automate certain business processes associated with the release of code. 
 
-Release Engine is a collection of open-source tools for managing
-automated software releases. The home of the Release Engines is on
+The home of the Release Engines is on
 GitHub in the `RHInception Organization
 <https://github.com/RHInception?query=re->`_.
 
@@ -14,7 +14,7 @@ format.
 
 Interaction with the engine happens via a REST interface
 (:ref:`re-rest <re_rest>`). Additional workers exist for the purposes
-of aggregating logs, as well as sending notifications over any
+of aggregating logs, as well as sending notifications over any 
 preferred method (such as email, or IRC). A bare-minimal Release
 Engine installation would require **re-rest**, **re-core**, and any
 given **re-worker**.
