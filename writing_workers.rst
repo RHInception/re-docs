@@ -673,4 +673,15 @@ bindings so that messages are delivered to the right workers.
 Other languages
 ===============
 
-what about erlang, go, hack, or node.js?
+Nothing is stopping you from writing a worker in any other language of
+your choice. If you decide to do so, keep a few things in mind:
+
+* Try to follow the ``re-worker`` reference library as close as
+  possible
+* Make sure you ack receipt of the initial message
+* The initial message is a dictionary serialized as a JSON string,
+  you'll need to deserialize it
+* Talk to the FSM on the temporary queue provided in the ``reply_to``
+  property
+* Make sure you notify the FSM upon initial failure or start, and
+  final failure or completion
