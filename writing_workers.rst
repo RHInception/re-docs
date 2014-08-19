@@ -659,14 +659,40 @@ Message Queue Bindings
 This section will describe how to configure your message queue
 bindings so that messages are delivered to the right workers.
 
-..
-   * a binding from worker.juicer must exist, routing to whatever queue the worker is listening on (presumably, worker.juicer)
-   * running worker instances can pick whatever queue they want to listen on. this has important implications:
-   * You could have two juicer workers running. One listening on worker.juicer, one on worker.secretjuice
-   * If you did this, you could have two different step definitions in your playbook:
-     * juicer:promote
-     * secretjuice:promote
-   * Each would route to a different juicer worker, respectively.
+FSM - Topics
+------------
+
+When the FSM reads a step from a playbook, the destination **topic**
+is determined by:
+
+* Splitting the execution step name (ex: ``juicer::promote``) on the
+  first ``::``, and taking the first item (ex: ``juicer``)
+* This string is then substituted into the string ``worker.%s``
+
+Therefore, an execution step of ``juicer::promote`` would result in
+the FSM sending messages to the topic ``worker.juicer``.
+
+**Your message queue** must be configured to route messages sent to
+this topic to somewhere intelligent. Preferably to a queue which
+matches the same name, i.e.: ``worker.juicer``.
+
+Read the next section on how workers select their queue for more
+information.
+
+Worker - Queues
+---------------
+
+When a worker using the ``re-worker`` library first starts, the
+**default** behavior is to consume from a queue on the message bus
+whose name matches ``worker.CLASS_STR`` where ``CLASS_STR`` is the
+class name in all lower-case letters. For example, the
+**juicerworker** worker (from our previous example) would want to
+consume from the ``worker.juicerworker`` queue.
+
+Still using the **juicer** worker as reference, if we desired it, this
+worker could be configured to consume from the ``worker.juicer`` queue
+by setting the ``queue`` parameter in the worker's configuration file
+to just ``juicer``.
 
 
 
