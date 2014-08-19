@@ -288,24 +288,24 @@ with these properties.
    :linenos:
 
    def process(self, channel, basic_deliver, properties, body, output):
-      # Output is a logger from the python logger library. This is
-      # what we report progress through
-      self.output = output
+       # Output is a logger from the python logger library. This is
+       # what we report progress through
+       self.output = output
 
-      # This is the ID given to the currently happening deployment. It
-      # is a unique ID used to connect all passed messages together and
-      # record the deployment state in the database.
-      #
-      # We use it when responding to the FSM.
-      self.corr_id = str(properties.correlation_id)
+       # This is the ID given to the currently happening deployment. It
+       # is a unique ID used to connect all passed messages together and
+       # record the deployment state in the database.
+       #
+       # We use it when responding to the FSM.
+       self.corr_id = str(properties.correlation_id)
 
-      # If the FSM passed us any dynamic variables, they will be in
-      # the 'dynamic' key of the body parameter
-      dynamic = body.get('dynamic', {})
+       # If the FSM passed us any dynamic variables, they will be in
+       # the 'dynamic' key of the body parameter
+       dynamic = body.get('dynamic', {})
 
-      # reply_to is the temporary message bus queue we respond to the
-      # FSM through
-      self.reply_to = properties.reply_to
+       # reply_to is the temporary message bus queue we respond to the
+       # FSM through
+       self.reply_to = properties.reply_to
 
 
 Scaffolding: Make It Runnable
@@ -489,6 +489,161 @@ process the result:
                   "message": _msg},
                  exchange='')
        return False
+
+Full MegaFrobber Worker Source
+------------------------------
+
+.. code-block:: python
+   :linenos:
+
+   #!/usr/bin/env python
+   import reworker.worker
+   import logging
+   import random
+
+   class MegafrobberWorker(reworker.worker.Worker):
+       """
+       Plugin to frob the heck out of something
+       """
+
+       def process(self, channel, basic_deliver, properties, body, output):
+           # Output is a logger from the python logger library. This is
+           # what we report progress through
+           self.output = output
+
+           # This is the ID given to the currently happening deployment. It
+           # is a unique ID used to connect all passed messages together and
+           # record the deployment state in the database.
+           #
+           # We use it when responding to the FSM.
+           self.corr_id = str(properties.correlation_id)
+
+           # If the FSM passed us any dynamic variables, they will be in
+           # the 'dynamic' key of the body parameter
+           dynamic = body.get('dynamic', {})
+
+           # reply_to is the temporary message bus queue we respond to the
+           # FSM through
+           self.reply_to = properties.reply_to
+
+           # Begin parameter parsing
+           #
+           # It's usually a good idea to record all of your valid
+           # subcommands somewhere:
+           self._subcommands = ['frob']
+
+           # Grab the REQUESTED subcommand from the 'parameters' dictionary
+           _subcommand = body['parameters'].get('subcommand', None)
+
+           # Make sure it's recognized
+           if _subcommand in self._subcommands:
+               # This is good, the requested subcommand is valid.
+               #
+               # ACK the message to make the message bus happy.
+               self.ack(basic_deliver)
+           else:
+               # This is bad, the playbook calls for an unknown subcommand
+               #
+               # Reject the message we received on the message bus
+               self.reject(basic_deliver)
+
+               # Output to the console that an error has occurred,
+               # include the correlation ID so we can trace the error
+               # back to this deployment
+               self.app_logger.error(
+                   "%s - Rejecting message, invalid subcommand requested: %s" % (
+                       self.corr_id, _subcommand))
+
+               # Use 'notify' to update the output worker of our
+               # progress. This output is usually logged to a central
+               # location.
+               self.notify(
+                   'Juicer Failed',
+                   ('Juicer failed. No dynamic keys given. '
+                       'Expected: "cart" and "environment"'),
+                   'failed',
+                   self.corr_id)
+
+               # Send a message to the FSM indicating that the release
+               # has failed. This will cause the FSM to stop the
+               # deployment.
+               self.send(self.reply_to,
+                         self.corr_id,
+                         {'status': 'failed',
+                          "message": "invalid subcommand requested: %s" % _subcommand},
+                         exchange='')
+
+               # Break out of this job and start over
+               return False
+
+           # End parameter parsing
+
+           # Begin the actual job
+           #
+           # Let the FSM know we're starting the job now
+           self.send(
+               self.reply_to, self.corr_id, {'status': 'started'}, exchange='')
+
+           self.app_logger.info('Beginning the frobbing')
+
+           _frob_result = self._frob()
+
+           # Process the results
+           if (_frob_result % 2) == 0:
+               _msg = "The frobbing passed, even random number generated: %s" % _frob_result
+
+               self.app_logger.info(_msg)
+               self.notify(
+                   'Frobbing passed',
+                   _msg,
+                   'completed',
+                   self.corr_id)
+
+               # When a job succeeds, let the FSM know by sending
+               # a 'completed' message
+               self.send(self.reply_to,
+                         self.corr_id,
+                         {'status': 'completed',
+                          "message": _msg},
+                         exchange='')
+               return True
+           else:
+               _msg = 'Frobbing failed, odd random number generated: %s' % _frob_result
+
+               self.app_logger.error(_msg)
+               self.notify(
+                   'Frobbing failed',
+                   _msg,
+                   'failed',
+                   self.corr_id)
+
+               # When a job fails, let the FSM know by sending
+               # a 'failed' message
+               self.send(self.reply_to,
+                         self.corr_id,
+                         {'status': 'failed',
+                          "message": _msg},
+                         exchange='')
+               return False
+
+       def _frob(self):
+           """
+           Frob the random number generator.
+
+           If the result is even then "frob successful". If the result is
+           odd, then "frob failed"
+           """
+           return random.randint(0, 100)
+
+
+   def main():  # pragma: no cover
+       from reworker.worker import runner
+       runner(MegafrobberWorker)
+
+
+   if __name__ == '__main__':  # pragma: no cover
+       main()
+
 
 
 
