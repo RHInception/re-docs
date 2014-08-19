@@ -382,9 +382,8 @@ abort the worker.
        # progress. This output is usually logged to a central
        # location.
        self.notify(
-           'Juicer Failed',
-           ('Juicer failed. No dynamic keys given. '
-               'Expected: "cart" and "environment"'),
+           'Frobbing Failed',
+           'Frobbing failed. Invalid subcommand requested: %s" % _subcommand,
            'failed',
            self.corr_id)
 
@@ -558,9 +557,8 @@ Full MegaFrobber Worker Source
                # progress. This output is usually logged to a central
                # location.
                self.notify(
-                   'Juicer Failed',
-                   ('Juicer failed. No dynamic keys given. '
-                       'Expected: "cart" and "environment"'),
+                   'Frobbing Failed',
+                   'Frobbing failed. Invalid subcommand requested: %s" % _subcommand,
                    'failed',
                    self.corr_id)
 
