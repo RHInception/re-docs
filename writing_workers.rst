@@ -78,7 +78,7 @@ Now, let's translate what this is saying into human readable words:
 **parse parameters**
    If our worker requires any unique information to do its job, then
    it must parse that information from the parameters provided by the
-   FSM. This step typically involves verify everything it needs to
+   FSM. This step typically involves verifying everything it needs to
    operate was provided and is valid.
 
    This information often includes reading which sub-command (if
