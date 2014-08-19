@@ -56,8 +56,8 @@ Now, let's translate what this is saying into human readable words:
    `json.loads()
    <https://docs.python.org/2/library/json.html#json.load>`_ method.
 
-   The **most important** piece of information contained in this
-   datastructure is the ``reply_to`` variable. This variable tells our
+   The **most important** piece of information contained in this first
+   message is the ``reply_to`` property. This property tells our
    worker the name of the temporary queue to continue all further
    communication with the FSM on. Messages sent to *any other*
    destination will be lost in the message exchange.
