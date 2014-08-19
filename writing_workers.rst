@@ -156,7 +156,12 @@ worker will utilize the :ref:`re-worker <re_worker>` library.
 To keep things simple, our new worker will pretend to `frob
 <http://www.catb.org/jargon/html/F/frobnicate.html>`_ ("manipulate or
 adjust, to tweak") an arbitrary *thing* and then report the
-results. This worker will be called the **megafrobber** worker.
+results. This worker will be called the **megafrobber** worker. The
+**megafrobber** worker will have one sub-command: ``frob``.
+
+The ``frob`` sub-command requires no arguments. When the sub-command
+is ran, it will take no actual actions. It will just randomly pass or
+fail.
 
 This section is separated into several sub-sections. Each sub-section
 will incrementally build upon the work of the preceeding sections. At
@@ -327,6 +332,163 @@ go at the **end** of the file.
 Note on line **3** that we pass the name of our class to the
 ``runner`` function.
 
+
+Parse Parameters
+----------------
+
+Some workers have subcommands which require parameters to run. By
+default three parameters are always passed to workers: ``hosts``,
+``command``, and ``subcommand``. Our worker will not require passing
+any extra parameters. Therefore, in this tutorial, we will show how to
+verify that a requested sub-command is valid.
+
+For the cases where input is invalid, we will also demonstrate how to
+abort the worker.
+
+.. note:: This is within the ``process`` method
+
+.. code-block:: python
+   :linenos:
+
+   # Begin parameter parsing
+   #
+   # It's usually a good idea to record all of your valid
+   # subcommands somewhere:
+   self._subcommands = ['frob']
+
+   # Grab the REQUESTED subcommand from the 'parameters' dictionary
+   _subcommand = body['parameters'].get('subcommand', None)
+
+   # Make sure it's recognized
+   if _subcommand in self._subcommands:
+       # This is good, the requested subcommand is valid.
+       #
+       # ACK the message to make the message bus happy.
+       self.ack(basic_deliver)
+   else:
+       # This is bad, the playbook calls for an unknown subcommand
+       #
+       # Reject the message we received on the message bus
+       self.reject(basic_deliver)
+
+       # Output to the console that an error has occurred,
+       # include the correlation ID so we can trace the error
+       # back to this deployment
+       self.app_logger.error(
+           "%s - Rejecting message, invalid subcommand requested: %s" % (
+               self.corr_id, _subcommand))
+
+       # Use 'notify' to update the output worker of our
+       # progress. This output is usually logged to a central
+       # location.
+       self.notify(
+           'Juicer Failed',
+           ('Juicer failed. No dynamic keys given. '
+               'Expected: "cart" and "environment"'),
+           'failed',
+           self.corr_id)
+
+       # Send a message to the FSM indicating that the release
+       # has failed. This will cause the FSM to stop the
+       # deployment.
+       self.send(self.reply_to,
+                 self.corr_id,
+                 {'status': 'failed',
+                  "message": "invalid subcommand requested: %s" % _subcommand},
+                 exchange='')
+
+       # Break out of this job and start over
+       return False
+
+   # End parameter parsing
+
+The ``ack``, ``notify``, and ``send`` methods are described in the
+primary :ref:`re-worker <re_worker>` documentation.
+
+
+Run the Job
+-----------
+
+At this point we have set up all the usual scaffolding and validated
+the input parameters for this job. If we haven't aborted by now then
+we will run the actual ``frob`` sub-command.
+
+For this tutorial, the ``frob`` sub-command will just randomly pass or
+fail. We'll need an additional library for this, ``random``, so let's
+add the import to the top of our file::
+
+   import random
+
+It's a good idea to write each of your sub-commands as a separate
+method. For the ``frob`` sub-command it is as simple as returning a
+random number grabbed from the random number generator:
+
+.. code-block:: python
+   :linenos:
+
+   def _frob(self):
+       """
+       Frob the random number generator.
+
+       If the result is even then "frob successful". If the result is
+       odd, then "frob failed"
+       """
+       return random.randint(0, 100)
+
+
+And then, back in the ``process`` method, call this sub-command and
+process the result:
+
+.. code-block:: python
+   :linenos:
+
+   # Begin the actual job
+   #
+   # Let the FSM know we're starting the job now
+   self.send(
+       self.reply_to, self.corr_id, {'status': 'started'}, exchange='')
+
+   self.app_logger.info('Beginning the frobbing')
+
+   _frob_result = self._frob()
+
+   # Process the results
+   if (_frob_result % 2) == 0:
+       _msg = "The frobbing passed, even random number generated: %s" % _frob_result
+
+       self.app_logger.info(_msg)
+       self.notify(
+           'Frobbing passed',
+           _msg,
+           'completed',
+           self.corr_id)
+
+       # When a job succeeds, let the FSM know by sending
+       # a 'completed' message
+       self.send(self.reply_to,
+                 self.corr_id,
+                 {'status': 'completed',
+                  "message": _msg},
+                 exchange='')
+       return True
+   else:
+       _msg = 'Frobbing failed, odd random number generated: %s' % _frob_result
+
+       self.app_logger.error(_msg)
+       self.notify(
+           'Frobbing failed',
+           _msg,
+           'failed',
+           self.corr_id)
+
+       # When a job fails, let the FSM know by sending
+       # a 'failed' message
+       self.send(self.reply_to,
+                 self.corr_id,
+                 {'status': 'failed',
+                  "message": _msg},
+                 exchange='')
+       return False
 
 
 
