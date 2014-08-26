@@ -15,7 +15,7 @@ with the :ref:`re-worker API documentation <re_worker>`.
 Basics
 ******
 
-Simpe stuff.
+Simple stuff.
 
 Typical Worker Flow
 ===================
