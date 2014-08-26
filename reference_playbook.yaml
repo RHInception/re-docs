@@ -20,7 +20,7 @@ execution:
 
     # Install megafrobber on all our hosts ahead of time
     preflight:
-      - yum:Install:
+      - yumcmd:install:
           package: "megafrobber"
 
     steps:
