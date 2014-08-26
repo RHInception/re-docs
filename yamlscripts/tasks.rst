@@ -41,10 +41,10 @@ one sub-command: ``Rotate``.
 The documentation for the ``logrotate`` module tell us that the
 ``Rotate`` sub-command requires no keyword parameters. That is to say,
 we can define it in our execution steps as a simple string. Recall
-that steps are denoted using dotted notation where the module name
+that steps are denoted using colon notation, where the module name
 comes first, followed by the sub-command. In this case our module is
-``logrotate`` and our sub-command is ``Rotate``. We can see this on line
-**9** in the following example:
+``logrotate`` and our sub-command is ``Rotate``. We can see this on
+line **9** in the following example:
 
 
 .. code-block:: yaml
