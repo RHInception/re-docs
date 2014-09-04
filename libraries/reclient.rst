@@ -51,6 +51,7 @@ The ``re-client`` command accepts two optional parameters:
 
 * ``--project``, ``-p`` - Set the default project
 * ``--id``, ``-i`` - Set the default playbook ID
+* ``--format``, ``-f`` - Select yaml/json for the format. Default: yaml
 
 Usage Example
 `````````````
