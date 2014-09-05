@@ -41,30 +41,37 @@ USERNAME                  str    MONGODB_Settings    Username to auth with
 Password                  str    MONGODB_Settings    Password to auth with
 HOST                      str    MONGODB_Settings    Host to connect to
 PORT                      int    MONGODB_Settings    Port to connect to on the host
-AUTHORIZATION_CALLABLE    str    None                module.location:callable. Eg: "rerest.authorization:no_authorization"
+AUTHORIZATION_CALLABLE    str    None                module.location:callable. Eg: ``rerest.authorization:no_authorization``
 AUTHORIZATION_CONFIG      dict   None                Authorization callable specific configuration items
 ========================= ====== =================== ===========================================
 
 
-Further configuration items can be found in the `Flask Documentation <http://flask.pocoo.org/docs/config/#builtin-configuration-values>`_ or look at specific AUTHORIZATION_CALLABLE documentation.
+Further configuration items can be found in the `Flask Documentation
+<http://flask.pocoo.org/docs/config/#builtin-configuration-values>`_
+or look at specific ``AUTHORIZATION_CALLABLE`` documentation.
 
 For an example see `example-settings.json <http://github.com/RHInception/re-rest/blob/master/example-settings.json>`_
 
 
 Authentication
 ~~~~~~~~~~~~~~
-re-rest uses a simple decorator which enforces a REMOTE_USER be set.
+re-rest uses a simple decorator which enforces a ``REMOTE_USER`` be set.
 
 rerest.decorators:remote_user_required
 ``````````````````````````````````````
-This decorator assumes that re-rest is running behind another web server which is taking care of authentication. If REMOTE_USER is passed to re-rest from the web server re-rest assumes authentication has succeeded. If it is not passed through re-rest treats the users as unauthenticated.
+
+This decorator assumes that re-rest is running behind another web
+server which is taking care of authentication. If ``REMOTE_USER`` is
+passed to re-rest from the web server re-rest assumes authentication
+has succeeded. If it is not passed through re-rest treats the users as
+unauthenticated.
 
 .. warning::
    When using this decorator it is very important that re-rest not be reachable by any means other than through the front end webserver!!
 
 Authorization
 ~~~~~~~~~~~~~
-re-rest uses a decorator which keys off the AUTHORIZATION_CALLABLE configuration parameters.
+re-rest uses a decorator which keys off the ``AUTHORIZATION_CALLABLE`` configuration parameters.
 
 
 rerest.authroziation.no_authorization
@@ -72,25 +79,25 @@ rerest.authroziation.no_authorization
 .. warning::
    This should not be used in a production environment**
 
-To use this callable set AUTHORIZATION_CALLABLE to ``rerest.authorization:no_authorization``.
+To use this callable set ``AUTHORIZATION_CALLABLE`` to ``rerest.authorization:no_authorization``.
 
 
 rerest.authroziation.ldap_search
 ````````````````````````````````
 
-To use this callable set AUTHORIZATION_CALLABLE to ``rerest.authorization:ldap_search`` and set the following items
+To use this callable set ``AUTHORIZATION_CALLABLE`` to ``rerest.authorization:ldap_search`` and set the following items
 in your configuration file.
 
 =================== ====== ====================== ================================================
 Name                Type   Parent                 Value
 =================== ====== ====================== ================================================
-LDAP_URI            str    AUTHORIZATION_CONFIG   A full ldap URI such as ldaps://127.0.0.1
+LDAP_URI            str    AUTHORIZATION_CONFIG   A full ldap URI such as ``ldaps://127.0.0.1``
 LDAP_USER           str    AUTHORIZATION_CONFIG   User to bind with
 LDAP_PASSWORD       str    AUTHORIZATION_CONFIG   Password to bind with
-LDAP_SEARCH_BASE    str    AUTHORIZATION_CONFIG   Search base for all queries. Ex: dc=example,dc=com
+LDAP_SEARCH_BASE    str    AUTHORIZATION_CONFIG   Search base for all queries. Ex: ``dc=example,dc=com``
 LDAP_MEMBER_ID      str    AUTHORIZATION_CONFIG   The name of the field that houses the username
 LDAP_FIELD_MATCH    str    AUTHORIZATION_CONFIG   What field to use against the lookup table
-LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of LDAP_FIELD_MATCH items to allowed groups. A '*' means all groups.
+LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of ``LDAP_FIELD_MATCH`` items to allowed groups. A ``*`` means all groups.
 =================== ====== ====================== ================================================
 
 
