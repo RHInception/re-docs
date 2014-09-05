@@ -157,7 +157,7 @@ records which match **two** conditions:
 #. A record for a group exists in the ``ou=Groups,dc=example,dc=com``
    sub-tree with a ``cn`` of **admins**
 #. The discovered record has a ``memberUid`` attribute which matches
-   the users name, **testuser**
+   the user's name: **testuser**
 
 In LDAP search filter syntax, this query would look like the following::
 
