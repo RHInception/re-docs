@@ -102,8 +102,7 @@ LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of ``LDAP_FIEL
 
 Here's a command-line example of how the ``LDAP_LOOKUP_TABLE``
 property is used. In this example we will learn how authorization of
-the user **testuser** is determined. Our configuration will look like
-this:
+the user **testuser** is determined.
 
 Our organization has an ldap server at **ldap.example.com**, and
 groups are organized under the **ou=Groups,dc=example,dc=com**
@@ -117,7 +116,7 @@ configuration:
 
     {
         "AUTHORIZATION_CONFIG": {
-            "LDAP_URI": "ldap://ldap.corp.example.com",
+            "LDAP_URI": "ldap://ldap.example.com",
             "LDAP_USER": "",
             "LDAP_PASSWORD": "",
             "LDAP_SEARCH_BASE": "ou=Groups,dc=example,dc=com",
