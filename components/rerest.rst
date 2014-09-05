@@ -100,6 +100,81 @@ LDAP_FIELD_MATCH    str    AUTHORIZATION_CONFIG   What field to use against the 
 LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of ``LDAP_FIELD_MATCH`` items to allowed groups. A ``*`` means all groups.
 =================== ====== ====================== ================================================
 
+Here's a command-line example of how the ``LDAP_LOOKUP_TABLE``
+property is used. In this example we will learn how authorization of
+the user **testuser** is determined. Our configuration will look like
+this:
+
+Our organization has an ldap server at **ldap.example.com**, and
+groups are organized under the **ou=Groups,dc=example,dc=com**
+sub-tree. In this example re-rest will not attempt to **bind**
+(authenticate) with the LDAP server. Here is an example of this
+configuration:
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 10
+
+    {
+        "AUTHORIZATION_CONFIG": {
+            "LDAP_URI": "ldap://ldap.corp.example.com",
+            "LDAP_USER": "",
+            "LDAP_PASSWORD": "",
+            "LDAP_SEARCH_BASE": "ou=Groups,dc=example,dc=com",
+            "LDAP_MEMBER_ID": "memberUid",
+            "LDAP_FIELD_MATCH": "cn",
+            "LDAP_LOOKUP_TABLE": {
+                "admins": ["prod"],
+                "superadmins": ["*"]
+            }
+        }
+   }
+
+The **admins** group could look like this:
+
+.. code-block:: console
+   :linenos:
+   :emphasize-lines: 6
+
+   dn: cn=admins,ou=Groups,dc=example,dc=com
+   cn: admins
+   objectClass: top
+   objectClass: posixGroup
+   gidNumber: 1337
+   memberUid: testuser
+   memberUid: testboss
+
+On line **6** we can see that this user is a member of the LDAP group
+**admins**. We also see here that group membership is denoted by use
+of the ``memberUid`` attribute. Note how this matches the the
+``LDAP_MEMBER_ID`` setting we previously mentioned.
+
+Let's pretend **testuser** is attempting to run a playbook with the
+:ref:`group <elements_yaml>` field set to **prod** (short for
+**production**). To determine authorization, **re-rest** will perform
+an `LDAP search <https://www.ietf.org/rfc/rfc2254.txt>`_ to query for
+records which match **two** conditions:
+
+#. A record for a group exists in the ``ou=Groups,dc=example,dc=com``
+   sub-tree with a ``cn`` of **admins**
+#. The discovered record has a ``memberUid`` attribute which matches
+   the users name, **testuser**
+
+In LDAP search filter syntax, this query would look like the following::
+
+   (&(cn=admins)(memberUid=testuser))
+
+With the ``ldapsearch`` command-line tool, we can test this
+authorization with the following command:
+
+.. code-block:: console
+
+   $ ldapsearch -xLLL -b ou=Groups,dc=example,dc=com \
+        -h ldap.example.com '(&(cn=admins)(memberUid=testuser))'
+
+If no results are returned, then the user is **not** authorized. If a
+result is resturned, then the user **is** authorized.
+
 
 .. _rerest_deployment:
 
