@@ -168,8 +168,7 @@ authorization with the following command:
 
 .. code-block:: console
 
-   $ ldapsearch -xLLL -b ou=Groups,dc=example,dc=com \
-        -h ldap.example.com '(&(cn=admins)(memberUid=testuser))'
+   $ ldapsearch -xLLL -b ou=Groups,dc=example,dc=com -h ldap.example.com '(&(cn=admins)(memberUid=testuser))'
 
 If no results are returned, then the user is **not** authorized. If a
 result is resturned, then the user **is** authorized.
