@@ -383,7 +383,7 @@ abort the worker.
        # location.
        self.notify(
            'Frobbing Failed',
-           'Frobbing failed. Invalid subcommand requested: %s" % _subcommand,
+           "Frobbing failed. Invalid subcommand requested: %s" % _subcommand,
            'failed',
            self.corr_id)
 
@@ -558,7 +558,7 @@ Full MegaFrobber Worker Source
                # location.
                self.notify(
                    'Frobbing Failed',
-                   'Frobbing failed. Invalid subcommand requested: %s" % _subcommand,
+                   "Frobbing failed. Invalid subcommand requested: %s" % _subcommand,
                    'failed',
                    self.corr_id)
 
