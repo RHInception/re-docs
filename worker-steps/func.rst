@@ -234,10 +234,10 @@ F5 LTM BigIPs. In a situation like this you may monitor the status of
 all balancer pools so that you can send alerts if members of the pool
 drop out of rotation unexpectedly.
 
-However, while performing routine maintenance is it expected for hosts
-to be taken out of the rotation. That's what ``service_host`` is
+However, while performing routine maintenance, is it expected for
+hosts to be taken out of the rotation. That's what ``service_host`` is
 for. Instead of setting downtime for a specific host, we might
-schedulw downtime for a service representing a balancer pool on our
+schedule downtime for a service representing a balancer pool on our
 **service host**.
 
 
