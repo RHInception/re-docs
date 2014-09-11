@@ -134,7 +134,11 @@ This section describes the **optional** items which are allowed in
 execution sequences.
 
 .. include:: yamlscripts/description.rst
-.. include:: yamlscripts/preflight.rst
+
+..
+   .. include:: yamlscripts/preflight.rst
+
+
 .. include:: yamlscripts/notify.rst
 
 
@@ -142,8 +146,7 @@ Putting it all together
 ***********************
 
 To finish up, let's put together everything we've seen up to now. That
-will include ``hosts``, ``preflight``, and some example items for
-``steps``.
+will include ``hosts``, and some example items for ``steps``.
 
 .. literalinclude:: reference_playbook.yaml
    :language: yaml
