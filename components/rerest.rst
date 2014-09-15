@@ -41,6 +41,7 @@ USERNAME                  str    MONGODB_Settings    Username to auth with
 Password                  str    MONGODB_Settings    Password to auth with
 HOST                      str    MONGODB_Settings    Host to connect to
 PORT                      int    MONGODB_Settings    Port to connect to on the host
+PLAYBOOK_UI               bool   None                Turn's on/off the experimental playbook ui. It's off by default.
 AUTHORIZATION_CALLABLE    str    None                module.location:callable. Eg: ``rerest.authorization:no_authorization``
 AUTHORIZATION_CONFIG      dict   None                Authorization callable specific configuration items
 ========================= ====== =================== ===========================================
