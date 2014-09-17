@@ -92,6 +92,7 @@ exclude_patterns = [
     'setup/*.rst',
     'jsonscripts/*.rst',
     'worker-steps/*.rst',
+    'worker-steps/func/*.rst',
     'yamlscripts/*.rst'
 ]
 
