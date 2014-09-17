@@ -24,32 +24,34 @@ file.
 You can override the location by setting ``REREST_CONFIG`` environment variable.
 
 
-========================= ====== =================== ===========================================
-Name                      Type   Parent              Value
-========================= ====== =================== ===========================================
-LOGFILE                   str    None                File name for the application level log
-LOGLEVEL                  str    None                DEBUG, INFO (default), WARN, FATAL
-MQ                        dict   None                Where all of the MQ connection settings are
-SERVER                    str    MQ                  Hostname or IP of the server
-PORT                      int    MQ                  Port to connect on
-USER                      str    MQ                  Username to connect with
-PASSWORD                  str    MQ                  Password to authenticate with
-VHOST                     str    MQ                  vhost on the server to utilize
-MONGODB_SETTINGS          dict   None                Where all of the MongoDB settings live
-DB                        str    MONGODB_Settings    Name of the database to use
-USERNAME                  str    MONGODB_Settings    Username to auth with
-Password                  str    MONGODB_Settings    Password to auth with
-HOST                      str    MONGODB_Settings    Host to connect to
-PORT                      int    MONGODB_Settings    Port to connect to on the host
-PLAYBOOK_UI               bool   None                Turn's on/off the experimental playbook ui. It's off by default.
-AUTHORIZATION_CALLABLE    str    None                module.location:callable. Eg: ``rerest.authorization:no_authorization``
-AUTHORIZATION_CONFIG      dict   None                Authorization callable specific configuration items
-========================= ====== =================== ===========================================
+================================== ====== =================== ===========================================
+Name                               Type   Parent              Value
+================================== ====== =================== ===========================================
+LOGFILE                            str    None                File name for the application level log
+LOGLEVEL                           str    None                DEBUG, INFO (default), WARN, FATAL
+MQ                                 dict   None                Where all of the MQ connection settings are
+SERVER                             str    MQ                  Hostname or IP of the server
+PORT                               int    MQ                  Port to connect on
+USER                               str    MQ                  Username to connect with
+PASSWORD                           str    MQ                  Password to authenticate with
+VHOST                              str    MQ                  vhost on the server to utilize
+MONGODB_SETTINGS                   dict   None                Where all of the MongoDB settings live
+DB                                 str    MONGODB_Settings    Name of the database to use
+USERNAME                           str    MONGODB_Settings    Username to auth with
+Password                           str    MONGODB_Settings    Password to auth with
+HOST                               str    MONGODB_Settings    Host to connect to
+PORT                               int    MONGODB_Settings    Port to connect to on the host
+PLAYBOOK_UI                        bool   None                Turn's on/off the experimental playbook ui. It's off by default.
+AUTHORIZATION_CALLABLE             str    None                module.location:callable. Eg: ``rerest.authorization:no_authorization``
+AUTHORIZATION_ENVIRONMENT_CALLABLE str    None                module.location:callable that decides is a user can modify an environment
+AUTHORIZATION_CONFIG               dict   None                Authorization callable specific configuration items
+GROUP_ENVIRONMENT_MAPPING          dict   None                Mapping of group: ["allowed", "environments"].
+================================== ====== =================== ===========================================
 
 
 Further configuration items can be found in the `Flask Documentation
 <http://flask.pocoo.org/docs/config/#builtin-configuration-values>`_
-or look at specific ``AUTHORIZATION_CALLABLE`` documentation.
+or look at specific ``AUTHORIZATION_CALLABLE``/``AUTHORIZATION_ENVIRONMENT_CALLABLE`` documentation.
 
 For an example see `example-settings.json <http://github.com/RHInception/re-rest/blob/master/example-settings.json>`_
 
@@ -70,15 +72,15 @@ unauthenticated.
 .. warning::
    When using this decorator it is very important that re-rest not be reachable by any means other than through the front end webserver!!
 
-Authorization
-~~~~~~~~~~~~~
-re-rest uses a decorator which keys off the ``AUTHORIZATION_CALLABLE`` configuration parameters.
-
+Authorization: Callable
+~~~~~~~~~~~~~~~~~~~~~~~
+re-rest uses two decorators. The first keys off the ``AUTHORIZATION_CALLABLE`` configuration parameter. This callable
+is responsible for deciding if a user has access to the URL in question.
 
 rerest.authroziation.no_authorization
 `````````````````````````````````````
 .. warning::
-   This should not be used in a production environment**
+   This should not be used in a production environment
 
 To use this callable set ``AUTHORIZATION_CALLABLE`` to ``rerest.authorization:no_authorization``.
 
@@ -89,17 +91,18 @@ rerest.authroziation.ldap_search
 To use this callable set ``AUTHORIZATION_CALLABLE`` to ``rerest.authorization:ldap_search`` and set the following items
 in your configuration file.
 
-=================== ====== ====================== ================================================
-Name                Type   Parent                 Value
-=================== ====== ====================== ================================================
-LDAP_URI            str    AUTHORIZATION_CONFIG   A full ldap URI such as ``ldaps://127.0.0.1``
-LDAP_USER           str    AUTHORIZATION_CONFIG   User to bind with
-LDAP_PASSWORD       str    AUTHORIZATION_CONFIG   Password to bind with
-LDAP_SEARCH_BASE    str    AUTHORIZATION_CONFIG   Search base for all queries. Ex: ``dc=example,dc=com``
-LDAP_MEMBER_ID      str    AUTHORIZATION_CONFIG   The name of the field that houses the username
-LDAP_FIELD_MATCH    str    AUTHORIZATION_CONFIG   What field to use against the lookup table
-LDAP_LOOKUP_TABLE   dict   AUTHORIZATION_CONFIG   key: list table of ``LDAP_FIELD_MATCH`` items to allowed groups. A ``*`` means all groups.
-=================== ====== ====================== ================================================
+=============================== ====== ====================== ================================================
+Name                            Type   Parent                 Value
+=============================== ====== ====================== ================================================
+LDAP_URI                        str    AUTHORIZATION_CONFIG   A full ldap URI such as ``ldaps://127.0.0.1``
+LDAP_USER                       str    AUTHORIZATION_CONFIG   User to bind with
+LDAP_PASSWORD                   str    AUTHORIZATION_CONFIG   Password to bind with
+LDAP_SEARCH_BASE                str    AUTHORIZATION_CONFIG   Search base for all queries. Ex: ``dc=example,dc=com``
+LDAP_MEMBER_ID                  str    AUTHORIZATION_CONFIG   The name of the field that houses the username
+LDAP_FIELD_MATCH                str    AUTHORIZATION_CONFIG   What field to use against the lookup table
+LDAP_LOOKUP_TABLE               dict   AUTHORIZATION_CONFIG   key: list table of ``LDAP_FIELD_MATCH`` items to allowed groups. A ``*`` means all groups.
+LDAP_GROUP_ENVIRONMENT_MAPPING  dict   AUTHORIZATION_CONFIG   key: list table of ``LDAP_FIELD_MATCH`` items to allowed environments.
+=============================== ====== ====================== ================================================
 
 Here's a command-line example of how the ``LDAP_LOOKUP_TABLE``
 property is used. In this example we will learn how authorization of
@@ -126,6 +129,10 @@ configuration:
             "LDAP_LOOKUP_TABLE": {
                 "admins": ["prod"],
                 "superadmins": ["*"]
+            },
+            "LDAP_GROUP_ENVIRONMENT_MAPPING": {
+                "someldapgroup": ["dev", "qa"],
+                "superadmins": ["dev", "qa", "stage", "production"]
             }
         }
    }
@@ -174,6 +181,46 @@ authorization with the following command:
 If no results are returned, then the user is **not** authorized. If a
 result is resturned, then the user **is** authorized.
 
+
+AUTHORIZATION: ENVIRONMENT_CALLABLE
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The second authorization callable keys off ``AUTHORIZATION_ENVIRONMENT_CALLABLE`` configuration parameter.
+This callable is responsible for deciding if a user has access to the environment(s).
+
+
+rerest.authroziation.envrestrictions:environment_allow_all
+``````````````````````````````````````````````````````````
+.. warning::
+   This should not be used in a production environment
+
+To use this callable set ``AUTHORIZATION_ENVIRONMENT_CALLABLE`` to ``rerest.authroziation.envrestrictions:environment_allow_all``.
+
+
+rerest.authroziation.envrestrictions:environment_flat_files
+```````````````````````````````````````````````````````````
+
+To use this callable set ``AUTHORIZATION_CALLABLE`` to ``rerest.authorization.envrestrictions:environment_flat_files`` and set the following items
+in your configuration file.
+
+======================= ====== ====================== ================================================
+Name                    Type   Parent                 Value
+======================= ====== ====================== ================================================
+ENVIRONMENT_FLAT_FILES  dict   None                   Dictionary holding mapping informationa. key/val is environment name: path to file
+======================= ====== ====================== ================================================
+
+Here is an example of what the *secion* would look like:
+
+.. code-block:: json
+   :linenos:
+
+    {
+        "AUTHORIZATION_ENVIRONMENT_CALLABLE": "rerest.authorization.envrestrictions:environment_flat_files",
+        "ENVIRONMENT_FLAT_FILES": {
+            "somegroup": ["dev", "qa"],
+            "superadmins": ["dev", "qa", "stage", "production"]
+        }
+    }
 
 .. _rerest_deployment:
 
@@ -320,7 +367,7 @@ kerberos
 
    $ kinit -f USERNAME
    Password for USERNAME@DOMAIN:
-   $ curl --negotiate -u 'a:a' -H "Content-Type: application/json" --data @file.json -X PUT https://rerest.example.com/api/v0/test/playbook/
+   $ curl -u 'a:a' -H "Content-Type: application/json" --data @file.json -X PUT https://rerest.example.com/api/v0/test/playbook/
 
    ... # 201 and json data if exists, otherwise an error code
 
