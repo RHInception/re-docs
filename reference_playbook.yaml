@@ -37,6 +37,7 @@ execution:
           notify:
               started:
                   irc: [ "PHB", "#myteam" ]
+                  email: [ "someone@example.com", "someoneelse@example.com" ]
 
   ################################################################
   # Sequence 2
