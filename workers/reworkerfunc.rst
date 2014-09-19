@@ -124,6 +124,29 @@ In contrast, we can see that the ``update`` method has an empty list,
 accepts no parameters. Using this method in a playbook step would
 update all packages on the target system.
 
+It is also possible to define when the result of a command will not follow
+the normal 0 success/any other return code failure. To do this add a
+``return_codes`` section listing the any subcommands which do not match
+the traditional return codes. Any subcommands not listed will default
+to 0 as success and anything else as failure.
+
+As an example, if one wanted the subcommand ``update`` to be successful
+if it exits with a 0, 10 or a 100 the following could be used:
+
+.. code-block:: json
+
+   {
+       "yumcmd": {
+           "install": ["package"],
+           "remove": ["package"],
+           "update": []
+       },
+       "return_codes": {
+           "update": [0, 10, 100]
+       }
+   }
+
+
 The following is an example using the ``yumcmd`` module in a playbook
 step.
 
