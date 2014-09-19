@@ -27,6 +27,7 @@ has started:
              notify:
                started:
                  irc: [ "PHB", "#teamchannel" ]
+                 email: [ "someone@example.com", "anothersomeone@example.com" ]
 
 Line **6**
    Shows the beginning of the ``notify`` syntax.
