@@ -61,7 +61,8 @@ PHASE_NOTIFICATION dict   None               Notifications that will always happ
 TABOOT_URL         str    PHASE_NOTIFICATION URL with ``%s`` to taboot tailer EX: http://example.com/taboot/%s/
 TOPIC              str    PHASE_NOTIFICATION The topic (`routing key`) to send notification on. EX: ``notify.irc``.
 TARGET             list   PHASE_NOTIFICATION The targets to send the notification to. EX: ``["#mychannel", "auser"]``
-PRE_DEPLOY_CHECK   list   None               The yes/no checks to make prior to deployment (see below for more information)
+PRE_DEPLOY_CHECK   list   None               The yes/no checks to make prior to deployment (:ref:`see below <components_recore_predeployment_checks>`  for more information)
+POST_DEPLOY_ACTION list   None               Steps which are ran after the playbook has been ran (:ref:`see below <components_recore_postdeployment_action>`  for more information)
 ================== ====== ================== ===========================================
 
 For an example see `example-config.json <https://github.com/RHInception/re-core/blob/master/examples/settings-example.json>`_.
