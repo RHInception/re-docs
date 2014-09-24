@@ -180,3 +180,6 @@ pseudoxml:
 
 spell:
 	for i in `find . -name "*.rst"`; do aspell -c $$i; done
+
+viewdocs: html
+	xdg-open _build/html/index.html

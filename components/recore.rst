@@ -2,9 +2,17 @@
 
 RE-CORE
 -------
-The core is essentially a finite state machine (**FSM**) hooked into a message bus and a database.
 
-The core oversees the execution of all *release steps* for any given project. The core is separate from the actual execution of each release step. Execution is delegated to the **worker** component.
+The core is essentially a finite state machine (**FSM**) hooked into a
+message bus and a database.
+
+The core oversees the execution of all *release steps* for any given
+project. The core is separate from the actual execution of each
+release step. Execution is delegated to the **worker** component.
+
+.. contents::
+   :depth: 2
+   :local:
 
 
 Running From Source
@@ -20,9 +28,13 @@ Running From Source
 
 RE-CORE Configuration
 ~~~~~~~~~~~~~~~~~~~~~
-Configuration of the server is done in JSON. You can find an example configuration file in the `examples/ <https://github.com/RHInception/re-core/tree/master/examples>`_ directory.
+Configuration of the server is done in JSON. You can find an example
+configuration file in the `examples/
+<https://github.com/RHInception/re-core/tree/master/examples>`_
+directory.
 
-You must point to a specific configuration file using the ``-c`` command-line option to start the FSM:
+You must point to a specific configuration file using the ``-c``
+command-line option to start the FSM:
 
 .. code-block:: bash
 
@@ -200,3 +212,47 @@ Now let's look at this nested-dictionary closer:
 against ``EXPECTATION``. If they are the same then the check
 passes. If they differ then the check fails and the deployment is
 marked as *failed* and aborted.
+
+.. _components_recore_postdeployment_action:
+
+Post-Deployment Action
+~~~~~~~~~~~~~~~~~~~~~~
+
+Similar in functionality to the :ref:`pre-deployment check
+<components_recore_predeployment_checks>`, re-core allows us to run a
+set of worker steps **after** each deployment as well. What makes
+**POST_DEPLOY_ACTION** different from **PRE_DEPLOY_CHECK** is that
+pre-deployment checks allow you to specify expected results, whereas
+post-deploy actions only check for ``completed`` or ``failed``
+return-statuses.
+
+If a post-deploy action fails (by returning a ``status`` other than
+``completed``), then the deployment is recorded as a failure.
+
+.. important:: These actions apply to *all* deployments
+
+Configuration of pre-deployment checks takes place in the re-core
+``setting.json`` file.
+
+Let's take a look at example settings for a post-deploy action which
+records the time the deployment finished in a Service Now change
+record.
+
+.. code-block:: json
+   :linenos:
+
+   {
+       "POST_DEPLOY_ACTION": [{
+           "Update Change Record": {
+               "COMMAND": "servicenow",
+               "SUBCOMMAND": "UpdateEndTime",
+               "PARAMETERS": {}
+           }
+       }]
+   }
+
+In this example we're defining an empty ``PARAMETERS`` key. This is
+because the :ref:`ServiceNow <steps_servicenow>` worker's
+:ref:`UpdateEndTime <steps_servicenow_updateendtime>` sub-command only
+requires dynamic arguments. The FSM (*re-core*) will send dynamic
+arguments to the worker automatically.

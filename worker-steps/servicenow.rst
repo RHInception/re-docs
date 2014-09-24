@@ -8,6 +8,8 @@ ServiceNow
 .. note:: All ServiceNow steps are more useful as a :ref:`Pre-Deployment Step <components_recore_predeployment_checks>`
 
 
+.. _steps_servicenow_doeschangerecordexist:
+
 servicenow:DoesChangeRecordExist
 ================================
 
@@ -34,6 +36,7 @@ To check if a change record exists:
            dynamic:
                - change_record
 
+.. _steps_servicenow_updatestarttime:
 
 servicenow:UpdateStartTime
 ==========================
@@ -70,6 +73,7 @@ To update the start time:
                - change_record
 
 
+.. _steps_servicenow_updateendtime:
 
 servicenow:UpdateEndTime
 ==========================
