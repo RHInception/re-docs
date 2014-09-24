@@ -3,6 +3,11 @@
 ServiceNow
 **********
 
+.. note:: All checks are ran for each host in ``hosts``
+
+.. note:: All ServiceNow steps are more useful as a :ref:`Pre-Deployment Step <components_recore_predeployment_checks>`
+
+
 servicenow:DoesChangeRecordExist
 ================================
 
@@ -29,6 +34,73 @@ To check if a change record exists:
            dynamic:
                - change_record
 
-.. note:: This check is ran for each host in ``hosts``
 
-.. note:: This step has no direct side-effects. It is more useful as a :ref:`Pre-Deployment Step <components_recore_predeployment_checks>`
+servicenow:UpdateStartTime
+==========================
+
+Updates the custom start time field for an environment.
+
+**Dynamic Arguments**
+
+* ``change_record`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** The change record to look for.
+
+* ``environment`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** The target environment.
+
+
+**Example**
+
+
+To update the start time:
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 3,4
+
+   hosts: ['localhost']
+   steps:
+       - servicenow:UpdateStartTime:
+           dynamic:
+               - environment
+               - change_record
+
+
+
+servicenow:UpdateEndTime
+==========================
+
+Updates the custom end time field for an environment.
+
+**Dynamic Arguments**
+
+* ``change_record`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** The change record to look for.
+
+* ``environment`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** The target environment.
+
+
+**Example**
+
+
+To update the start time:
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 3,4
+
+   hosts: ['localhost']
+   steps:
+       - servicenow:UpdateEndTime:
+           dynamic:
+               - environment
+               - change_record
