@@ -18,11 +18,6 @@ execution:
       - foo.dev.example.com
       - bar.ops.example.com
 
-    # Install megafrobber on all our hosts ahead of time
-    preflight:
-      - yumcmd:install:
-          package: "megafrobber"
-
     steps:
       # Some steps don't require parameters:
       - bigip:OutOfRotation
