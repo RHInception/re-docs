@@ -104,7 +104,7 @@ fileops:ChangePermissions
            group: root
 
        # Change permissions on an entire directory
-       - fileops:ChangeOwnership:
+       - fileops:ChangePermissions:
            path: /tmp/dir/
            user: root
            group: root
