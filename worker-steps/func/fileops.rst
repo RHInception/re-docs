@@ -6,7 +6,7 @@ Fileops
 The **fileops** module allows you to interact with the files on remote hosts.
 This is meant to be slightly more restricted than allowing puppet:Run.
 
-fileops:ChangeOnwership
+fileops:ChangeOwnership
 -----------------------
 
 **Parameters**
