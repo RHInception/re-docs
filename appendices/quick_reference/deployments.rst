@@ -1,4 +1,4 @@
-.. _quick_reference_deployments:
+.. _appendicies_quick_reference_deployments:
 
 Deployments
 ===========
@@ -9,13 +9,16 @@ Assume:
 
 * A playbook exists with ID ``54219f1702b67c666dde3a7d``
 * Our **re-rest** base endpoint is ``http://rerest.example.com/api/v0/``
+* We are a member of the group called: **test**
 
+
+.. _appendicies_quick_reference_deployments_start_no_dynamic:
 
 Start (No dynamic args)
 -----------------------
 
 Example of how to start a deployment which requires no dynamic arguments
-and authentication required.
+and authentication is required.
 
 .. code-block:: bash
    :linenos:
@@ -29,11 +32,14 @@ and authentication required.
 
 Our deployment ID is on line **3**: ``542ac6607d4b6d00153b6db5``
 
+
+.. _appendicies_quick_reference_deployments_start_with_dynamic:
+
 Start (With dynamic args)
 -------------------------
 
 Example of how to start a deployment which requires dynamic arguments and
-authentication required.
+authentication is required.
 
 .. code-block:: bash
    :linenos:
