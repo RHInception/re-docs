@@ -81,6 +81,7 @@ release = '0.0.1'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 exclude_patterns = [
+    'appendices/quick_reference/*.rst',
     '_build',
     'development/*.rst',
     'intro/components.rst',
