@@ -12,6 +12,7 @@ available. They are all documented on this page.
    :depth: 1
 
 .. include:: worker-steps/func/command.rst
+.. include:: worker-steps/func/fileops.rst
 .. include:: worker-steps/func/nagios.rst
 .. include:: worker-steps/func/puppet.rst
 .. include:: worker-steps/func/service.rst
