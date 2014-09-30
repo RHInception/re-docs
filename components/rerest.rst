@@ -77,7 +77,7 @@ Authorization: Callable
 re-rest uses two decorators. The first keys off the ``AUTHORIZATION_CALLABLE`` configuration parameter. This callable
 is responsible for deciding if a user has access to the URL in question.
 
-rerest.authroziation.no_authorization
+rerest.authorization.no_authorization
 `````````````````````````````````````
 .. warning::
    This should not be used in a production environment
@@ -85,7 +85,7 @@ rerest.authroziation.no_authorization
 To use this callable set ``AUTHORIZATION_CALLABLE`` to ``rerest.authorization:no_authorization``.
 
 
-rerest.authroziation.ldap_search
+rerest.authorization.ldap_search
 ````````````````````````````````
 
 To use this callable set ``AUTHORIZATION_CALLABLE`` to ``rerest.authorization:ldap_search`` and set the following items
@@ -189,15 +189,15 @@ The second authorization callable keys off ``AUTHORIZATION_ENVIRONMENT_CALLABLE`
 This callable is responsible for deciding if a user has access to the environment(s).
 
 
-rerest.authroziation.envrestrictions:environment_allow_all
+rerest.authorization.envrestrictions:environment_allow_all
 ``````````````````````````````````````````````````````````
 .. warning::
    This should not be used in a production environment
 
-To use this callable set ``AUTHORIZATION_ENVIRONMENT_CALLABLE`` to ``rerest.authroziation.envrestrictions:environment_allow_all``.
+To use this callable set ``AUTHORIZATION_ENVIRONMENT_CALLABLE`` to ``rerest.authorization.envrestrictions:environment_allow_all``.
 
 
-rerest.authroziation.envrestrictions:environment_flat_files
+rerest.authorization.envrestrictions:environment_flat_files
 ```````````````````````````````````````````````````````````
 
 To use this callable set ``AUTHORIZATION_CALLABLE`` to ``rerest.authorization.envrestrictions:environment_flat_files`` and set the following items
