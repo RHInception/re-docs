@@ -81,7 +81,7 @@ fileops:ChangePermissions
 
   * **Required:** True
   * **Default:** ``None``
-  * **Description:** The new mode. Ex: 0644
+  * **Description:** The new mode. Ex: "0644". Note you must make it a string else it will modify it while parsing!
 
 * ``recursive`` (type: bool)
 
