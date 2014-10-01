@@ -100,14 +100,12 @@ fileops:ChangePermissions
        # Change permissions on one file
        - fileops:ChangePermissions:
            path: /tmp/filename
-           user: root
-           group: root
+           mode: 0644
 
        # Change permissions on an entire directory
        - fileops:ChangePermissions:
            path: /tmp/dir/
-           user: root
-           group: root
+           mode: 0644
            recursive: true
 
 
