@@ -4,6 +4,9 @@ RE-WORKER
 ---------
 This library provides a simple base for release engine workers to build from.
 
+.. admonition:: New in 0.0.5
+
+   Workers using re-worker will attempt to reconnect if disconnected from the bus.
 
 .. _re_worker_implementation:
 
@@ -113,6 +116,15 @@ Acks a message.
    <http://pika.readthedocs.org/en/latest/modules/spec.html#pika.spec.Basic.Deliver>`_
    instance
 
+* **Returns**: None
+
+Worker._connect
+```````````````
+Internal connection method. This is also used when trying to reconnect.
+
+.. versionadded:: 0.0.5
+
+* **Inputs**: None
 * **Returns**: None
 
 Worker.run_forever
