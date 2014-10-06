@@ -15,7 +15,7 @@ This worker takes two configuration files. The first is the worker configuration
   {
       "queue": "output",
       "output_dir": "/tmp/",
-      "redactions': [
+      "redactions": [
           "somethingtomakealineasredacted",
           "valid[rR]?egex"
       ]
