@@ -14,10 +14,17 @@ This worker takes two configuration files. The first is the worker configuration
 
   {
       "queue": "output",
-      "output_dir": "/tmp/"
+      "output_dir": "/tmp/",
+      "redactions': [
+          "somethingtomakealineasredacted",
+          "valid[rR]?egex"
+      ]
   }
 
 * Set the ``output_dir`` to where the output files should reside.
+
+.. versionadded:: 0.0.2
+* ``redactions`` is an optional config option. If set it should be a list of strings or valid regular expressions which will be used to find lines that will be redacted.
 
 
 The second configuration file is the normal MQ configuration:
@@ -50,7 +57,7 @@ We should see output similar to the following if everything well:
 .. code-block:: bash
 
    [user@frober]$ re-worker-output -w myconf.json mq.json
-   2014-05-19 14:39:47,080 - IRCNotifyWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
-   2014-05-19 14:39:47,083 - IRCNotifyWorker - INFO - Attempting connection with amqp://inceptadmin:***@messagebus.example.com:5672/
-   2014-05-19 14:39:47,412 - IRCNotifyWorker - INFO - Connection and channel open.
-   2014-05-19 14:39:47,413 - IRCNotifyWorker - INFO - Consuming on queue worker.output
+   2014-05-19 14:39:47,080 - OutputWorker - WARNING - No app logger passed in. Defaulting to Streamandler with level INFO.
+   2014-05-19 14:39:47,083 - OutputWorker - INFO - Attempting connection with amqp://inceptadmin:***@messagebus.example.com:5672/
+   2014-05-19 14:39:47,412 - OutputWorker - INFO - Connection and channel open.
+   2014-05-19 14:39:47,413 - OutputWorker - INFO - Consuming on queue worker.output
