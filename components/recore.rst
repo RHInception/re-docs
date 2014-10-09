@@ -257,3 +257,19 @@ because the :ref:`ServiceNow <steps_servicenow>` worker's
 :ref:`UpdateEndTime <steps_servicenow_updateendtime>` sub-command only
 requires dynamic arguments. The FSM (*re-core*) will send dynamic
 arguments to the worker automatically.
+
+
+RE-CORE Disconnection
+~~~~~~~~~~~~~~~~~~~~~
+
+Much like the worker component **re-core** will attempt to reconnect to the
+bus if it gets disconnected. However, a disconnect of **re-core** is likely
+to be disruptive due to the use of temporary queues. Do not expect a flaky
+**re-core** connection to be sufficient. A disconnection of **re-core**
+should always stop a deployment dead in it's tracks and not restart it
+if able to reconnect.
+
+.. warning::
+
+   If a deployment is taking place while **re-core** is disconnected it's highly unlikely that a notification will be sent out showing a failure.
+
