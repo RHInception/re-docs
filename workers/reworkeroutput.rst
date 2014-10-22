@@ -24,6 +24,7 @@ This worker takes two configuration files. The first is the worker configuration
 * Set the ``output_dir`` to where the output files should reside.
 
 .. versionadded:: 0.0.2
+
 * ``redactions`` is an optional config option. If set it should be a list of strings or valid regular expressions which will be used to find lines that will be redacted.
 
 

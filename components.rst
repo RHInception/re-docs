@@ -24,6 +24,8 @@ These workers are usable in :ref:`playbooks <playbooks>`.
 
    workers/reworkerbigip.rst
    workers/reworkerfunc.rst
+   workers/reworkergit.rst
+   workers/reworkersatellite5.rst
    workers/reworkerjuicer.rst
    workers/reworkerservicenow.rst
    workers/reworkersleep.rst
