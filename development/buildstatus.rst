@@ -27,6 +27,12 @@ Build States
    * - `re-worker-func <https://github.com/RHInception/re-worker-func>`_
      - .. image:: https://api.travis-ci.org/RHInception/re-worker-func.png
           :target: https://travis-ci.org/RHInception/re-worker-func/
+   * - `re-worker-git <https://github.com/RHInception/re-worker-git>`_
+     - .. image:: https://api.travis-ci.org/RHInception/re-worker-git.png
+          :target: https://travis-ci.org/RHInception/re-worker-git/
+   * - `re-worker-satellite5 <https://github.com/RHInception/re-worker-satellite5>`_
+     - .. image:: https://api.travis-ci.org/RHInception/re-worker-satellite5.png
+          :target: https://travis-ci.org/RHInception/re-worker-satellite5/
    * - `re-worker-ircnotify <https://github.com/RHInception/re-worker-ircnotify>`_
      - .. image:: https://api.travis-ci.org/RHInception/re-worker-ircnotify.png
           :target: https://travis-ci.org/RHInception/re-worker-ircnotify/
