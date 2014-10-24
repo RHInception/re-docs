@@ -11,6 +11,11 @@ This section contains tutorials for writing your own workers. If you
 haven't already, please take a few minutes and familiarize yourself
 with the :ref:`re-worker API documentation <re_worker>`.
 
+.. note:: To get going even **faster**, check out the `worker
+          quickstart
+          <https://github.com/RHInception/re-worker-quickstart/blob/master/README-QUICKSTART.md>`_
+          repository!
+
 
 Basics
 ******

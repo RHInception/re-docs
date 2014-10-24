@@ -12,6 +12,11 @@ This library provides a simple base for release engine workers to build from.
 
 Implementing a Worker
 ~~~~~~~~~~~~~~~~~~~~~
+.. note:: To get going even **faster**, check out the `worker
+          quickstart
+          <https://github.com/RHInception/re-worker-quickstart/blob/master/README-QUICKSTART.md>`_
+          repository!
+
 To implement a worker, subclass off of ``reworker.worker.Worker`` and
 override the ``process`` method.
 
