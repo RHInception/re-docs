@@ -174,3 +174,78 @@ passing in a few items.
   * mq_config: should house: user, password, server, port and vhost.
   * config_file: is an optional full path to a json config file
   * logger: is an optional logger. Defaults to a logger to stderr
+
+
+
+**MQ Config File**
+
+There are two optional parameters in the MQ configuration files:
+``port``, and ``ssl``. Their defaults are shown below:
+
+* ``port`` - 5672 (*rabbitmq no-ssl*)
+* ``ssl`` - ``False``
+
+If ``ssl`` is not set (or is ``False``) then **re-worker** uses the
+default rabbit MQ port (5672), unless a port port has been specified
+in the config file. If ``ssl`` is set to ``True`` then **re-worker**
+uses the RabbitMQ SSL port (5671), unless a port has been specified in
+the configuration file.
+
+Simply put, you don't need to set ``ssl`` or ``port`` unless:
+
+* You want to enable SSL (in which case, set ``ssl`` to ``true`` in
+  the config file)
+* You are running RabbitMQ on non-standard ports.
+
+Here's a bare-minimum MQ configuration file:
+
+.. code-block:: json
+   :linenos:
+
+   {
+       "server": "127.0.0.1",
+       "vhost": "/",
+       "user": "guest",
+       "password": "guest"
+   }
+
+Note that ``port`` and ``ssl`` are not set. Therefore this will open
+an unencrypted connection to Rabbit MQ using the default port (5672).
+
+
+Here's a bare-minimum MQ configuration file for an encrypted
+connection:
+
+.. code-block:: json
+   :linenos:
+
+   {
+       "server": "127.0.0.1",
+       "vhost": "/",
+       "user": "guest",
+       "password": "guest",
+       "ssl": true
+   }
+
+Note on line **6** that we set ``ssl`` to ``true`` (remember, it's
+lower-case "true" in JSON files) and we are not setting the port. In
+this case the port is automatically set to 5671.
+
+And now a non-standard configuration:
+
+.. code-block:: json
+   :linenos:
+
+   {
+       "server": "127.0.0.1",
+       "vhost": "/",
+       "user": "guest",
+       "password": "guest",
+       "port": 5672,
+       "ssl": true
+   }
+
+In this **confusing** and **non-standard** configuration we are
+connecting to an SSL enabled RabbitMQ server which is listening for
+SSL connections on port 5672, a port which is normally reserved for
+non-SSL connections.
