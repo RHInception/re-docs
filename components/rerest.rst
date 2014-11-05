@@ -30,10 +30,11 @@ Name                               Type   Parent              Value
 LOGFILE                            str    None                File name for the application level log
 LOGLEVEL                           str    None                DEBUG, INFO (default), WARN, FATAL
 MQ                                 dict   None                Where all of the MQ connection settings are
-SERVER                             str    MQ                  Hostname or IP of the server
-PORT                               int    MQ                  Port to connect on
-USER                               str    MQ                  Username to connect with
 PASSWORD                           str    MQ                  Password to authenticate with
+PORT                               int    MQ                  AMQP connection port (default ``5672`` for non-ssl, ``5671`` for ssl)
+SERVER                             str    MQ                  Hostname or IP of the server
+USER                               str    MQ                  Username to connect with
+SSL                                bool   MQ                  If the AMQP connection should be SSL/TLS secured (default ``false``)
 VHOST                              str    MQ                  vhost on the server to utilize
 MONGODB_SETTINGS                   dict   None                Where all of the MongoDB settings live
 DB                                 str    MONGODB_Settings    Name of the database to use
@@ -53,7 +54,95 @@ Further configuration items can be found in the `Flask Documentation
 <http://flask.pocoo.org/docs/config/#builtin-configuration-values>`_
 or look at specific ``AUTHORIZATION_CALLABLE``/``AUTHORIZATION_ENVIRONMENT_CALLABLE`` documentation.
 
-For an example see `example-settings.json <http://github.com/RHInception/re-rest/blob/master/example-settings.json>`_
+For a full example see `example-settings.json <http://github.com/RHInception/re-rest/blob/master/example-settings.json>`_
+
+MQ Configuration Notes
+``````````````````````
+
+There are two optional parameters in the MQ configuration section:
+``PORT``, and ``SSL``. Their defaults are shown below:
+
+* ``PORT`` - 5672 (*rabbitmq no-ssl*)
+* ``SSL`` - ``false``
+
+If ``SSL`` is not set (or is ``false``) then **re-rest** uses the
+default rabbit MQ port (5672), unless a port has been specified in the
+config file. If ``SSL`` is set to ``true`` then **re-rest** uses the
+RabbitMQ SSL port (5671), unless a port has been specified in the
+configuration file.
+
+Simply put, you don't need to set ``SSL`` or ``PORT`` unless:
+
+* You want to enable SSL (in which case, set ``SSL`` to ``true`` in
+  the config file)
+* You are running RabbitMQ on non-standard ports.
+
+Here's a bare-minimum MQ configuration section:
+
+.. code-block:: json
+   :linenos:
+
+   {
+       "MQ": {
+           "EXCHANGE": "my_exchange",
+           "NAME": "username",
+           "PASSWORD": "password",
+           "QUEUE": "re",
+           "SERVER": "amqp.example.com",
+           "VHOST": "/"
+       }
+   }
+
+Note that ``PORT`` and ``SSL`` are not set. Therefore this will open
+an unencrypted connection to Rabbit MQ using the default port (5672).
+
+
+Here's a bare-minimum MQ configuration file for an encrypted
+connection:
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 8
+
+   {
+       "MQ": {
+           "EXCHANGE": "my_exchange",
+           "NAME": "username",
+           "PASSWORD": "password",
+           "QUEUE": "re",
+           "SERVER": "amqp.example.com",
+           "SSL": true,
+           "VHOST": "/"
+       }
+   }
+
+Note on line **8** that we set ``SSL`` to ``true`` (remember, it's
+lower-case "true" in JSON files) and we are not setting the port. In
+this case the port is automatically set to 5671.
+
+And now a non-standard configuration:
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 6,9
+
+   {
+       "MQ": {
+           "EXCHANGE": "my_exchange",
+           "NAME": "username",
+           "PASSWORD": "password",
+           "PORT": 5672,
+           "QUEUE": "re",
+           "SERVER": "amqp.example.com",
+           "SSL": true,
+           "VHOST": "/"
+       }
+   }
+
+In this **confusing** and **non-standard** configuration we are
+connecting to an SSL enabled RabbitMQ server which is listening for
+SSL connections on port 5672, a port which is normally reserved for
+non-SSL connections.
 
 
 Authentication
