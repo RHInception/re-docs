@@ -199,13 +199,13 @@ the user **testuser** is determined.
 
 Our organization has an ldap server at **ldap.example.com**, and
 groups are organized under the **ou=Groups,dc=example,dc=com**
-sub-tree. In this example re-rest will not attempt to **bind**
-(authenticate) with the LDAP server. Here is an example of this
-configuration:
+sub-tree. In this example re-rest **will not* attempt to *bind*
+(authenticate) with the LDAP server (lines **4** and **5**). Here is
+an example of this configuration:
 
 .. code-block:: json
    :linenos:
-   :emphasize-lines: 10
+   :emphasize-lines: 4,5,7,10
 
     {
         "AUTHORIZATION_CONFIG": {
@@ -243,12 +243,13 @@ The **admins** group could look like this:
 On line **6** we can see that this user is a member of the LDAP group
 **admins**. We also see here that group membership is denoted by use
 of the ``memberUid`` attribute. Note how this matches the the
-``LDAP_MEMBER_ID`` setting we previously mentioned.
+``LDAP_MEMBER_ID`` setting we previously mentioned (line **7** in the
+previous block).
 
 Let's pretend **testuser** is attempting to run a playbook with the
 :ref:`group <elements_yaml>` field set to **prod** (short for
-**production**). To determine authorization, **re-rest** will perform
-an `LDAP search <https://www.ietf.org/rfc/rfc2254.txt>`_ to query for
+*production*). To determine authorization, **re-rest** will perform an
+`LDAP search <https://www.ietf.org/rfc/rfc2254.txt>`_ to query for
 records which match **two** conditions:
 
 #. A record for a group exists in the ``ou=Groups,dc=example,dc=com``
