@@ -186,10 +186,10 @@ There are two optional parameters in the MQ configuration files:
 * ``ssl`` - ``False``
 
 If ``ssl`` is not set (or is ``False``) then **re-worker** uses the
-default rabbit MQ port (5672), unless a port port has been specified
-in the config file. If ``ssl`` is set to ``True`` then **re-worker**
-uses the RabbitMQ SSL port (5671), unless a port has been specified in
-the configuration file.
+default rabbit MQ port (5672), unless a port has been specified in the
+config file. If ``ssl`` is set to ``True`` then **re-worker** uses the
+RabbitMQ SSL port (5671), unless a port has been specified in the
+configuration file.
 
 Simply put, you don't need to set ``ssl`` or ``port`` unless:
 
