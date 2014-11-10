@@ -19,3 +19,4 @@ playbooks.
 .. include:: worker-steps/satellite5.rst
 .. include:: worker-steps/sleep.rst
 .. include:: worker-steps/servicenow.rst
+.. include:: worker-steps/sql.rst
