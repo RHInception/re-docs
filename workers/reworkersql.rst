@@ -23,6 +23,8 @@ This worker takes two configuration files. The first is the SQL configuration fi
     }
   }
 
+The important bits are under the database key. Here there are subkeys which define a friendly database name that can be used in playbooks. There are then two required keys under the name: uri and kwargs. uri is the database connection uri (see: http://docs.sqlalchemy.org/en/rel_0_8/core/engines.html#supported-databases). The other is kwargs which are additional arguments to pass to the engine object. In most cases it should be an empty dictionart.
+
 
 This worker takes the normal MQ configuration as it's only configuration file:
 
