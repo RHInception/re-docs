@@ -24,12 +24,16 @@ Creates a NEW database table.
 * ``columns`` (type ``dict``)
 
   * **Required:** True
-  * **Descrip tion:** Explination of how the table should look like. For more information on types see http://docs.sqlalchemy.org/en/rel_0_8/core/types.html#types-generic
+  * **Description:** Explination of how the table should look
+    like. For more information on types see `SQL Alchemy - Generic
+    Types
+    <http://docs.sqlalchemy.org/en/rel_0_8/core/types.html#types-generic>`_
+    documentation.
 
 
 **Example**
 
-To create a table named MyTable with a two varchar columns:
+To create a table named ``MyTable`` with a two ``varchar`` columns:
 
 .. code-block:: yaml
    :linenos:
@@ -69,7 +73,7 @@ Execute raw (and database specific) SQL.
 
 **Example**
 
-To insert a row in to MyTable:
+To insert a row in to ``MyTable``:
 
 .. code-block:: yaml
    :linenos:
