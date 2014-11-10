@@ -29,7 +29,7 @@ These workers are usable in :ref:`playbooks <playbooks>`.
    workers/reworkerjuicer.rst
    workers/reworkerservicenow.rst
    workers/reworkersleep.rst
-
+   workers/reworkersql.rst
 
 Auxiliary Workers
 -----------------
