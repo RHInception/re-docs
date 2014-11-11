@@ -77,10 +77,10 @@ To insert a row in to ``MyTable``:
 
 .. code-block:: yaml
    :linenos:
-   :emphasize-lines: 3,6
+   :emphasize-lines: 4,5
 
    hosts: ['localhost']
    steps:
        - sql:ExecuteSQL:
-           datbase: a_configured_database
+           database: a_configured_database
            sql: 'INSERT INTO myTable (col1, col2) VALUES ("hello", "there")'
