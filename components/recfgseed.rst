@@ -90,7 +90,7 @@ Usage Example
    optional arguments:
      -h, --help  show this help message and exit
    
-   $ re-cfg-seed conf/re-worker-output.conf /configs/workers/re-worker-output.json
+   $ re-cfg-seed conf/re-worker-defaultcfg-output.conf /configs/workers/re-worker-output.json
    $ echo $?
    0
    $
