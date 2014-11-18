@@ -2,7 +2,7 @@
 
 RE-CFG-SEED
 -----------
-A simple confugration managemetn solution which uses `etcd <https://github.com/coreos/etcd>`_ which attempts to pull
+A simple configration managemetn solution which uses `etcd <https://github.com/coreos/etcd>`_ which attempts to pull
 configuration paramteres from the cluster. If the parameters do not exist sane defaults are used. If the passwords
 are not defined randomly generated passwords are created for the accounts.
 
@@ -71,7 +71,7 @@ What's Happening
   * If password is set to true (and default is not set) a random password is generated, sent to etcd and used as the value
   * If neither default or password are set then an error occurs
 
-* re-cfg-seed opns up the output configuration file and updates/creates all relevent keys with their updated values
+* re-cfg-seed opens up the output configuration file and updates/creates all relevent keys with their updated values
 
 
 Usage Example
