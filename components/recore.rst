@@ -255,17 +255,20 @@ Example settings
 
 .. code-block:: json
    :linenos:
-   :emphasize-lines: 6-16
+   :emphasize-lines: 5-19
 
    {
        "LOGFILE": "recore.log",
        "RELEASE_LOG_DIR": null,
-
-       "PRE_DEPLOY_CHECK": [{
-           "Require Change Record": {
+       "PRE_DEPLOY_CHECK": [
+           {
+               "NAME": "Require Change Record",
                "COMMAND": "servicenow",
                "SUBCOMMAND": "getchangerecord",
-               "PARAMETERS": {},
+               "PARAMETERS": {
+                   "project": "myproject",
+                   "some_filter": "to find the record"
+               },
                "EXPECTATION": {
                    "status": "completed",
                    "data": {
@@ -273,24 +276,29 @@ Example settings
                    }
                }
            }
-       }]
+       ]
    }
 
 
-Here we see a new directive, ``PRE_DEPLOY_CHECK`` (line **5**), this
-key holds a list whose members are nested dictionaries (lines **6** →
-**16**). This example has one nested-dictionary. It has one key, that
-is the name of the check, **Require Change Record**. You can give any
-name you want to keys as long as it is JSON parsable.
+Here we see a new directive, ``PRE_DEPLOY_CHECK`` (line **4**), this
+key holds a list whose members are dictionaries (lines **5** →
+**19**). This example has one dictionary. It has several keys,
+starting with ``NAME``, that is the name of the check, **Require
+Change Record**. You can give any name you want as long as it is JSON
+parsable.
 
 Now let's look at this nested-dictionary closer:
 
 .. code-block:: python
 
    {
+       "NAME": "Require Change Record",
        "COMMAND": "servicenow",
        "SUBCOMMAND": "getchangerecord",
-       "PARAMETERS": {},
+       "PARAMETERS": {
+           "project": "myproject",
+           "some_filter": "to find the record"
+       },
        "EXPECTATION": {
            "status": "completed",
            "data": {
@@ -340,14 +348,17 @@ record.
    :linenos:
 
    {
-       "POST_DEPLOY_ACTION": [{
-           "Update Change Record": {
+       "POST_DEPLOY_ACTION": [
+           {
+               "NAME": "Update End Time",
                "COMMAND": "servicenow",
                "SUBCOMMAND": "UpdateEndTime",
                "PARAMETERS": {}
            }
-       }]
+       ]
    }
+
+
 
 In this example we're defining an empty ``PARAMETERS`` key. This is
 because the :ref:`ServiceNow <steps_servicenow>` worker's
