@@ -108,3 +108,39 @@ To update the start time:
            dynamic:
                - environment
                - change_record
+
+
+
+.. _steps_servicenow_create_change_record:
+
+servicenow:CreateChangeRecord
+=============================
+
+Create a change record automatically.
+
+.. note:: Creating change records requires a non-trivial amount of
+          integration work. This subcommand will **not** work
+          out-of-the-box.
+
+          See the main :ref:`re-worker-servicenow
+          <workers_servicenow>` documentation for additional
+          information.
+
+
+**Arguments**
+
+* *This subcommand accepts no arguments*
+
+
+**Example**
+
+
+To create a change record
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 3
+
+   hosts: ['localhost']
+   steps:
+       - servicenow:CreateChangeRecord
