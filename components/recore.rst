@@ -45,7 +45,8 @@ Descriptions of all settings directives:
 ================== ====== ================== ===========================================
 Name               Type   Parent             Value
 ================== ====== ================== ===========================================
-LOGFILE            str    None               File name for the application level log
+LOGFILE            str    None               File name for the application level log. Include the full path to write the log somewhere else
+LOGLEVEL           str    None               Logging threshold, default: ``INFO``. Acceptable values: ``DEBUG``, ``INFO``, ``WARN``, ``ERROR``, ``CRITICAL``
 RELEASE_LOG_DIR    str    None               Directory for per-release logging (default: ``None``)
 MQ                 dict   None               Where all of the MQ connection settings are
 SERVER             str    MQ                 Hostname or IP of the server
@@ -191,14 +192,16 @@ You should see output similar to the following:
 
 .. code-block:: bash
 
-   [~/release-engine/re-core] $ re-core -c ./real-settings.json
-   2014-05-19 13:56:00,179 - __init__:start_logging:43 - DEBUG - initialized stdout logger
-   2014-05-19 13:56:00,180 - __init__:parse_config:53 - DEBUG - Parsed configuration file
+
+   $ re-core -c ./examples/settings-example.json
+   2014-12-10 19:24:02.012102 +0000 - app_component="recore" - source_ip="" - log_level="INFO" - playbook_id="" - deployment_id="" - user_id="" - active_step="" - deploy_phase="" - message="Initialized core logging with level=INFO and log file=/tmp/recore.log"
 
 Additional output will be directed to the log file you configured in
 the ``settings.json`` file. The default log file is called
 ``recore.log`` and will be in your present working directory.
 
+
+.. _re_core_pre_release_logging:
 
 Per-release Logging
 ~~~~~~~~~~~~~~~~~~~
