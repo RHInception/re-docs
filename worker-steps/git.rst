@@ -3,6 +3,45 @@
 Git
 ***
 
+git:Merge
+=========
+Merges one branch into another and then pushes it back to origin.
+
+**Parameters**
+
+* ``repo`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** Git repo to clone
+
+
+* ``to_branch`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** The branch to merge in to
+
+* ``from_branch`` (type ``str``)
+
+  * **Required:** False
+  * **Description:** The branch to merge from
+
+
+**Example**
+
+To merge one commit into mybranch:
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 3,6
+
+   hosts: ['localhost']
+   steps:
+       - git:Merge:
+           repo: git@example.com/someplace.git
+           to_branch: master
+           from_branch: feature
+
+
 git:CherryPickMerge
 ===================
 
