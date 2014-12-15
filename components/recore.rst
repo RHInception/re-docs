@@ -370,6 +370,93 @@ requires dynamic arguments. The FSM (*re-core*) will send dynamic
 arguments to the worker automatically.
 
 
+Trigger Steps (Hooks)
+~~~~~~~~~~~~~~~~~~~~~
+
+**Triggers Steps** (or *hooks* in some parlance) automatically add
+steps into a deployment based on pre-defined ``WHEN`` conditions:
+
+* ``NEXT_COMMAND`` - Trigger added when the next command matches the value
+* ``NEXT_SUBCOMMAND`` - Trigger added when the next subcommand matches the value
+
+A trigger step is added into a deployment only when all the defined
+criteria match. When multiple ``WHEN`` conditions are present, the
+``WHEN`` expression is treated as a boolean AND statement.
+
+Syntax for defining triggers follows the following pattern:
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 5-7
+
+   {
+       "STEP_TRIGGERS": [
+           {
+               "DESCRIPTION": "Sleep for a second before running any httprequest subcommands",
+               "WHEN": {
+                   "NEXT_COMMAND": "httprequest"
+               },
+               "COMMAND": "sleep",
+               "SUBCOMMAND": "seconds",
+               "PARAMETERS": {
+                   "seconds": 1
+               }
+          }
+       ]
+   }
+
+In the previous example, if our deployment had **any**
+:ref:`httprequest <steps_httprequest>` steps defined then a
+``sleep:seconds`` step with parameters ``{'seconds': 1}`` would be
+inserted before *each* ``httprequest`` step.
+
+If we wanted to trigger on a **specific** subcommand from the
+``httprequest`` worker we would add another condition to the ``WHEN``
+expression:
+
+
+.. code-block:: json
+   :linenos:
+   :emphasize-lines: 4
+
+   {
+      "WHEN": {
+         "NEXT_COMMAND": "httprequest",
+	 "NEXT_SUBCOMMAND": "Get"
+      }
+   }
+
+Multiple triggers may be defined. Triggers are applied in order:
+
+.. code-block:: json
+   :linenos:
+
+   {
+      "STEP_TRIGGERS": [
+        {
+            "DESCRIPTION": "Sleep for a sec before bigip",
+            "WHEN": {
+                "NEXT_COMMAND": "bigip",
+            },
+            "COMMAND": "sleep",
+            "SUBCOMMAND": "seconds",
+            "PARAMETERS": {
+                "seconds": 1
+            }
+        },
+        {
+            "DESCRIPTION": "Run a noop before we sleep",
+            "WHEN": {
+                "NEXT_COMMAND": "sleep",
+            },
+            "COMMAND": "noop",
+            "SUBCOMMAND": "Whatever",
+            "PARAMETERS": {}
+        }
+      ]
+   }
+
+
 RE-CORE Disconnection
 ~~~~~~~~~~~~~~~~~~~~~
 
