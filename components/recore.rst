@@ -385,7 +385,10 @@ criteria match. When multiple ``WHEN`` conditions are present, the
 ``WHEN`` expression is treated as a boolean AND statement.
 
 Step triggers are defined outside of the main settings file. Set the
-value of the ``TRIGGERS`` parameter to the path of your triggers file.
+value of the ``TRIGGERS`` parameter to the path of your triggers
+file. An example triggers file is included in the re-core source
+distribution: `examples/triggers/triggers.trigger.json
+<https://github.com/RHInception/re-core/blob/master/examples/triggers/triggers.trigger.json>`_.
 
 
 Syntax for defining triggers follows the following pattern:
