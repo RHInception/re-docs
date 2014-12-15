@@ -12,7 +12,7 @@ Merges one branch into another and then pushes it back to origin.
 * ``repo`` (type ``str``)
 
   * **Required:** True
-  * **Description:** Git repo to clone
+  * **Description:** Git repo to clone. Make sure to note a transport if remote (such as ssh:// or https://)
 
 
 * ``to_branch`` (type ``str``)
@@ -52,7 +52,7 @@ Cherry pick's commits from one branch and then squashs the results into another.
 * ``repo`` (type ``str``)
 
   * **Required:** True
-  * **Description:** Git repo to clone
+  * **Description:** Git repo to clone. Make sure to note a transport if remote (such as ssh:// or https://)
 
 
 * ``to_branch`` (type ``str``)
@@ -87,6 +87,6 @@ To merge one commit into mybranch:
    hosts: ['localhost']
    steps:
        - git:CherryPickMerge:
-           repo: git@example.com/someplace.git
+           repo: ssh://git@example.com/someplace.git
            to_branch: mybranch
            commits: ['77a085eb34597b544a233d8ce4c943dcac']
