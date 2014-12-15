@@ -37,7 +37,7 @@ To merge one commit into mybranch:
    hosts: ['localhost']
    steps:
        - git:Merge:
-           repo: git@example.com/someplace.git
+           repo: ssh://git@example.com/someplace.git
            to_branch: master
            from_branch: feature
 
