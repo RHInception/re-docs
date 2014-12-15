@@ -48,6 +48,7 @@ Name               Type   Parent             Value
 LOGFILE            str    None               File name for the application level log. Include the full path to write the log somewhere else
 LOGLEVEL           str    None               Logging threshold, default: ``INFO``. Acceptable values: ``DEBUG``, ``INFO``, ``WARN``, ``ERROR``, ``CRITICAL``
 RELEASE_LOG_DIR    str    None               Directory for per-release logging (default: ``None``)
+TRIGGERS           str    None               Path to a trigger step definition file
 MQ                 dict   None               Where all of the MQ connection settings are
 SERVER             str    MQ                 Hostname or IP of the server
 NAME               str    MQ                 Username to connect with
@@ -382,6 +383,10 @@ steps into a deployment based on pre-defined ``WHEN`` conditions:
 A trigger step is added into a deployment only when all the defined
 criteria match. When multiple ``WHEN`` conditions are present, the
 ``WHEN`` expression is treated as a boolean AND statement.
+
+Step triggers are defined outside of the main settings file. Set the
+value of the ``TRIGGERS`` parameter to the path of your triggers file.
+
 
 Syntax for defining triggers follows the following pattern:
 
