@@ -3,8 +3,7 @@ RE-WORKER-EMAILNOTIFY
 Release Engine Worker Plugin can send notifications via email.
 
 .. note::
-   This is a notification handler and is not meant to be used in steps.
-
+   This is a notification worker can handle both notification and step message formats. When receiving step message format it will ignore all items with the exception of the slug, message, phase and target within the parameters key.
 
 This worker takes two configuration files. The first is the EMAILNOTIFY configuration file. It should look like this:
 
