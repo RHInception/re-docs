@@ -42,7 +42,7 @@ To create a table named ``MyTable`` with a two ``varchar`` columns:
    hosts: ['localhost']
    steps:
        - sql:CreateTable:
-           datbase: a_configured_database
+           database: a_configured_database
            name: MyTable
            columns:
                col1:
@@ -84,7 +84,7 @@ To drop ``MyTable``:
    hosts: ['localhost']
    steps:
        - sql:DropTable:
-           datbase: a_configured_database
+           database: a_configured_database
            name: MyTable
 
 
@@ -127,7 +127,7 @@ To alter ``MyTable`` modifying a column:
    hosts: ['localhost']
    steps:
        - sql:AlterTableColumns:
-           datbase: a_configured_database
+           database: a_configured_database
            name: MyTable
            columns:
                col_to_modify:
@@ -174,7 +174,7 @@ To add two new columns to ``MyTable``:
    hosts: ['localhost']
    steps:
        - sql:AddTableColumns:
-           datbase: a_configured_database
+           database: a_configured_database
            name: MyTable
            columns:
                new_col:
@@ -217,7 +217,7 @@ Drop col2 from ``MyTable``:
    hosts: ['localhost']
    steps:
        - sql:DropTableColumns:
-           datbase: a_configured_database
+           database: a_configured_database
            name: MyTable
            columns: [
                col2
@@ -258,7 +258,7 @@ To insert two rows into ``MyTable``:
    hosts: ['localhost']
    steps:
        - sql:Insert:
-           datbase: a_configured_database
+           database: a_configured_database
            name: MyTable
            rows: [
                {
@@ -310,7 +310,7 @@ Delete everything from ``MyTable`` where col1 is hi:
    hosts: ['localhost']
    steps:
        - sql:Delete:
-           datbase: a_configured_database
+           database: a_configured_database
            name: MyTable
            where: {
                col1: "hi"
