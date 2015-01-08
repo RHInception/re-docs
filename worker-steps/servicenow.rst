@@ -36,7 +36,38 @@ To check if a change record exists:
            dynamic:
                - change_record
 
+.. _steps_servicenow_doesctaskexist:
+
+
+servicenow:DoesCTaskExist
+=========================
+
+Checks to see if a CTask exists. Resulting data will have an exists key with a bool.
+
+**Dynamic Arguments**
+
+* ``ctask`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** The CTask to look for.
+
+**Example**
+
+To check if a CTask exists:
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 3-5
+
+   hosts: ['localhost']
+   steps:
+       - servicenow:DoesCTaskExist:
+           dynamic:
+               - change_record
+
 .. _steps_servicenow_updatestarttime:
+
+
 
 servicenow:UpdateStartTime
 ==========================
@@ -76,7 +107,7 @@ To update the start time:
 .. _steps_servicenow_updateendtime:
 
 servicenow:UpdateEndTime
-==========================
+========================
 
 Updates the custom end time field for an environment.
 
@@ -144,3 +175,40 @@ To create a change record
    hosts: ['localhost']
    steps:
        - servicenow:CreateChangeRecord
+
+
+
+.. _steps_servicenow_createctask:
+
+
+servicenow:CreateCTask
+======================
+
+Creates a new CTask.
+
+**Dynamic Arguments**
+
+* ``change_record`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** The change record to associate the new CTask with.
+
+* ``ctask_description`` (type ``str``)
+
+  * **Required:** False
+  * **Description:** Description of the task.
+
+**Example**
+
+To create a new CTask:
+
+.. code-block:: yaml
+   :linenos:
+   :emphasize-lines: 3-6
+
+   hosts: ['localhost']
+   steps:
+       - servicenow:CreateCTask:
+           dynamic:
+               - change_record
+               - ctask_description
