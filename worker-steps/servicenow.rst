@@ -46,6 +46,11 @@ Checks to see if a CTask exists. Resulting data will have an exists key with a b
 
 **Dynamic Arguments**
 
+* ``change_record`` (type ``str``)
+
+  * **Required:** True
+  * **Description:** The associated CHG in case of auto creation.
+
 * ``ctask`` (type ``str``)
 
   * **Required:** True
@@ -57,13 +62,14 @@ To check if a CTask exists:
 
 .. code-block:: yaml
    :linenos:
-   :emphasize-lines: 3-5
+   :emphasize-lines: 3-6
 
    hosts: ['localhost']
    steps:
        - servicenow:DoesCTaskExist:
            dynamic:
                - change_record
+               - ctask
 
 .. _steps_servicenow_updatestarttime:
 
