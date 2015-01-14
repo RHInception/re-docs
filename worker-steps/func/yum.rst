@@ -3,7 +3,7 @@
 Yum Cmd
 =======
 
-yumcmd:install
+yumcmd:Install
 --------------
 The yumcmd install command will allow you to install a package or packages to the systems defined in the playbook.
 
@@ -13,10 +13,10 @@ The yumcmd install command will allow you to install a package or packages to th
 
    hosts: ['localhost']
    steps:
-       - yumcmd:install:
+       - yumcmd:Install:
            package: emacs
 
-yumcmd:remove
+yumcmd:Remove
 -------------
 The yumcmd remove command will remove a package installed on one system or many systems as defined by the playbook.
 
@@ -26,10 +26,10 @@ The yumcmd remove command will remove a package installed on one system or many 
 
    hosts: ['localhost']
    steps:
-       - yumcmd:remove:
-           package: emacs
+       - yumcmd:Remove:
+           package: vim
 
-yumcmd:update
+yumcmd:Update
 -------------
 Yumcmd update will update the system completely. Of note this will not currently update an individual package.
 
@@ -39,4 +39,4 @@ Yumcmd update will update the system completely. Of note this will not currently
 
    hosts: ['localhost']
    steps:
-       - yumcmd:update
+       - yumcmd:Update
