@@ -16,6 +16,7 @@ playbooks.
 .. include:: worker-steps/bigip.rst
 .. include:: worker-steps/func.rst
 .. include:: worker-steps/git.rst
+.. include:: worker-steps/noop.rst
 .. include:: worker-steps/httprequest.rst
 .. include:: worker-steps/satellite5.rst
 .. include:: worker-steps/sleep.rst

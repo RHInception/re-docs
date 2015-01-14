@@ -3,7 +3,7 @@
 Juicer
 ******
 
-juicer:promote
+juicer:Promote
 ==============
 
 Promote a release cart to a specified environment. It is recommended
@@ -28,7 +28,7 @@ being ran multiple times.
 
    hosts: ['localhost']
    steps:
-       - juicer:promote:
+       - juicer:Promote:
            dynamic:
                - environment
                - cart

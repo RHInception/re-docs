@@ -4,9 +4,9 @@ Command
 =======
 
 The **command** module allows you to run arbitrary commands on a
-remote host. It has one sub-command available, **run**.
+remote host. It has one sub-command available, **Run**.
 
-command:run
+command:Run
 -----------
 
 **Parameters**
@@ -24,5 +24,5 @@ command:run
 
    hosts: ['localhost']
    steps:
-       - command:run:
+       - command:Run:
            cmd: puppet agent --test --color=false

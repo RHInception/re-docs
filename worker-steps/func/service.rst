@@ -19,33 +19,32 @@ This example demonstrates how to restart the **megafrobber** service
 
    hosts: ['localhost']
    steps:
-       - service:restart:
+       - service:Restart:
            service: megafrobber
 
 To use any of the other sub-commands, on line **3** in this example we
-would replace ``service:restart`` with the desired subcommand. Such as
-``service:stop`` or ``service:reload``.
+would replace ``service:Restart`` with the desired subcommand. Such as
+``service:Stop`` or ``service:Reload``.
 
 
-service:stop
+service:Stop
 ------------
 Stop a given service.
 
-service:start
+service:Start
 -------------
 Start a given service.
 
-service:restart
+service:Restart
 ---------------
 Restart a given service.
 
-service:status
+service:Status
 --------------
 Return the status (running, stopped, etc) of a given service.
 
-service:reload
+service:Reload
 --------------
 Tell a service to reload it's configuration files.
 
 .. note:: Not all system services support all the given subcommands. This is especially true for **reload**.
-
