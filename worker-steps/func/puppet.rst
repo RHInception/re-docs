@@ -32,15 +32,6 @@ mutually exclusive*.
     catalog against
   * **CLI Equivalent:** ``puppet agent --test --server puppetmaster01.example.com``
 
-* ``enable`` (type: boolean)
-
-  * **Required:** False
-  * **Default:** ``False``
-  * **Description:** Set to ``True`` to enable the puppet agent prior
-    to running puppet. **Note** that running puppet will not be
-    attempted if the **enable** command fails
-  * **CLI Equivalent:** ``puppet agent --enable && puppet agent --test``
-
 * ``tags`` (type: list of strings)
 
   * **Required:** False
@@ -71,12 +62,6 @@ mutually exclusive*.
        - puppet:Enable
        - puppet:Run:
            noop: True
-
-       # Run puppet in noop mode, and make sure the agent is enabled
-       # first, but as one single step
-       - puppet:Run:
-           noop: True
-           enable: True
 
        # Equivalent to 'puppet agent --test --tags yum auth package'
        - puppet:Run:
