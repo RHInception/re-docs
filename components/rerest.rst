@@ -348,6 +348,20 @@ The dev server will allow any HTTP Basic Auth user/password combination.
 URLs
 ~~~~
 
+/api/v0/groups/
+```````````````
+.. note::
+   All authorized users can list all groups. However, authentication is required to see or manipulate the actual playbooks.
+
+
+* **GET**: Gets a list of **all** groups.
+
+ * **Response Type**: json
+ * **Response Example**: ``{"status": "ok", "items": [...]}``
+ * **Input Format**: None
+ * **Inputs**: None
+
+
 /api/v0/*$GROUP*/playbook/*$PLAYBOOKID*/deployment/
 `````````````````````````````````````````````````````
 
