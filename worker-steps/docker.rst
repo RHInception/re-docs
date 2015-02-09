@@ -33,7 +33,7 @@ To stop the container ``mycontainer`` on ``127.0.0.1``:
    hosts: ['localhost']
    steps:
        - docker:StopContainer:
-           server_name: "127.0.0.1"
+           server_name: "127.0.0.1:2376"
            container_name: "mycontainer"
 
 
@@ -67,7 +67,7 @@ To remove the container ``mycontainer`` on ``127.0.0.1``:
    hosts: ['localhost']
    steps:
        - docker:RemoveContainer:
-           server_name: "127.0.0.1"
+           server_name: "127.0.0.1:2376"
            container_name: "mycontainer"
 
 docker:PullImage
@@ -108,7 +108,7 @@ To pull the image ``myimage`` to ``127.0.0.1`` from ``http://registry.example.co
    hosts: ['localhost']
    steps:
        - docker:RemoveContainer:
-           server_name: "127.0.0.1"
+           server_name: "127.0.0.1:2376"
            image_name: "myimage"
            insecure_registry: "http://registry.example.com"
 
@@ -142,12 +142,12 @@ Creates a container for use.
 
 * ``container_hostname`` (type ``str``)
 
-  * **Required:** True
+  * **Required:** False
   * **Description:** The hostname of the new container.
 
 * ``container_ports`` (type ``list``)
 
-  * **Required:** True
+  * **Required:** False
   * **Description:** The port setup for the new container.
 
 
@@ -162,7 +162,7 @@ To pull the image ``myimage`` to ``127.0.0.1`` from ``http://registry.example.or
    hosts: ['localhost']
    steps:
        - docker:RemoveContainer:
-           server_name: "127.0.0.1"
+           server_name: "127.0.0.1:2376"
            image_name: "myimage"
            container_name: "mycontainer"
            container_command: "/use/bin/supervisord"
@@ -189,12 +189,12 @@ Starts a container.
 
 * ``container_binds`` (type ``dict``)
 
-  * **Required:** True
+  * **Required:** False
   * **Description:** The file system binds.
 
 * ``port_bindings`` (type ``dict``)
 
-  * **Required:** True
+  * **Required:** False
   * **Description:** The mapping of host and container ports.
 
 
@@ -209,7 +209,7 @@ To start the container ``mycontainer`` on ``127.0.0.1`` binding ``1111`` to the 
    hosts: ['localhost']
    steps:
        - docker:RemoveContainer:
-           server_name: "127.0.0.1"
+           server_name: "127.0.0.1:2376"
            container_name: "mycontainer"
            container_binds:
                "/var/data/":
