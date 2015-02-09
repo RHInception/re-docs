@@ -23,6 +23,7 @@ These workers are usable in :ref:`playbooks <playbooks>`.
    :maxdepth: 1
 
    workers/reworkerbigip.rst
+   workers/reworkerdocker.rst
    workers/reworkerfunc.rst
    workers/reworkergit.rst
    workers/reworkerhttprequest.rst

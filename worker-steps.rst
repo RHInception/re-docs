@@ -14,6 +14,7 @@ playbooks.
 
 .. include:: worker-steps/juicer.rst
 .. include:: worker-steps/bigip.rst
+.. include:: worker-steps/docker.rst
 .. include:: worker-steps/func.rst
 .. include:: worker-steps/git.rst
 .. include:: worker-steps/noop.rst
